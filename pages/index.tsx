@@ -58,8 +58,10 @@ const Home: NextPage = () => {
                             </button>
                             <ul className={isNavExpanded ? styles.navListMobile : styles.navList}>
                                 <li className={styles.navLinks} onClick={toggleNavBar}><a href="#home">Home</a></li>
-                                <li className={styles.navLinks} onClick={toggleNavBar}><a href="#preview">Preview</a></li>
-                                <li className={styles.navLinks} onClick={toggleNavBar}><a href="#roadmap">Roadmap</a></li>
+                                <li className={styles.navLinks} onClick={toggleNavBar}><a href="#preview">Preview</a>
+                                </li>
+                                <li className={styles.navLinks} onClick={toggleNavBar}><a href="#roadmap">Roadmap</a>
+                                </li>
                                 <li className={styles.navLinks} onClick={toggleNavBar}><a href="#team">Team</a></li>
                             </ul>
                             <button className={styles.discordButtonNav}>Discord</button>
@@ -263,17 +265,26 @@ const Home: NextPage = () => {
                     </div>
                     <div className={styles.footerLinks}>
                         <ul className={styles.footerList}>
-                            <li><a className={styles.footerListLinks}
+                            <li>
+                                <a className={styles.footerListLinks}
                                    href="https://discordapp.com/users/964997634563637258" target="_blank"
-                                   rel="noreferrer"><Image
-                                src="/icons/discord-brands.svg" height={30} width={30}/></a></li>
-                            <li><a className={styles.footerListLinks} href="https://t.me/EternalZombies" target="_blank"
-                                   rel="noreferrer"><Image
-                                src="/icons/telegram-brands.svg" height={30} width={30}/></a></li>
-                            <li><a className={styles.footerListLinks}
+                                   rel="noreferrer">
+                                    <img src="/icons/discord-brands.png" height={30} width={30}/>
+                                </a>
+                            </li>
+                            <li>
+                                <a className={styles.footerListLinks} href="https://t.me/EternalZombies" target="_blank"
+                                   rel="noreferrer">
+                                    <img src="/icons/telegram-brands.png" height={30} width={30}/>
+                                </a>
+                            </li>
+                            <li>
+                                <a className={styles.footerListLinks}
                                    href="https://twitter.com/EternalZombies?s=20&t=fZpZNbcCbPBtdlfNGMAgqA"
-                                   target="_blank" rel="noreferrer"><Image
-                                src="/icons/twitter-logo.svg" height={30} width={30}/></a></li>
+                                   target="_blank" rel="noreferrer">
+                                    <img src="/icons/twitter-logo.png" height={30} width={30}/>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

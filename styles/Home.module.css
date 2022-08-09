@@ -40,6 +40,7 @@
     background-size: cover;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    padding-top: 35px;
 }
 
 .nav {
@@ -429,6 +430,10 @@
         justify-content: center;
         align-items: center;
         background: var(--background);
+    }
+
+    .header {
+        padding-top: 20px;
     }
 
     .logo {
