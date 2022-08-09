@@ -1,116 +1,616 @@
 .container {
-  padding: 0 2rem;
+
 }
 
 .main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    min-height: 100vh;
+    padding: 2rem 5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--background);
 }
 
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
+.containerCard {
+    background: #416F73;
+    border-radius: 15px;
+    width: 100%;
+    box-shadow: 0px 0px 20px 10px #0B3448;
 }
 
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
-}
-
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-}
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
-}
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
-}
-
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
+.logoWrapper {
+    display: flex;
+    align-content: center;
 }
 
 .logo {
-  height: 1em;
-  margin-left: 0.5rem;
+    width: 200px;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
+.hamburger {
+    border: 0px;
+    background: transparent;
+    display: none;
+}
+
+.header {
+    background: url("/BG_1920x1080.png");
+    background-size: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 40px;
+}
+
+.navList {
+    list-style: none;
+    width: 60%;
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+    color: white;
+}
+
+.navLinks {
+    display: inline;
+    color: white;
+}
+
+.introduction {
+    display: flex;
+    padding: 8%;
+    justify-content: space-between;
+}
+
+.introWrapper {
+    display: flex;
     flex-direction: column;
-  }
+    width: 50%;
+    padding: 4%;
+}
+
+.introHeading {
+
+}
+
+.introText {
+
+}
+
+.mintCard {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    /*align-content: center;*/
+    width: 40%;
+    padding: 5%;
+    background: #134357;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 5px;
+}
+
+.preview {
+    /*display: flex;*/
+    /*justify-content: center;*/
+    padding: 3% 5%;
+}
+
+.previewHeaderWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.previewHeader {
+
+}
+
+.carouselItems {
+    height: 400px;
+    width: 400px;
+}
+
+.roadmap {
+    padding: 5%;
+    background: cadetblue;
+}
+
+.roadmapContainer {
+    display: flex;
+    align-content: center;
+}
+
+.roadmapHeaderWrapper {
+    display: flex;
+    justify-content: center;
+    /*margin-bottom: 1%;*/
+}
+
+.roadmapHeader {
+    /*color: #5479B3;*/
+    font-size: 30px;
+}
+
+/*team styling*/
+
+.team {
+    padding-top: 3%;
+}
+
+.teamInfoContainer {
+    display: flex;
+    align-items: center;
+    padding: 0% 10%;
+}
+
+.teamMemberContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0% 5%;
+    width: 50%;
+}
+
+.teamMemberTextContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20%;
+}
+
+.teamMemberName {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    white-space: nowrap;
+}
+
+.teamMemberTitle {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    white-space: nowrap;
+}
+
+.teamMemberLink {
+    color: aquamarine;
+    white-space: nowrap;
+}
+
+.teamMemberImage {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px 5px;
+}
+
+.footer {
+    padding: 2rem 0;
+    border-top: 1px solid #eaeaea;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    background: #1f252b;
+}
+
+.footerWrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /*border-top: 2px solid white;*/
+    /*border-bottom: 1px solid #eaeaea;*/
+    width: 100%;
+}
+
+.copyright {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.footerList {
+    list-style: none;
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+    width: 200px;
+}
+
+.footerListLinks {
+    color: white;
+    display: inline;
+}
+
+.discordButton {
+    color: white;
+    background: #5479B3;
+    text-align: center;
+    width: 200px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bolder;
+    font-size: 20px;
+    height: 50px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.discordButtonNav {
+    color: white;
+    background: #5479B3;
+    text-align: center;
+    width: 125px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bolder;
+    font-size: 20px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.discordButtonNav:hover {
+    box-shadow: 0px 0px 10px 5px white;
+}
+
+.discordButton:hover {
+    box-shadow: 0px 0px 10px 5px white;
+}
+
+
+/*roadmap styling*/
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    position: relative;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.timeline__event__one {
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    margin: 20px 0px;
+    border-radius: 6px;
+    align-self: center;
+    width: 50vw;
+    flex-direction: row-reverse;
+}
+
+.timeline__event__date {
+    border-radius: 0 6px 6px 0;
+    /*color: #f6a4ec;*/
+    font-size: 1.5rem;
+    font-weight: 600;
+    /*background: #87bbfe;*/
+    background: darkcyan;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 0 20px;
+    /*border-radius: 6px 0 0 6px;*/
+}
+
+.timeline__event__date__two {
+    font-size: 1.5rem;
+    font-weight: 600;
+    /*background: #87bbfe;*/
+    background: darkcyan;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 0 20px;
+    border-radius: 6px 0 0 6px;
+}
+
+.timeline__event__content {
+    padding: 20px;
+    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3),
+    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    background: #fff;
+    width: calc(40vw - 84px);
+    /*border-radius: 0 6px 6px 0;*/
+    border-radius: 6px 0 0 6px;
+}
+
+.timeline__event__content__two {
+    padding: 20px;
+    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3),
+    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    background: #fff;
+    width: calc(40vw - 84px);
+    border-radius: 0 6px 6px 0;
+}
+
+.timeline__event__icon__one {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*color: #87bbfe;*/
+    align-self: center;
+    background: #87bbfe;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3),
+    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    position: relative;
+    margin-right: 20px;
+    /*animation: fillLeft 2s forwards;*/
+}
+
+.timeline__event__icon__two {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*color: #87bbfe;*/
+    align-self: center;
+    background: #87bbfe;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3),
+    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    position: relative;
+    margin-left: 20px;
+    /*animation: fillLeft 2s forwards;*/
+}
+
+.timeline__separator {
+    width: 50px;
+    height: 0px;
+    border: 3px solid #87bbfe;
+    display: flex;
+    align-self: center;
+    background: #87bbfe;
+}
+
+.timeline__event__title {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #9251ac;
+    letter-spacing: 1.5px;
+}
+
+.timeline__event__description {
+    flex-basis: 60%;
+    color: #1f252b;
+}
+
+.timeline__event__two {
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    margin: 20px 0px;
+    border-radius: 6px;
+    align-self: center;
+    width: 50vw;
+}
+
+@keyframes fillLeft {
+    100% {
+        right: 100%;
+    }
+}
+
+@keyframes fillTop {
+    100% {
+        top: 100%;
+    }
+}
+
+@keyframes fillLeftOdd {
+    100% {
+        left: 100%;
+    }
+}
+
+/* for media width less than or equal to 600px */
+@media only screen and (max-width: 950px) {
+
+    .main {
+        min-height: 100vh;
+        padding: 2rem 1rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: var(--background);
+    }
+
+    .logo {
+        width: 100px;
+        height: 50px;
+    }
+
+    .logoWrapper {
+        display: flex;
+        align-content: center;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 20px;
+    }
+
+    .hamburger {
+        border: 0px;
+        background: transparent;
+        display: block;
+    }
+
+    .navList {
+        display: none;
+    }
+
+    .navListMobile {
+        display: block;
+        align-content: center;
+        justify-content: center;
+        color: white;;
+        width: 92%;
+        position: fixed;
+        background: dimgray;
+        padding: 2%;
+        left: 17px;
+        top: 95px;
+
+    }
+
+    .navLinks {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        color: white;
+    }
+
+    .discordButtonNav {
+        display: none;
+    }
+
+    .discordButton {
+        color: white;
+        background: #5479B3;
+        text-align: center;
+        width: 100px;
+        border-radius: 20px;
+        border: none;
+        font-weight: bolder;
+        font-size: 16px;
+        height: 35px;
+        cursor: pointer;
+        align-self: center;
+        padding: 5px;
+    }
+
+    .introduction {
+        display: flex;
+        flex-direction: column;
+        padding: 8%;
+        justify-content: space-between;
+    }
+
+    .introWrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 4%;
+    }
+
+    .mintCard {
+        width: 100%;
+    }
+
+    .carouselItems {
+        height: 350px;
+        width: 350px;
+    }
+
+    .roadmap {
+        padding: 5%;
+        background: cadetblue;
+        display: block;
+    }
+
+    .timeline {
+        display: flex;
+        flex-direction: column;
+        margin: 0px;
+        position: relative;
+        box-sizing: border-box;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .timeline__event__one {
+        width: 100%;
+    }
+
+    .timeline__event__two {
+        width: 100%;
+    }
+
+    .timeline__event__icon__one {
+        display: none;
+    }
+
+    .timeline__event__icon__two {
+        display: none;
+    }
+
+    .timeline__event__date {
+        font-size: 1rem;
+    }
+
+    .timeline__event__date__two{
+        font-size: 1rem;
+    }
+
+
+    .timeline__event__content {
+        width: 100%;
+    }
+
+    .timeline__event__content__two {
+        width: 100%;
+    }
+
+    .timeline__separator {
+        display: none;
+    }
+
+    .teamInfoContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0% 10%;
+    }
+
+    .teamMemberImage {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px 5px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .navListMobile {
+        display: block;
+        align-content: center;
+        justify-content: center;
+        color: white;
+        width: 92%;
+        position: fixed;
+        background: dimgray;
+        padding: 2%;
+        left: 16px;
+        top: 95px;
+
+    }
+
+    .timeline__event__date {
+        padding: 10px;
+        font-size: 0.7rem;
+    }
+
+    .timeline__event__date__two{
+        padding: 10px;
+        font-size: 0.7rem;
+    }
 }
