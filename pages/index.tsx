@@ -269,20 +269,20 @@ const Home: NextPage = () => {
                                 <a className={styles.footerListLinks}
                                    href="https://discordapp.com/users/964997634563637258" target="_blank"
                                    rel="noreferrer">
-                                    <img src="/icons/discord-brands.png" height={30} width={30}/>
+                                    <img src="/discord-brands.png" height={30} width={30}/>
                                 </a>
                             </li>
                             <li>
                                 <a className={styles.footerListLinks} href="https://t.me/EternalZombies" target="_blank"
                                    rel="noreferrer">
-                                    <img src="/icons/telegram-brands.png" height={30} width={30}/>
+                                    <img src="/telegram-brands.png" height={30} width={30}/>
                                 </a>
                             </li>
                             <li>
                                 <a className={styles.footerListLinks}
                                    href="https://twitter.com/EternalZombies?s=20&t=fZpZNbcCbPBtdlfNGMAgqA"
                                    target="_blank" rel="noreferrer">
-                                    <img src="/icons/twitter-logo.png" height={30} width={30}/>
+                                    <img src="/twitter-logo.png" height={30} width={30}/>
                                 </a>
                             </li>
                         </ul>
