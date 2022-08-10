@@ -62,10 +62,10 @@
     display: block;
     align-content: center;
     justify-content: center;
-    color: white;;
+    color: white;
     width: 92%;
     position: fixed;
-    background: dimgray;
+    background: #134357;
     padding: 2%;
     left: 17px;
     top: 120px;
@@ -121,7 +121,7 @@
 }
 
 .previewHeader {
-
+    text-align: center;
 }
 
 .carouselItems {
@@ -484,7 +484,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 30px;
+        height: 50px;
         color: white;
     }
 
@@ -598,17 +598,18 @@
     }
 }
 
+@media only screen and (max-width: 500px) {
+    .navListMobile {
+        width: 93%;
+        left: 15px;
+        top: 130px;
+    }
+}
+
 @media only screen and (max-width: 400px) {
     .navListMobile {
-        display: block;
-        align-content: center;
-        justify-content: center;
-        color: white;
         width: 92%;
-        position: fixed;
-        background: dimgray;
-        padding: 2%;
-        left: 16px;
+        left: 15px;
         top: 130px;
     }
 

@@ -35,6 +35,10 @@ const Home: NextPage = () => {
         setIsNavExpanded(!isNavExpanded)
     }
 
+    const closeNavBar = () => {
+        setIsNavExpanded(false)
+    }
+
     return (
         <div className={styles.container}>
             <Head>
@@ -57,12 +61,15 @@ const Home: NextPage = () => {
                                 <img src="/menu.png"/>
                             </button>
                             <ul className={isNavExpanded ? styles.navListMobile : styles.navList}>
-                                <li className={styles.navLinks} onClick={toggleNavBar}><a href="#home">Home</a></li>
-                                <li className={styles.navLinks} onClick={toggleNavBar}><a href="#preview">Preview</a>
+                                <li className={styles.navLinks} onClick={closeNavBar}><a href="#home">Home</a></li>
+                                <hr/>
+                                <li className={styles.navLinks} onClick={closeNavBar}><a href="#preview">Preview</a>
                                 </li>
-                                <li className={styles.navLinks} onClick={toggleNavBar}><a href="#roadmap">Roadmap</a>
+                                <hr/>
+                                <li className={styles.navLinks} onClick={closeNavBar}><a href="#roadmap">Roadmap</a>
                                 </li>
-                                <li className={styles.navLinks} onClick={toggleNavBar}><a href="#team">Team</a></li>
+                                <hr/>
+                                <li className={styles.navLinks} onClick={closeNavBar}><a href="#team">Team</a></li>
                             </ul>
                             <button className={styles.discordButtonNav}>Discord</button>
                         </nav>
