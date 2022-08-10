@@ -1,6 +1,5 @@
 import type {NextPage} from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 // import roadmapStyles from '../styles/Timeline.module.css'
 import {BrowserView, MobileView, isBrowser, isMobile} from 'react-device-detect';
@@ -62,13 +61,13 @@ const Home: NextPage = () => {
                             </button>
                             <ul className={isNavExpanded ? styles.navListMobile : styles.navList}>
                                 <li className={styles.navLinks} onClick={closeNavBar}><a href="#home">Home</a></li>
-                                <hr/>
+                                {isMobile? <hr/> : null}
                                 <li className={styles.navLinks} onClick={closeNavBar}><a href="#preview">Preview</a>
                                 </li>
-                                <hr/>
+                                {isMobile? <hr/> : null}
                                 <li className={styles.navLinks} onClick={closeNavBar}><a href="#roadmap">Roadmap</a>
                                 </li>
-                                <hr/>
+                                {isMobile? <hr/> : null}
                                 <li className={styles.navLinks} onClick={closeNavBar}><a href="#team">Team</a></li>
                             </ul>
                             <button className={styles.discordButtonNav}>Discord</button>
