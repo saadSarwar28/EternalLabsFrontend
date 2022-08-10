@@ -58,6 +58,19 @@
     color: white;
 }
 
+.navListMobile {
+    display: block;
+    align-content: center;
+    justify-content: center;
+    color: white;;
+    width: 92%;
+    position: fixed;
+    background: dimgray;
+    padding: 2%;
+    left: 17px;
+    top: 120px;
+}
+
 .navLinks {
     display: inline;
     color: white;
@@ -463,17 +476,8 @@
     }
 
     .navListMobile {
-        display: block;
-        align-content: center;
-        justify-content: center;
-        color: white;;
-        width: 92%;
-        position: fixed;
-        background: dimgray;
-        padding: 2%;
-        left: 17px;
-        top: 95px;
-
+        width: 97%;
+        left: 14px;
     }
 
     .navLinks {
@@ -605,8 +609,7 @@
         background: dimgray;
         padding: 2%;
         left: 16px;
-        top: 95px;
-
+        top: 130px;
     }
 
     .timeline__event__date {

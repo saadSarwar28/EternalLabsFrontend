@@ -54,7 +54,7 @@ const Home: NextPage = () => {
                                 />
                             </div>
                             <button className={styles.hamburger} onClick={toggleNavBar}>
-                                <img src="icons/menu.png"/>
+                                <img src="/menu.png"/>
                             </button>
                             <ul className={isNavExpanded ? styles.navListMobile : styles.navList}>
                                 <li className={styles.navLinks} onClick={toggleNavBar}><a href="#home">Home</a></li>
