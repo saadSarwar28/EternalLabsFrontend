@@ -103,10 +103,25 @@
     /*justify-content: center;*/
     /*align-content: center;*/
     width: 40%;
-    padding: 5%;
+    height: fit-content;
+    padding: 3%;
     background: #134357;
     border-radius: 20px;
     box-shadow: 0px 0px 10px 5px;
+}
+
+.mintCardIcons {
+    list-style: none;
+    display: flex;
+    align-content: center;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+.mintCardListLinks {
+    color: white;
+    display: inline;
+    padding: 0px 10px;
 }
 
 .preview {
@@ -523,6 +538,7 @@
 
     .mintCard {
         width: 100%;
+        padding: 10%;
     }
 
     .carouselItems {
@@ -602,6 +618,10 @@
         width: 93%;
         left: 15px;
         top: 130px;
+    }
+
+    .mintCardIcons {
+     justify-content: center;
     }
 }
 

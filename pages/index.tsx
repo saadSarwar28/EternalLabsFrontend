@@ -82,9 +82,31 @@ const Home: NextPage = () => {
                             </div>
                             <div className={styles.mintCard}>
                                 <p>Stay tuned! Mint will be live soon!</p>
-                                <p>Join our discord server for further updates.</p>
-                                <a href="https://discordapp.com/users/964997634563637258" target="_blank"
-                                   rel="noreferrer" className={styles.discordButton}>Discord</a>
+                                <p>Join our Discord server/Telegram channel for further updates.</p>
+                                <ul className={styles.mintCardIcons}>
+                                    <li>
+                                        <a className={styles.mintCardListLinks}
+                                           href="https://discordapp.com/users/964997634563637258" target="_blank"
+                                           rel="noreferrer">
+                                            <img src="/discord-brands.png" height={30} width={35}/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={styles.mintCardListLinks} href="https://t.me/EternalZombies" target="_blank"
+                                           rel="noreferrer">
+                                            <img src="/telegram-brands.png" height={30} width={35}/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className={styles.mintCardListLinks}
+                                           href="https://twitter.com/EternalZombies?s=20&t=fZpZNbcCbPBtdlfNGMAgqA"
+                                           target="_blank" rel="noreferrer">
+                                            <img src="/twitter-logo.png" height={30} width={35}/>
+                                        </a>
+                                    </li>
+                                </ul>
+                                {/*<a href="https://discordapp.com/users/964997634563637258" target="_blank"*/}
+                                {/*   rel="noreferrer" className={styles.discordButton}>Discord</a>*/}
                             </div>
                         </div>
                     </div>
@@ -154,7 +176,7 @@ const Home: NextPage = () => {
                                     </div>
                                     <div className={styles.timeline__separator}></div>
                                     <div className={styles.timeline__event__date}>
-                                        15-08-2022
+                                        20-08-2022
                                     </div>
                                     <div className={styles.timeline__event__content}>
                                         <div className={styles.timeline__event__title}>
