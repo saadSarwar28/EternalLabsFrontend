@@ -176,7 +176,7 @@ const Home: NextPage = () => {
                                     </div>
                                     <div className={styles.timeline__separator}></div>
                                     <div className={styles.timeline__event__date}>
-                                        20-08-2022
+                                        TBA
                                     </div>
                                     <div className={styles.timeline__event__content}>
                                         <div className={styles.timeline__event__title}>
