@@ -81,7 +81,7 @@ const Home: NextPage = () => {
                                 </p>
                             </div>
                             <div className={styles.mintCard}>
-                                <p>Stay tuned! Mint will be live soon!</p>
+                                <p>The wait is over. Mint will be live on <span className={styles.mintCardDate}>01/09/22</span></p>
                                 <p>Join our Discord server/Telegram channel for further updates.</p>
                                 <ul className={styles.mintCardIcons}>
                                     <li>
