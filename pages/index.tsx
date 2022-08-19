@@ -176,7 +176,7 @@ const Home: NextPage = () => {
                                     </div>
                                     <div className={styles.timeline__separator}></div>
                                     <div className={styles.timeline__event__date}>
-                                        TBA
+                                        01-09-2022
                                     </div>
                                     <div className={styles.timeline__event__content}>
                                         <div className={styles.timeline__event__title}>
@@ -194,7 +194,7 @@ const Home: NextPage = () => {
                                     </div>
                                     <div className={styles.timeline__separator}></div>
                                     <div className={styles.timeline__event__date__two}>
-                                        01-09-2022
+                                        TBA
                                     </div>
                                     <div className={styles.timeline__event__content__two}>
                                         <div className={styles.timeline__event__title}>
@@ -214,7 +214,7 @@ const Home: NextPage = () => {
                                     </div>
                                     <div className={styles.timeline__separator}></div>
                                     <div className={styles.timeline__event__date}>
-                                        01-10-2022
+                                        TBA
                                     </div>
                                     <div className={styles.timeline__event__content}>
                                         <div className={styles.timeline__event__title}>
@@ -236,7 +236,7 @@ const Home: NextPage = () => {
                                     </div>
                                     <div className={styles.timeline__separator}></div>
                                     <div className={styles.timeline__event__date__two}>
-                                        01-11-2022
+                                        TBA
                                     </div>
                                     <div className={styles.timeline__event__content__two}>
                                         <div className={styles.timeline__event__title}>
