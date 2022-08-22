@@ -70,7 +70,7 @@ const Home: NextPage = () => {
                                 {isMobile? <hr/> : null}
                                 <li className={styles.navLinks} onClick={closeNavBar}><a href="#team">Team</a></li>
                             </ul>
-                            <a href="https://docs.eternalzombies.com" target="_blank" className={styles.docsButtonNav}>Read The Docs</a>
+                            <a href="https://docs.eternalzombies.com/welcome-to-eternal-zombies" target="_blank" className={styles.docsButtonNav}>Read The Docs</a>
                         </nav>
                         <div id="home" className={styles.introduction}>
                             <div className={styles.introWrapper}>
