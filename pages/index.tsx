@@ -42,7 +42,7 @@ const Home: NextPage = () => {
         <div className={styles.container}>
             <Head>
                 <title>Eternal Zombies</title>
-                <meta name="eternalzombies.com" content="a collection of 1111 intrinsic value yeild bearing nfts"/>
+                <meta name="eternalzombies.com" content="a collection of 1111 intrinsic value yield bearing nfts"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <main className={styles.main}>
@@ -70,14 +70,13 @@ const Home: NextPage = () => {
                                 {isMobile? <hr/> : null}
                                 <li className={styles.navLinks} onClick={closeNavBar}><a href="#team">Team</a></li>
                             </ul>
-                            <button className={styles.discordButtonNav}>Discord</button>
+                            <a href="https://docs.eternalzombies.com" className={styles.discordButtonNav}>Docs</a>
                         </nav>
                         <div id="home" className={styles.introduction}>
                             <div className={styles.introWrapper}>
                                 <h2 className={styles.introHeading}>Eternal Zombies</h2>
                                 <p className={styles.introText}>
-                                    A collection of 1111 yield bearing zombies that keep rewarding their holders with
-                                    $ZMBE tokens for eternity
+                                    Bored of plain old worthless NFTs that do not hold any value??<br/> Try Eternal Zombies...
                                 </p>
                             </div>
                             <div className={styles.mintCard}>
