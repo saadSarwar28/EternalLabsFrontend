@@ -85,8 +85,7 @@ const Home: NextPage = () => {
                                 <ul className={styles.mintCardIcons}>
                                     <li>
                                         <a className={styles.mintCardListLinks}
-                                           href="https://discordapp.com/users/964997634563637258" target="_blank"
-                                           rel="noreferrer">
+                                           href="https://discord.gg/gnN7k9am83" target="_blank" rel="noreferrer">
                                             <img src="/discord-brands.png" height={30} width={35}/>
                                         </a>
                                     </li>
@@ -294,8 +293,7 @@ const Home: NextPage = () => {
                         <ul className={styles.footerList}>
                             <li>
                                 <a className={styles.footerListLinks}
-                                   href="https://discordapp.com/users/964997634563637258" target="_blank"
-                                   rel="noreferrer">
+                                   href="https://discord.gg/gnN7k9am83" target="_blank" rel="noreferrer">
                                     <img src="/discord-brands.png" height={30} width={30}/>
                                 </a>
                             </li>
