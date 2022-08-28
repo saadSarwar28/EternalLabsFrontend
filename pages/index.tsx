@@ -1,14 +1,34 @@
 import type {NextPage} from 'next'
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 // import roadmapStyles from '../styles/Timeline.module.css'
 import {BrowserView, MobileView, isBrowser, isMobile} from 'react-device-detect';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import {useState} from 'react';
-
+import {useEffect, useState} from 'react';
+import {errors, ethers} from "ethers";
+import minterABI from '../abi/minter.json';
+import ADDRESSES from '../utils/contractAddresses';
+import ERROR_MESSAGES from '../utils/errorMessages';
+import SUCCESS_MESSAGES from '../utils/successMessages';
+import WHITELIST from '../utils/whitelist';
 
 const Home: NextPage = () => {
+
+    const { MerkleTree } = require('merkletreejs')
+    const keccak256 = require('keccak256')
+
+    const leafNodes = WHITELIST.map(addr => keccak256(addr));
+    const merkleTree = new MerkleTree(leafNodes, keccak256, {sortPairs: true})
+
+    // console.log(merkleTree.getHexRoot(), ' < hex root') // hex root to input in the contract
+
+    const getMerkleProof = () => {
+        return merkleTree.getHexProof(keccak256(address))
+    }
 
     const responsive = {
         desktop: {
@@ -28,7 +48,21 @@ const Home: NextPage = () => {
         }
     };
 
+    const [balance, setBalance] = useState(0)
+    const [address, setAddress] = useState('')
+    const [walletConnected, setWalletConnected] = useState(false)
+    const [price, setPrice] = useState(0)
+    const [whitelistPrice, setWhitelistPrice] = useState(0)
+    const [amount, setAmount] = useState(1)
+    const [chainID, setChainId] = useState(0)
+    const [provider, setProvider] = useState(null)
+    const [signer, setSigner] = useState(null)
+    const [minter, setMinter] = useState(null)
+    const [totalMinted, setTotalMinted] = useState(0)
     const [isNavExpanded, setIsNavExpanded] = useState(false)
+    const [whitelistActive, setWhitelistActive] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [isWlLoading, setIsWlLoading] = useState(false)
 
     const toggleNavBar = () => {
         setIsNavExpanded(!isNavExpanded)
@@ -38,8 +72,238 @@ const Home: NextPage = () => {
         setIsNavExpanded(false)
     }
 
+    const connectWallet = () => {
+        if (address === '') {
+            // @ts-ignore
+            if (window.ethereum) {
+                // @ts-ignore
+                window.ethereum.request({method: 'eth_requestAccounts'})
+                    // @ts-ignore
+                    .then(result => {
+                        // @ts-ignore
+                        setAddress(result[0])
+                        setWalletConnected(true)
+                    })
+                    // @ts-ignore
+                    .catch(error => {
+                        console.log(error)
+                    });
+            } else {
+                // for mobile
+                window.open('https://metamask.app.link/dapp/eternalzombies.com')
+            }
+        }
+    }
+
+    const setNewProvider = () => {
+        // @ts-ignore
+        if (window.ethereum && provider === null) {
+            // @ts-ignore
+            setProvider(new ethers.providers.Web3Provider(window.ethereum))
+        }
+    }
+
+    useEffect(() => {
+        setNewProvider()
+    }, [address])
+
+    const initializeMintingContract = () => {
+        // @ts-ignore
+        if (window.ethereum && address !== '' && provider !== null) {
+            // @ts-ignore
+            setMinter(new ethers.Contract(ADDRESSES.MINTER, minterABI, provider))
+        }
+    }
+
+    useEffect(() => {
+        initializeMintingContract()
+    }, [address])
+
+    useEffect(() => {
+        // @ts-ignore
+        if (window.ethereum && address !== '' && provider !== null) {
+            // @ts-ignore
+            setSigner(provider.getSigner())
+        }
+    }, [provider, address])
+
+    const increaseAmount = () => {
+        setAmount(amount + 1)
+    }
+
+    const decreaseAmount = () => {
+        if (amount > 1) {
+            setAmount(amount - 1)
+        }
+    }
+
+    useEffect(() => {
+        // @ts-ignore
+        if (window.ethereum && provider !== null) {
+            // @ts-ignore
+            provider.getNetwork().then(res => {
+                setChainId(res.chainId)
+            })
+        }
+    }, [provider])
+
+    async function updateMintPrice() {
+        // @ts-ignore
+        if (window.ethereum && minter !== null) {
+            // @ts-ignore
+            const mintPrice = await minter.nftPrice()
+            setPrice(Number(ethers.utils.formatEther(mintPrice)) * amount)
+        }
+    }
+
+    useEffect(() => {
+        updateMintPrice()
+    }, [address, minter])
+
+    async function updateWhitelistPrice() {
+        // @ts-ignore
+        if (window.ethereum && minter !== null) {
+            // @ts-ignore
+            const mintPrice = await minter.whitelistPrice()
+            setWhitelistPrice(Number(ethers.utils.formatEther(mintPrice)) * amount)
+        }
+    }
+
+    useEffect(() => {
+        updateWhitelistPrice()
+    }, [address, minter])
+
+    async function checkWhitelistActive() {
+        // @ts-ignore
+        if (window.ethereum && minter !== null) {
+            // @ts-ignore
+            setWhitelistActive(await minter.whitelistActive())
+        }
+    }
+
+    useEffect(() => {
+        checkWhitelistActive()
+    }, [address, minter])
+
+    async function updateTotalSupply() {
+        // @ts-ignore
+        if (window.ethereum && minter !== null) {
+            // @ts-ignore
+            const totalSupply = await minter.totalSupply()
+            setTotalMinted(Number(totalSupply.toString()))
+        }
+    }
+
+    useEffect(() => {
+        updateTotalSupply()
+    }, [address, minter])
+
+    useEffect(() => {
+        // @ts-ignore
+        if (window.ethereum && provider !== null) {
+            // @ts-ignore
+            provider.listAccounts()
+                // @ts-ignore
+                .then(res => {
+                    if (res.length > 0) {
+                        setAddress(res[0])
+                        setWalletConnected(true)
+                    }
+                })
+
+        } else {
+            // showWarningToast(errorsMessage.INSTALL_METAMASK);
+        }
+    })
+
+    const updateBalance = () => {
+        // @ts-ignore
+        if (window.ethereum && address  !== '' && signer !== null) {
+            // @ts-ignore
+            signer.getBalance()
+                // @ts-ignore
+                .then(res => {
+                    setBalance(Number(ethers.utils.formatEther(res)))
+                    if (price > balance) {
+                        // alert("don't have enough BNB");
+                        // showWarningToast(errorsMessage.NOT_ENOUGH_ETH);
+                    }
+                })
+        }
+    }
+
+    useEffect(() => {
+        updateBalance()
+    }, [signer, address])
+
+    const mint = async () => {
+        try {
+            // @ts-ignore
+            if (window.ethereum) {
+                if (balance < (amount * price)) {
+                    notifyError('Not enough balance')
+                    return
+                }
+                setIsLoading(true)
+                // @ts-ignore
+                const contractWithSigner = minter.connect(signer)
+                const options = {value: ethers.utils.parseEther(String(amount * price))}
+                const tx = await contractWithSigner.mint(amount, options)
+                await tx.wait()
+                updateTotalSupply()
+                // console.log(tx)
+                notifySuccess('Minted Successfully')
+                setIsLoading(false)
+            }
+        } catch (error) {
+            // console.log(error)
+            setIsLoading(false)
+        }
+    }
+
+    const whitelistMint = async () => {
+        if (getMerkleProof().length < 1) {
+            notifyError('Your Address is not whitelisted!')
+            return
+        }
+        try {
+            // @ts-ignore
+            if (window.ethereum) {
+                if (balance < whitelistPrice) {
+                    notifyError('Not enough balance')
+                    return
+                }
+                setIsWlLoading(true)
+                // @ts-ignore
+                const contractWithSigner = minter.connect(signer)
+                const options = {value: ethers.utils.parseEther(String(whitelistPrice.toFixed(2)))}
+                const tx = await contractWithSigner.whitelistMint(getMerkleProof(), options)
+                await tx.wait()
+                setIsWlLoading(false)
+                updateTotalSupply()
+                // console.log(tx)
+                notifySuccess('Minted Successfully')
+            }
+        } catch (e) {
+            setIsWlLoading(false)
+            notifyError('Already Claimed!')
+        }
+    }
+
+    const notifyError = (message: string) => toast.error(message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: 'dark'
+    });
+
+    const notifySuccess = (message: string) => toast.success(message, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: 'dark'
+    });
+
+
     return (
         <div className={styles.container}>
+            <ToastContainer />
             <Head>
                 <title>Eternal Zombies</title>
                 <meta name="eternalzombies.com" content="a collection of 1111 intrinsic value yield bearing nfts"/>
@@ -61,50 +325,79 @@ const Home: NextPage = () => {
                             </button>
                             <ul className={isNavExpanded ? styles.navListMobile : styles.navList}>
                                 <li className={styles.navLinks} onClick={closeNavBar}><a href="#home">Home</a></li>
-                                {isMobile? <hr/> : null}
+                                {isMobile ? <hr/> : null}
                                 <li className={styles.navLinks} onClick={closeNavBar}><a href="#preview">Preview</a>
                                 </li>
-                                {isMobile? <hr/> : null}
+                                {isMobile ? <hr/> : null}
                                 <li className={styles.navLinks} onClick={closeNavBar}><a href="#roadmap">Roadmap</a>
                                 </li>
-                                {isMobile? <hr/> : null}
+                                {isMobile ? <hr/> : null}
                                 <li className={styles.navLinks} onClick={closeNavBar}><a href="#team">Team</a></li>
                             </ul>
-                            <a href="https://docs.eternalzombies.com/welcome-to-eternal-zombies" target="_blank" className={styles.docsButtonNav}>Read The Docs</a>
+                            <a href="https://docs.eternalzombies.com/welcome-to-eternal-zombies" target="_blank"
+                               className={styles.docsButtonNav} rel="noreferrer">Read The Docs</a>
                         </nav>
                         <div id="home" className={styles.introduction}>
                             <div className={styles.introWrapper}>
                                 <h2 className={styles.introHeading}>Eternal Zombies</h2>
                                 <p className={styles.introText}>
-                                    Bored of plain old worthless NFTs that do not hold any value??<br/> Try Eternal Zombies...
+                                    Bored of plain old worthless NFTs that do not hold any value??<br/><br/> Try Eternal
+                                    Zombies...
                                 </p>
                             </div>
                             <div className={styles.mintCard}>
-                                <p>The wait is over. Mint will be live on <span className={styles.mintCardDate}>01/09/22</span></p>
-                                <p>Join our Discord server/Telegram channel for further updates.</p>
-                                <ul className={styles.mintCardIcons}>
-                                    <li>
-                                        <a className={styles.mintCardListLinks}
-                                           href="https://discord.gg/gnN7k9am83" target="_blank" rel="noreferrer">
-                                            <img src="/discord-brands.png" height={30} width={35}/>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className={styles.mintCardListLinks} href="https://t.me/EternalZombies" target="_blank"
-                                           rel="noreferrer">
-                                            <img src="/telegram-brands.png" height={30} width={35}/>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className={styles.mintCardListLinks}
-                                           href="https://twitter.com/EternalZombies?s=20&t=fZpZNbcCbPBtdlfNGMAgqA"
-                                           target="_blank" rel="noreferrer">
-                                            <img src="/twitter-logo.png" height={30} width={35}/>
-                                        </a>
-                                    </li>
-                                </ul>
-                                {/*<a href="https://discordapp.com/users/964997634563637258" target="_blank"*/}
-                                {/*   rel="noreferrer" className={styles.discordButton}>Discord</a>*/}
+                                <p className={styles.mintCardAnnouncement}>Eternal Zombies mint is Live!</p>
+                                <p className={styles.mintCardTotalMinted}>{totalMinted} / 1111</p>
+                                <div className={styles.mintCardAmounts}>
+                                    <div className={styles.mintCardNormalPrice}>
+                                        <p className={styles.mintCardTotalMinted}>Price</p>
+                                        <p className={styles.mintCardTotalMinted}>{price.toFixed(2)} BNB</p>
+                                    </div>
+                                    {
+                                        whitelistActive ?
+                                            <div className={styles.mintCardWhitelistPrice}>
+                                                <p className={styles.mintCardTotalMinted}>Whitelist Price</p>
+                                                <p className={styles.mintCardTotalMinted}>{whitelistPrice.toFixed(2)} BNB</p>
+                                            </div> : null
+                                    }
+                                </div>
+                                {
+                                    walletConnected ?
+                                        <>
+                                            <div className={styles.mintCardAmountAdjustment}>
+                                                <p className={styles.mintCardTotalMinted}>Amount</p>
+                                                <div className={styles.mintCardAmountAdjustmentButtonContainer}>
+                                                    <button onClick={decreaseAmount} className={styles.amountAdjustmentButton}>-</button>
+                                                    <p className={styles.mintCardTotalMinted}>&nbsp;&nbsp;{amount}&nbsp;&nbsp;</p>
+                                                    <button onClick={increaseAmount} className={styles.amountAdjustmentButton}>+</button>
+                                                </div>
+                                            </div>
+                                            <div className={styles.mintCardWhitelistPrice}>
+                                                <p className={styles.mintCardTotalMinted}>Total</p>
+                                                <p className={styles.mintCardTotalMinted}>{(price * amount).toFixed(2)} BNB</p>
+                                            </div>
+                                            <div className={styles.mintCardMintButtons}>
+                                                <button onClick={mint} className={styles.connectWalletButton}>
+                                                    { isLoading ? <img className={styles.mintCardButtonLoader} src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"/> : <span>Mint</span>}
+                                                </button>
+                                                {
+                                                    whitelistActive ?
+                                                        <button onClick={whitelistMint} className={styles.connectWalletButton}>
+                                                            {
+                                                                isWlLoading ?
+                                                                    <img className={styles.mintCardButtonLoader}
+                                                                         src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"/>
+                                                                    : <span>Whitelist Mint</span>
+                                                            }
+                                                        </button> : null
+                                                }
+                                            </div>
+                                        </>
+                                        :
+                                        <div className={styles.mintCardButtons}>
+                                            <button className={styles.connectWalletButton} onClick={connectWallet}>Connect Wallet</button>
+                                        </div>
+                                }
                             </div>
                         </div>
                     </div>

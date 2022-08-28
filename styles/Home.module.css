@@ -101,8 +101,8 @@
 .mintCard {
     display: flex;
     flex-direction: column;
-    /*justify-content: center;*/
-    /*align-content: center;*/
+    justify-content: center;
+    align-content: center;
     width: 40%;
     height: fit-content;
     padding: 3%;
@@ -110,6 +110,68 @@
     border-radius: 20px;
     box-shadow: 0px 0px 10px 5px;
     font-weight: 600;
+}
+
+.mintCardAnnouncement {
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    margin: 0px;
+}
+
+.mintCardTotalMinted {
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    /*margin: 0px;*/
+}
+
+.mintCardAmounts {
+    display: flex;
+    flex-direction: column;
+}
+
+.mintCardNormalPrice {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.mintCardWhitelistPrice {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.mintCardAmountAdjustment {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.mintCardAmountAdjustmentButtonContainer {
+    display: flex;
+    align-content: center;
+    width: 30%;
+    justify-content: space-between;
+}
+
+.mintCardButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.mintCardMintButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.mintCardButtonLoader {
+    width: 190px;
+    height: 80px;
+    bottom: 23px;
+    position: relative;
 }
 
 .mintCardDate {
@@ -294,6 +356,44 @@
     box-shadow: 0px 0px 10px 5px white;
 }
 
+.amountAdjustmentButton {
+    /*display: flex;*/
+    color: white;
+    background: #0a667d;
+    text-align: center;
+    width: 50px;
+    height: 100%;
+    border-radius: 20px;
+    border: none;
+    font-size: x-large;
+    font-weight: bolder;
+    padding-bottom: 5px;
+}
+
+.amountAdjustmentButton:hover {
+    box-shadow: 0px 0px 10px 5px white;
+}
+
+
+.connectWalletButton {
+    color: white;
+    background: #6353BD;
+    text-align: center;
+    width: 200px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bolder;
+    font-size: 20px;
+    height: 50px;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.connectWalletButton:hover {
+    box-shadow: 0px 0px 10px 5px white;
+}
 
 /*roadmap styling*/
 
@@ -620,6 +720,22 @@
     }
 }
 
+@media only screen and (max-width: 700px) {
+    .mintCardAmountAdjustmentButtonContainer {
+        width: 35%;
+    }
+
+    .connectWalletButton {
+        margin-top: 20px;
+        align-self: center;
+    }
+
+    .mintCardMintButtons {
+        margin-top: 0px;
+        flex-direction: column;
+    }
+}
+
 @media only screen and (max-width: 500px) {
     .navListMobile {
         width: 93%;
@@ -629,6 +745,20 @@
 
     .mintCardIcons {
      justify-content: center;
+    }
+
+    .mintCardAmountAdjustmentButtonContainer {
+        width: 50%;
+    }
+
+    .connectWalletButton {
+        margin-top: 20px;
+        align-self: center;
+    }
+
+    .mintCardMintButtons {
+        margin-top: 0px;
+        flex-direction: column;
     }
 }
 
@@ -647,5 +777,19 @@
     .timeline__event__date__two{
         padding: 10px;
         font-size: 0.7rem;
+    }
+
+    .mintCardAmountAdjustmentButtonContainer {
+        width: 50%;
+    }
+
+    .connectWalletButton {
+        margin-top: 20px;
+        align-self: center;
+    }
+
+    .mintCardMintButtons {
+        margin-top: 0px;
+        flex-direction: column;
     }
 }
