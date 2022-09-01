@@ -147,6 +147,12 @@ const Home: NextPage = () => {
         }
     }, [provider])
 
+    useEffect(() => {
+        if (!(chainID === 56) && chainID !== 0) {
+            notifyError("Please switch to Binance Smart Chain Main net.")
+        }
+    }, [chainID])
+
     async function updateMintPrice() {
         // @ts-ignore
         if (window.ethereum && minter !== null) {
