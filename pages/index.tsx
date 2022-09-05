@@ -1,6 +1,6 @@
 import type {NextPage} from 'next'
 import React from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
@@ -15,10 +15,15 @@ import ADDRESSES from '../utils/contractAddresses';
 import ERROR_MESSAGES from '../utils/errorMessages';
 import SUCCESS_MESSAGES from '../utils/successMessages';
 import WHITELIST from '../utils/whitelist';
+import Web3 from 'web3'
+import {useWeb3React} from '@web3-react/core'
+import CONSTANTS from '../utils/constants';
+import {getMinterAddress} from '../utils/getContractAddress';
+import {getProvider} from '../utils/getProvider';
 
 const Home: NextPage = () => {
 
-    const { MerkleTree } = require('merkletreejs')
+    const {MerkleTree} = require('merkletreejs')
     const keccak256 = require('keccak256')
 
     const leafNodes = WHITELIST.map(addr => keccak256(addr));
@@ -54,15 +59,16 @@ const Home: NextPage = () => {
     const [price, setPrice] = useState(0)
     const [whitelistPrice, setWhitelistPrice] = useState(0)
     const [amount, setAmount] = useState(1)
-    const [chainID, setChainId] = useState(0)
+    const [chainID, setChainId] = useState(process.env.NEXT_PUBLIC_CHAIN_ID)
     const [provider, setProvider] = useState(null)
-    const [signer, setSigner] = useState(null)
-    const [minter, setMinter] = useState(null)
+    const [web3WithWallet, setWeb3WithWallet] = useState(null)
     const [totalMinted, setTotalMinted] = useState(0)
     const [isNavExpanded, setIsNavExpanded] = useState(false)
     const [whitelistActive, setWhitelistActive] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [isWlLoading, setIsWlLoading] = useState(false)
+    // @ts-ignore
+    const [web3NoWallet, setWeb3] = useState(new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)) // for fetching info
 
     const toggleNavBar = () => {
         setIsNavExpanded(!isNavExpanded)
@@ -71,6 +77,17 @@ const Home: NextPage = () => {
     const closeNavBar = () => {
         setIsNavExpanded(false)
     }
+
+    const updateWeb3 = () => {
+        if (provider !== null) {
+            // @ts-ignore
+            setWeb3WithWallet(new Web3(provider))
+        }
+    }
+
+    useEffect(() => {
+        updateWeb3()
+    }, [provider])
 
     const connectWallet = () => {
         if (address === '') {
@@ -95,37 +112,21 @@ const Home: NextPage = () => {
         }
     }
 
-    const setNewProvider = () => {
+    useEffect(() => {
+        connectWallet()
+    }, [])
+
+    const updateProvider = () => {
         // @ts-ignore
-        if (window.ethereum && provider === null) {
+        if (window.ethereum && address !== '') {
             // @ts-ignore
-            setProvider(new ethers.providers.Web3Provider(window.ethereum))
+            setProvider(window.ethereum)
         }
     }
 
     useEffect(() => {
-        setNewProvider()
+        updateProvider()
     }, [address])
-
-    const initializeMintingContract = () => {
-        // @ts-ignore
-        if (window.ethereum && address !== '' && provider !== null) {
-            // @ts-ignore
-            setMinter(new ethers.Contract(ADDRESSES.MINTER, minterABI, provider))
-        }
-    }
-
-    useEffect(() => {
-        initializeMintingContract()
-    }, [address])
-
-    useEffect(() => {
-        // @ts-ignore
-        if (window.ethereum && address !== '' && provider !== null) {
-            // @ts-ignore
-            setSigner(provider.getSigner())
-        }
-    }, [provider, address])
 
     const increaseAmount = () => {
         setAmount(amount + 1)
@@ -139,135 +140,126 @@ const Home: NextPage = () => {
 
     useEffect(() => {
         // @ts-ignore
-        if (window.ethereum && provider !== null) {
+        if (window.ethereum && web3WithWallet !== null) {
             // @ts-ignore
-            provider.getNetwork().then(res => {
-                setChainId(res.chainId)
+            web3WithWallet.eth.getChainId().then(res => {
+                setChainId(res.toString())
             })
         }
-    }, [provider])
+    }, [web3WithWallet])
 
     useEffect(() => {
-        if (!(chainID === 56) && chainID !== 0) {
-            notifyError("Please switch to Binance Smart Chain Main net.")
+        if (process.env.NEXT_PUBLIC_CHAIN_ID === '56') {
+            if (!(chainID === '56') && chainID !== '0') {
+                notifyError("Please switch to Binance Smart Chain Main net.")
+            }
         }
     }, [chainID])
 
-    async function updateMintPrice() {
-        // @ts-ignore
-        if (window.ethereum && minter !== null) {
+    const getMinterContract = () => {
+        if (walletConnected && web3WithWallet !== null) {
             // @ts-ignore
-            const mintPrice = await minter.nftPrice()
-            setPrice(Number(ethers.utils.formatEther(mintPrice)) * amount)
+            return new web3WithWallet.eth.Contract(minterABI, getMinterAddress(chainID))
+        } else {
+            // @ts-ignore
+            return new web3NoWallet.eth.Contract(minterABI, getMinterAddress(chainID))
         }
+    }
+
+    function updateMintPrice() {
+        getMinterContract().methods.nftPrice().call().then((res: any) => {
+            setPrice(Number(web3NoWallet.utils.fromWei(res)) * amount)
+        })
     }
 
     useEffect(() => {
         updateMintPrice()
-    }, [address, minter])
+    }, [provider])
 
-    async function updateWhitelistPrice() {
-        // @ts-ignore
-        if (window.ethereum && minter !== null) {
+    function updateWhitelistPrice() {
+        if (whitelistActive) {
             // @ts-ignore
-            const mintPrice = await minter.whitelistPrice()
-            setWhitelistPrice(Number(ethers.utils.formatEther(mintPrice)) * amount)
+            getMinterContract().methods.whitelistPrice().call()
+                .then((res: any) => {
+                    setWhitelistPrice(Number(web3NoWallet.utils.fromWei(res)) * amount)
+                })
         }
     }
 
     useEffect(() => {
         updateWhitelistPrice()
-    }, [address, minter])
+    }, [whitelistActive])
 
-    async function checkWhitelistActive() {
+    function checkWhitelistActive() {
         // @ts-ignore
-        if (window.ethereum && minter !== null) {
-            // @ts-ignore
-            setWhitelistActive(await minter.whitelistActive())
-        }
+        getMinterContract().methods.whitelistActive().call()
+            .then((res: any) => {
+                setWhitelistActive(res)
+            })
     }
 
     useEffect(() => {
         checkWhitelistActive()
-    }, [address, minter])
+    }, [provider])
 
-    async function updateTotalSupply() {
-        // @ts-ignore
-        if (window.ethereum && minter !== null) {
-            // @ts-ignore
-            const totalSupply = await minter.totalSupply()
-            setTotalMinted(Number(totalSupply.toString()))
-        }
+    function updateTotalSupply() {
+        getMinterContract().methods.totalSupply().call()
+            .then((res: any) => {
+                setTotalMinted(Number(res.toString()))
+            })
     }
 
     useEffect(() => {
         updateTotalSupply()
-    }, [address, minter])
-
-    useEffect(() => {
-        // @ts-ignore
-        if (window.ethereum && provider !== null) {
-            // @ts-ignore
-            provider.listAccounts()
-                // @ts-ignore
-                .then(res => {
-                    if (res.length > 0) {
-                        setAddress(res[0])
-                        setWalletConnected(true)
-                    }
-                })
-
-        } else {
-            // showWarningToast(errorsMessage.INSTALL_METAMASK);
-        }
-    })
+    }, [provider])
 
     const updateBalance = () => {
         // @ts-ignore
-        if (window.ethereum && address  !== '' && signer !== null) {
+        if (window.ethereum && address !== '') {
             // @ts-ignore
-            signer.getBalance()
+            web3NoWallet.eth.getBalance(address)
                 // @ts-ignore
                 .then(res => {
-                    setBalance(Number(ethers.utils.formatEther(res)))
-                    if (price > balance) {
-                        // alert("don't have enough BNB");
-                        // showWarningToast(errorsMessage.NOT_ENOUGH_ETH);
-                    }
+                    setBalance(Number(web3NoWallet.utils.fromWei(res)))
                 })
         }
     }
 
     useEffect(() => {
         updateBalance()
-    }, [signer, address])
+    }, [address])
 
-    const mint = async () => {
+    const mint = () => {
         try {
-            // @ts-ignore
-            if (window.ethereum) {
+            if (walletConnected) {
                 if (balance < (amount * price)) {
                     notifyError('Not enough balance')
                     return
                 }
                 setIsLoading(true)
+                const total = amount * price
                 // @ts-ignore
-                const contractWithSigner = minter.connect(signer)
-                const options = {value: ethers.utils.parseEther(String(amount * price))}
-                const tx = await contractWithSigner.mint(amount, options)
-                await tx.wait()
-                updateTotalSupply()
-                // console.log(tx)
-                notifySuccess('Minted Successfully')
-                setIsLoading(false)
+                getMinterContract().methods.mint(amount).send({
+                    'from': address,
+                    // @ts-ignore
+                    value: web3WithWallet.utils.toWei(total.toString(), 'ether'),
+                    // @ts-ignore
+                    gasPrice: web3WithWallet.utils.toWei('12', 'gwei')
+                })
+                    // @ts-ignore
+                    .then(res => {
+                        updateTotalSupply()
+                        notifySuccess('Minted Successfully')
+                        setIsLoading(false)
+                    })
             }
         } catch (error) {
-            // console.log(error)
+            console.log(error)
             setIsLoading(false)
         }
     }
 
-    const whitelistMint = async () => {
+    const whitelistMint = () => {
         if (getMerkleProof().length < 1) {
             notifyError('Your Address is not whitelisted!')
             return
@@ -280,15 +272,29 @@ const Home: NextPage = () => {
                     return
                 }
                 setIsWlLoading(true)
-                // @ts-ignore
-                const contractWithSigner = minter.connect(signer)
-                const options = {value: ethers.utils.parseEther(String(whitelistPrice.toFixed(2)))}
-                const tx = await contractWithSigner.whitelistMint(getMerkleProof(), options)
-                await tx.wait()
-                setIsWlLoading(false)
-                updateTotalSupply()
-                // console.log(tx)
-                notifySuccess('Minted Successfully')
+                getMinterContract().methods.whitelistClaimed(address).call()
+                    // @ts-ignore
+                    .then(res => {
+                        if (!res) {
+                            getMinterContract().methods.whitelistMint(getMerkleProof()).send({
+                                from: address,
+                                // @ts-ignore
+                                value: web3WithWallet.utils.toWei(whitelistPrice.toString(), 'ether'),
+                                // @ts-ignore
+                                gasPrice: web3WithWallet.utils.toWei('12', 'gwei')
+                            })
+                                // @ts-ignore
+                                .then(res => {
+                                    updateTotalSupply()
+                                    notifySuccess('Minted Successfully')
+                                    setIsWlLoading(false)
+                                    updateTotalSupply()
+                                })
+                        } else {
+                            notifyError('Already Claimed!')
+                            setIsWlLoading(false)
+                        }
+                    })
             }
         } catch (e) {
             setIsWlLoading(false)
@@ -298,7 +304,7 @@ const Home: NextPage = () => {
 
     const notifyError = (message: string) => toast.error(message, {
         position: toast.POSITION.TOP_CENTER,
-        theme: 'dark'
+        theme: 'dark',
     });
 
     const notifySuccess = (message: string) => toast.success(message, {
@@ -309,7 +315,7 @@ const Home: NextPage = () => {
 
     return (
         <div className={styles.container}>
-            <ToastContainer />
+            <ToastContainer/>
             <Head>
                 <title>Eternal Zombies</title>
                 <meta name="eternalzombies.com" content="a collection of 1111 intrinsic value yield bearing nfts"/>
@@ -373,9 +379,13 @@ const Home: NextPage = () => {
                                             <div className={styles.mintCardAmountAdjustment}>
                                                 <p className={styles.mintCardTotalMinted}>Amount</p>
                                                 <div className={styles.mintCardAmountAdjustmentButtonContainer}>
-                                                    <button onClick={decreaseAmount} className={styles.amountAdjustmentButton}>-</button>
-                                                    <p className={styles.mintCardTotalMinted}>&nbsp;&nbsp;{amount}&nbsp;&nbsp;</p>
-                                                    <button onClick={increaseAmount} className={styles.amountAdjustmentButton}>+</button>
+                                                    <button onClick={decreaseAmount}
+                                                            className={styles.amountAdjustmentButton}>-
+                                                    </button>
+                                                    <p className={styles.mintCardTotalMinted}>&nbsp;&nbsp;&nbsp;{amount}&nbsp;&nbsp;&nbsp;</p>
+                                                    <button onClick={increaseAmount}
+                                                            className={styles.amountAdjustmentButton}>+
+                                                    </button>
                                                 </div>
                                             </div>
                                             <div className={styles.mintCardWhitelistPrice}>
@@ -384,11 +394,14 @@ const Home: NextPage = () => {
                                             </div>
                                             <div className={styles.mintCardMintButtons}>
                                                 <button onClick={mint} className={styles.connectWalletButton}>
-                                                    { isLoading ? <img className={styles.mintCardButtonLoader} src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"/> : <span>Mint</span>}
+                                                    {isLoading ? <img className={styles.mintCardButtonLoader}
+                                                                      src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"/> :
+                                                        <span>Mint</span>}
                                                 </button>
                                                 {
                                                     whitelistActive ?
-                                                        <button onClick={whitelistMint} className={styles.connectWalletButton}>
+                                                        <button onClick={whitelistMint}
+                                                                className={styles.connectWalletButton}>
                                                             {
                                                                 isWlLoading ?
                                                                     <img className={styles.mintCardButtonLoader}
@@ -401,7 +414,9 @@ const Home: NextPage = () => {
                                         </>
                                         :
                                         <div className={styles.mintCardButtons}>
-                                            <button className={styles.connectWalletButton} onClick={connectWallet}>Connect Wallet</button>
+                                            <button className={styles.connectWalletButton}
+                                                    onClick={connectWallet}>Connect Wallet
+                                            </button>
                                         </div>
                                 }
                             </div>
@@ -518,12 +533,12 @@ const Home: NextPage = () => {
                                             The DAO
                                         </div>
                                         <div className={styles.timeline__event__description}>
-                                            <p>Launch the EZ DAO, yeah that is right, we will giving the power to decide
-                                                about the
-                                                next collection to the EZ holders. Along with that, the EZ holders will
-                                                be able to make
-                                                certain critical decisions about the future of EZ collection
-                                                metrics.</p>
+                                            <p>
+                                                Launch the EZ DAO, yeah that is right, we will be giving the power to
+                                                decide about the next collection to the EZ holders. Along with that,
+                                                the EZ holders will be able to make certain critical decisions about
+                                                the future of EZ collection metrics.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
