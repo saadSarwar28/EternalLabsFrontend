@@ -244,7 +244,7 @@ const Home: NextPage = () => {
                     // @ts-ignore
                     value: web3WithWallet.utils.toWei(total.toString(), 'ether'),
                     // @ts-ignore
-                    gasPrice: web3WithWallet.utils.toWei('12', 'gwei')
+                    gasPrice: web3WithWallet.utils.toWei('5', 'gwei')
                 })
                     // @ts-ignore
                     .then(res => {
@@ -281,7 +281,7 @@ const Home: NextPage = () => {
                                 // @ts-ignore
                                 value: web3WithWallet.utils.toWei(whitelistPrice.toString(), 'ether'),
                                 // @ts-ignore
-                                gasPrice: web3WithWallet.utils.toWei('12', 'gwei')
+                                gasPrice: web3WithWallet.utils.toWei('5', 'gwei')
                             })
                                 // @ts-ignore
                                 .then(res => {
