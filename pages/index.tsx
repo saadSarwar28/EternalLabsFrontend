@@ -318,7 +318,8 @@ const Home: NextPage = () => {
             <ToastContainer/>
             <Head>
                 <title>Eternal Zombies</title>
-                <meta name="eternalzombies.com" content="a collection of 1111 intrinsic value yield bearing nfts"/>
+                <meta name="eternalzombies.com" content="a collection of 1111 intrinsic value yield bearing NFTs"/>
+                <meta name="google-site-verification" content="mLdpfYdmDazUVMLZ9NWfUwH7wBnmMmtb374Hgz6ZiBk" />
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <main className={styles.main}>
