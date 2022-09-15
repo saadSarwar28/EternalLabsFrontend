@@ -37,7 +37,7 @@ export const EzClaimCard = () => {
                     })
                     // @ts-ignore
                     .catch(error => {
-                        console.log(error)
+                        notifyError('Please connect your wallet to interact with this website')
                     });
             } else {
                 // for mobile
@@ -68,15 +68,19 @@ export const EzClaimCard = () => {
             // Check if User is already connected by retrieving the accounts
             web3.eth.getAccounts()
                 .then((result: any) => {
-                    setAddress(result[0])
-                    setWalletConnected(true)
+                    if (result.length > 0) {
+                        setAddress(result[0])
+                        setWalletConnected(true)
+                    }
                 });
         }
     }
 
     useEffect(() => {
-        checkWalletAlreadyConnected()
-    }, [])
+        if (address === '') {
+            checkWalletAlreadyConnected()
+        }
+    })
 
     const updateProvider = () => {
         // @ts-ignore

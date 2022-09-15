@@ -7,18 +7,22 @@ import minterABI from '../../../../../abi/minter.json';
 import {getMinterAddress} from '../../../../../utils/getContractAddress';
 import {getMerkleProof} from '../../../../../utils/merkleProof';
 import {ToastContainer} from 'react-toastify';
+import {weiToNumber} from '../../../../../utils/units';
+
+// interface MintCardInterface {
+//     address: '',
+// }
 
 export const EzMintCard = () => {
-
 
     const [balance, setBalance] = useState(0)
     const [address, setAddress] = useState('')
     const [walletConnected, setWalletConnected] = useState(false)
+    const [chainID, setChainId] = useState(process.env.NEXT_PUBLIC_CHAIN_ID)
+    const [provider, setProvider] = useState(null)
     const [price, setPrice] = useState(0)
     const [whitelistPrice, setWhitelistPrice] = useState(0)
     const [amount, setAmount] = useState(1)
-    const [chainID, setChainId] = useState(process.env.NEXT_PUBLIC_CHAIN_ID)
-    const [provider, setProvider] = useState(null)
     const [web3WithWallet, setWeb3WithWallet] = useState(null)
     const [totalMinted, setTotalMinted] = useState(0)
     const [whitelistActive, setWhitelistActive] = useState(false)
@@ -52,7 +56,7 @@ export const EzMintCard = () => {
                     })
                     // @ts-ignore
                     .catch(error => {
-                        console.log(error)
+                        notifyError('Please connect your wallet to interact with this website')
                     });
             } else {
                 // for mobile
@@ -83,14 +87,11 @@ export const EzMintCard = () => {
             // Check if User is already connected by retrieving the accounts
             web3.eth.getAccounts()
                 .then((result: any) => {
-                    // console.log(result[0], ' < result')
-                    setAddress(result[0])
-                    setWalletConnected(true)
+                    if (result.length > 0) {
+                        setAddress(result[0])
+                        setWalletConnected(true)
+                    }
                 });
-            // async (addr: string) => {
-            //     setAddress(addr[0])
-            //     setWalletConnected(true)
-            // });
         }
     }
 
@@ -202,9 +203,9 @@ export const EzMintCard = () => {
         if (walletConnected && address !== '') {
             // @ts-ignore
             web3NoWallet.eth.getBalance(address)
-                // @ts-ignore
-                .then(res => {
-                    setBalance(Number(web3NoWallet.utils.fromWei(res)))
+                .then((res: any) => {
+                    // @ts-ignore
+                    setBalance(weiToNumber(res, 3))
                 })
         }
     }
@@ -217,7 +218,6 @@ export const EzMintCard = () => {
         try {
             if (walletConnected) {
                 if (balance < (amount * price)) {
-                    console.log(' not enough balance')
                     notifyError('Not enough balance')
                     return
                 }
