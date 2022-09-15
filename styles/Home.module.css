@@ -36,7 +36,7 @@
 }
 
 .header {
-    background: url("/BG_1920x1080.png");
+    background: url("/mainpagehero.png");
     background-size: cover;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
