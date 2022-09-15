@@ -36,10 +36,11 @@
 }
 
 .header {
-    background: url("/BG_1920x1080.png");
+    background: url("/BGV2.png");
     background-size: cover;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    /*border-top-left-radius: 15px;*/
+    /*border-top-right-radius: 15px;*/
+    border-radius: 15px;
     padding-top: 35px;
 }
 
@@ -167,6 +168,12 @@
     margin-top: 20px;
 }
 
+.ezClaimCardButtons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .mintCardButtonLoader {
     width: 190px;
     height: 80px;
@@ -196,7 +203,6 @@
     /*display: flex;*/
     /*justify-content: center;*/
     padding: 3% 5%;
-    background: #05233A;
 }
 
 .previewHeaderWrapper {
@@ -747,7 +753,7 @@
     }
 
     .mintCardIcons {
-     justify-content: center;
+        justify-content: center;
     }
 
     .mintCardAmountAdjustmentButtonContainer {

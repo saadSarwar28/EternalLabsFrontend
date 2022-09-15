@@ -26,3 +26,13 @@ export const getDistributorAddress = (chainId: any) => {
     // @ts-ignore
     return ADDRESSES.DISTRIBUTOR[chainId]
 }
+
+export const getDrFrankensteinAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.DR_FRANKENSTEIN['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.DR_FRANKENSTEIN[chainId]
+}
+

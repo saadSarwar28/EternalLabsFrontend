@@ -1,0 +1,77 @@
+
+.collectionsCardWrapper {
+    display: flex;
+    padding: 3%;
+    justify-content: space-evenly;
+}
+
+.collectionCard {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px 5px;
+    border-radius: 15px;
+    background: #0a1622;
+}
+
+.collectionCard:hover {
+    box-shadow: 0px 0px 10px 10px;
+    cursor: pointer;
+}
+
+.imageWrapper {
+    display: flex;
+}
+
+.coverImage {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 100%;
+    width: 100%;
+}
+
+.bottomContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bottomHeadingContainer {
+    display: flex;
+    justify-content: center;
+    background: #7027b4;
+}
+
+.detailsContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5%;
+}
+
+.detailsRow {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.detailsColumn {
+    display: flex;
+}
+
+.detailsLeft {
+    font-weight: bolder;
+}
+
+.detailsRight {
+    font-weight: bolder;
+}
+
+.detailsContractLink {
+    color: lightcoral;
+}
+
+.detailsComingSoon {
+    display: flex;
+    justify-content: center;
+}

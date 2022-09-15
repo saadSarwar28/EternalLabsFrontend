@@ -1,4 +1,5 @@
 const CONSTANTS = {
+    'EZ_POOL_ID': '11',
     // 'CHAIN_ID': 56, mainnet
     'PROVIDER':
         {
