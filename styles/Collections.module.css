@@ -75,3 +75,29 @@
     display: flex;
     justify-content: center;
 }
+
+
+@media only screen and (max-width: 1494px) {
+
+    .collectionsCardWrapper {
+        flex-direction: column;
+    }
+
+    .collectionCard {
+        width: 50%;
+        margin-top: 5%;
+        align-self: center;
+    }
+}
+
+@media only screen and (max-width: 810px) {
+    .collectionCard {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .collectionCard {
+        width: 98%;
+    }
+}
