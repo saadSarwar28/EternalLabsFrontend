@@ -1,14 +1,5 @@
 import styles from '../../../styles/Home.module.css';
-import React, {useEffect, useState} from 'react';
-import Web3 from 'web3';
-import {isMobile} from 'react-device-detect';
-import minterABI from '../../../abi/minter.json';
-import {getMinterAddress} from '../../../utils/getContractAddress';
-import WHITELIST from '../../../utils/whitelist';
-import {MerkleTree} from 'merkletreejs';
-import {notifyInfo, notifyError, notifySuccess} from '../../../utils/toast';
-import {MintCard} from './components/mintCard';
-
+import React from 'react';
 
 export const Header = () => {
 
@@ -21,7 +12,8 @@ export const Header = () => {
                     Zombies...
                 </p>
             </div>
-            {/*<MintCard/>*/}
         </div>
     )
 }
+
+export default Header

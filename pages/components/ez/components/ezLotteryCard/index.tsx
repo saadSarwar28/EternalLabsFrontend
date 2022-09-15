@@ -6,6 +6,7 @@ import {notifyError, notifyInfo, notifySuccess} from '../../../../../utils/toast
 import minterABI from '../../../../../abi/minter.json';
 import {getMinterAddress} from '../../../../../utils/getContractAddress';
 import {getMerkleProof} from '../../../../../utils/merkleProof';
+import exp from 'constants';
 
 export const EzLotteryCard = () => {
 
@@ -351,3 +352,5 @@ export const EzLotteryCard = () => {
         </div>
     )
 }
+
+export default EzLotteryCard;

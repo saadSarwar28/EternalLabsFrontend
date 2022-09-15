@@ -5,11 +5,12 @@ import Image from 'next/image';
 import zmbeCardCover from '../../../public/rugzombie-logo.png'
 import cakeCardCover from '../../../public/CakeLogo.png'
 import linkIcon from '../../../public/link-icon.png'
-import { useRouter } from 'next/router'
-import { getStakerAddress} from '../../../utils/getContractAddress';
+import {useRouter} from 'next/router'
+import {getStakerAddress} from '../../../utils/getContractAddress';
 import {getDrFrankensteinNoWallet} from '../../../utils/web3NoWallet';
 import constants from '../../../utils/constants';
 import {weiToNumber} from '../../../utils/units';
+import Link from 'next/link';
 
 
 export const Collections = () => {
@@ -28,8 +29,7 @@ export const Collections = () => {
         updateZmbeLpLocked()
     }, [chainID])
 
-
-    const gotoZmbeCollection = () => {
+    const gotoZmbeCollection = (event: any) => {
         router.push('/eternalzombies')
     }
 
@@ -109,14 +109,21 @@ export const Collections = () => {
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
                                     <span className={collectionStyles.detailsRight}>
-                                        <a href="https://bscscan.com/address/0x5a87d0173a2a22579b878a27048c8a9b09bff496"
-                                           className={collectionStyles.detailsContractLink}>0x5a87d...ff496&nbsp;&nbsp;
-                                            <Image
-                                                src={linkIcon}
-                                                width={20}
-                                                height={20}
-                                            />
-                                        </a>
+                                        <Link
+                                            href="https://bscscan.com/address/0x5a87d0173a2a22579b878a27048c8a9b09bff496"
+                                            passHref={true}
+                                            className={collectionStyles.detailsContractLink}>
+                                            <a target="_blank">
+                                                <span id="span_element">
+                                                    0x5a87d...ff496&nbsp;&nbsp;
+                                                    <Image
+                                                        src={linkIcon}
+                                                        width={20}
+                                                        height={20}
+                                                    />
+                                                </span>
+                                            </a>
+                                        </Link>
                                     </span>
                                 </div>
                             </div>
@@ -170,9 +177,11 @@ export const Collections = () => {
                             </div>
                         </div>
                     </div>
-                    <a href="./eternalzombies" className={collectionStyles.link}></a>
+                    {/*<Link href="./eternalzombies" className={collectionStyles.link}></Link>*/}
                 </div>
             </div>
         </div>
     )
 }
+
+export default Collections;

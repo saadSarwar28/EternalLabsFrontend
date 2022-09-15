@@ -23,4 +23,4 @@ const EternalZombies: NextPage = () => {
     )
 }
 
-export default Ez
+export default EternalZombies

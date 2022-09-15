@@ -238,3 +238,5 @@ export const EzClaimCard = () => {
         </div>
     )
 }
+
+export default EzClaimCard

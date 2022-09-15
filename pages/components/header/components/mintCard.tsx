@@ -355,3 +355,5 @@ export const MintCard = () => {
         </div>
     )
 }
+
+export default MintCard

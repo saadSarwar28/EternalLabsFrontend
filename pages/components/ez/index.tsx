@@ -19,3 +19,5 @@ export const Ez = () => {
         </>
     )
 }
+
+export default Ez;

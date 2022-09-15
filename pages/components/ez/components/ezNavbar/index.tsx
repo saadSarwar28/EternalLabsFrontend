@@ -1,6 +1,8 @@
 import styles from '../../../../../styles/Ez.module.css';
 import {isMobile} from 'react-device-detect';
 import React, {useState} from 'react';
+import Link from 'next/link';
+import exp from 'constants';
 
 export const EzNavbar = () => {
 
@@ -27,7 +29,7 @@ export const EzNavbar = () => {
                 <img src="/menu.png"/>
             </button>
             <ul className={isNavExpanded ? styles.navListMobile : styles.navList}>
-                <li className={styles.navLinks} onClick={closeNavBar}><a href="/#home">Back to Home</a></li>
+                <li className={styles.navLinks} onClick={closeNavBar}><Link href="/#home"><a>Back to Home</a></Link></li>
                 {/*{isMobile ? <hr/> : null}*/}
                 {/*<li className={styles.navLinks} onClick={closeNavBar}><a href="#collections">Collections</a>*/}
                 {/*</li>*/}
@@ -42,3 +44,5 @@ export const EzNavbar = () => {
         </nav>
     )
 }
+
+export default EzNavbar;

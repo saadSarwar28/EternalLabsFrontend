@@ -14,3 +14,5 @@ export const EzHeader = () => {
         </div>
     )
 }
+
+export default EzHeader

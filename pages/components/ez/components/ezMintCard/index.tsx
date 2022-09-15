@@ -354,3 +354,5 @@ export const EzMintCard = () => {
         </div>
     )
 }
+
+export default EzMintCard;
