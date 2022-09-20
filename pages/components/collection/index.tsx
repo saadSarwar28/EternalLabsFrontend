@@ -73,7 +73,7 @@ export const Collections = () => {
                             </div>
                             <div className={collectionStyles.detailsRow}>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsLeft}>Pool's APR</span>
+                                    <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
                                     <span className={collectionStyles.detailsRight}>108.80%</span>

@@ -1,9 +1,6 @@
 // @ts-ignore
 import styled from "styled-components";
-import {useTimer} from "react-timer-hook";
 import React, {useEffect, useState} from "react";
-import styles from '../../../../../../styles/Ez.module.css';
-import {account, chainId, walletConnected, web3Provider, web3WithWallet} from '../../../../../../redux/get';
 
 const TimerBoxContainerWrapper = styled.div`
   display: flex;
@@ -91,12 +88,6 @@ const BountyTimer: React.FC<TimerInterface> = ({endTs, callback}) => {
         }, 1000);
         return () => clearInterval(interval);
     }, []);
-
-    // console.log(account(), ' < account ')
-    // console.log(walletConnected(), ' < wallet connected')
-    // console.log(web3Provider(), ' < web3 provider')
-    // console.log(web3WithWallet(), ' < web3 with wallet')
-    // console.log(chainId(), ' < chain id')
 
     return (
         <TimerBoxContainerWrapper>
