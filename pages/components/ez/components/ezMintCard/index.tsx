@@ -1,115 +1,35 @@
 import styles from '../../../../../styles/Ez.module.css';
 import React, {useEffect, useState} from 'react';
 import Web3 from 'web3';
-import {isMobile} from 'react-device-detect';
 import {notifyError, notifyInfo, notifySuccess} from '../../../../../utils/toast';
 import minterABI from '../../../../../abi/minter.json';
 import {getMinterAddress} from '../../../../../utils/getContractAddress';
 import {getMerkleProof} from '../../../../../utils/merkleProof';
 import {ToastContainer} from 'react-toastify';
 import {weiToNumber} from '../../../../../utils/units';
-
-// interface MintCardInterface {
-//     address: '',
-// }
+import {useDispatch, useSelector} from 'react-redux';
+import {selectCreateAccountState} from '../../../../../reduxStore/accountSlice';
 
 export const EzMintCard = () => {
 
+    const dispatch = useDispatch()
+
+    // @ts-ignore
+    const {userData, web3Provider} = useSelector(
+        selectCreateAccountState
+    )
+
     const [balance, setBalance] = useState(0)
-    const [address, setAddress] = useState('')
-    const [walletConnected, setWalletConnected] = useState(false)
     const [chainID, setChainId] = useState(process.env.NEXT_PUBLIC_CHAIN_ID)
-    const [provider, setProvider] = useState(null)
     const [price, setPrice] = useState(0)
     const [whitelistPrice, setWhitelistPrice] = useState(0)
     const [amount, setAmount] = useState(1)
-    const [web3WithWallet, setWeb3WithWallet] = useState(null)
     const [totalMinted, setTotalMinted] = useState(0)
     const [whitelistActive, setWhitelistActive] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [isWlLoading, setIsWlLoading] = useState(false)
     // @ts-ignore
-    const [web3NoWallet, setWeb3] = useState(new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)) // for fetching info
-
-    const updateWeb3 = () => {
-        if (provider !== null) {
-            // @ts-ignore
-            setWeb3WithWallet(new Web3(provider))
-        }
-    }
-
-    useEffect(() => {
-        updateWeb3()
-    }, [provider])
-
-    const connectWallet = () => {
-        if (address === '') {
-            // @ts-ignore
-            if (window.ethereum) {
-                // @ts-ignore
-                window.ethereum.request({method: 'eth_requestAccounts'})
-                    // @ts-ignore
-                    .then(result => {
-                        // @ts-ignore
-                        setAddress(result[0])
-                        setWalletConnected(true)
-                    })
-                    // @ts-ignore
-                    .catch(error => {
-                        notifyError('Please connect your wallet to interact with this website')
-                    });
-            } else {
-                // for mobile
-                if (isMobile) {
-                    window.open('https://metamask.app.link/dapp/eternalzombies.com')
-                } else {
-                    notifyInfo('Please Install metamask first.')
-                }
-            }
-        }
-    }
-
-    const checkWalletAlreadyConnected = () => {
-        // @ts-ignore
-        if (window.ethereum) {
-            // Check if browser is running Metamask
-            let web3: any;
-            // @ts-ignore
-            if (window.ethereum) {
-                // @ts-ignore
-                web3 = new Web3(window.ethereum);
-                // @ts-ignore
-            } else if (window.web3) {
-                // @ts-ignore
-                web3 = new Web3(window.web3.currentProvider);
-            }
-
-            // Check if User is already connected by retrieving the accounts
-            web3.eth.getAccounts()
-                .then((result: any) => {
-                    if (result.length > 0) {
-                        setAddress(result[0])
-                        setWalletConnected(true)
-                    }
-                });
-        }
-    }
-
-    useEffect(() => {
-        checkWalletAlreadyConnected()
-    }, [])
-
-    const updateProvider = () => {
-        // @ts-ignore
-        if (window.ethereum && address !== '') {
-            // @ts-ignore
-            setProvider(window.ethereum)
-        }
-    }
-
-    useEffect(() => {
-        updateProvider()
-    }, [address])
+    const [web3NoWallet, setWeb3NoWallet] = useState(new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)) // for fetching info
 
     const increaseAmount = () => {
         setAmount(amount + 1)
@@ -122,16 +42,6 @@ export const EzMintCard = () => {
     }
 
     useEffect(() => {
-        // @ts-ignore
-        if (window.ethereum && web3WithWallet !== null) {
-            // @ts-ignore
-            web3WithWallet.eth.getChainId().then(res => {
-                setChainId(res.toString())
-            })
-        }
-    }, [address])
-
-    useEffect(() => {
         if (process.env.NEXT_PUBLIC_CHAIN_ID === '56') {
             if (!(chainID === '56') && chainID !== '0') {
                 notifyError("Please switch to Binance Smart Chain Main net.")
@@ -140,9 +50,10 @@ export const EzMintCard = () => {
     }, [chainID])
 
     const getMinterWithWallet = () => {
-        if (walletConnected && web3WithWallet !== null) {
+        if (userData.walletConnected) {
+            const web3 = new Web3(web3Provider)
             // @ts-ignore
-            return new web3WithWallet.eth.Contract(minterABI, getMinterAddress(chainID))
+            return new web3.eth.Contract(minterABI, getMinterAddress(chainID))
         }
     }
 
@@ -159,7 +70,7 @@ export const EzMintCard = () => {
 
     useEffect(() => {
         updateMintPrice()
-    }, [provider])
+    }, [])
 
     function updateWhitelistPrice() {
         if (whitelistActive) {
@@ -185,7 +96,7 @@ export const EzMintCard = () => {
 
     useEffect(() => {
         checkWhitelistActive()
-    }, [provider])
+    }, [])
 
     function updateTotalSupply() {
         getMinterNoWallet().methods.totalSupply().call()
@@ -196,13 +107,13 @@ export const EzMintCard = () => {
 
     useEffect(() => {
         updateTotalSupply()
-    }, [provider])
+    }, [])
 
     const updateBalance = () => {
         // @ts-ignore
-        if (walletConnected && address !== '') {
+        if (userData.walletConnected) {
             // @ts-ignore
-            web3NoWallet.eth.getBalance(address)
+            web3NoWallet.eth.getBalance(userData.account)
                 .then((res: any) => {
                     // @ts-ignore
                     setBalance(weiToNumber(res, 3))
@@ -212,27 +123,30 @@ export const EzMintCard = () => {
 
     useEffect(() => {
         updateBalance()
-    }, [address])
+    }, [userData.walletConnected])
 
     const mint = () => {
         try {
-            if (walletConnected) {
+            if (userData.walletConnected) {
                 if (balance < (amount * price)) {
                     notifyError('Not enough balance')
                     return
                 }
                 setIsLoading(true)
                 const total = amount * price
+                const web3 = new Web3(web3Provider)
                 // @ts-ignore
-                getMinterWithWallet().methods.mint(amount).send({
-                    'from': address,
+                const minterContract = new web3.eth.Contract(minterABI, getMinterAddress(chainID))
+                minterContract.methods.mint(amount).send({
+                    'from': userData.account,
                     // @ts-ignore
-                    value: web3WithWallet.utils.toWei(total.toString(), 'ether'),
+                    value: web3.utils.toWei(total.toString(), 'ether'),
                     // @ts-ignore
                     // gasPrice: web3WithWallet.utils.toWei('5', 'gwei')
                 })
                     // @ts-ignore
                     .then(res => {
+                        console.log(' in mint')
                         updateTotalSupply()
                         notifySuccess('Minted Successfully')
                         setIsLoading(false)
@@ -245,7 +159,7 @@ export const EzMintCard = () => {
     }
 
     const whitelistMint = () => {
-        if (getMerkleProof(address).length < 1) {
+        if (getMerkleProof(userData.account).length < 1) {
             notifyError('Your Address is not whitelisted!')
             return
         }
@@ -257,14 +171,19 @@ export const EzMintCard = () => {
                     return
                 }
                 setIsWlLoading(true)
-                getMinterWithWallet().methods.whitelistClaimed(address).call()
+                const web3 = new Web3(web3Provider)
+                // @ts-ignore
+                const minterContract = new web3.eth.Contract(minterABI, getMinterAddress(chainID))
+                // @ts-ignore
+                minterContract.methods.whitelistClaimed(userData.account).call()
                     // @ts-ignore
                     .then(res => {
                         if (!res) {
-                            getMinterWithWallet().methods.whitelistMint(getMerkleProof(address)).send({
-                                from: address,
+                            // @ts-ignore
+                            minterContract.methods.whitelistMint(getMerkleProof(userData.account)).send({
+                                from: userData.account,
                                 // @ts-ignore
-                                value: web3WithWallet.utils.toWei(whitelistPrice.toString(), 'ether'),
+                                value: web3.utils.toWei(whitelistPrice.toString(), 'ether'),
                                 // @ts-ignore
                                 // gasPrice: web3WithWallet.utils.toWei('5', 'gwei')
                             })
@@ -306,7 +225,7 @@ export const EzMintCard = () => {
                 }
             </div>
             {
-                walletConnected ?
+                userData.walletConnected ?
                     <>
                         <div className={styles.mintCardAmountAdjustment}>
                             <p className={styles.mintCardTotalMinted}>Amount</p>
@@ -327,7 +246,8 @@ export const EzMintCard = () => {
                         <div className={styles.mintCardMintButtons}>
                             <button onClick={mint} className={styles.connectWalletButton}>
                                 {isLoading ? <img className={styles.mintCardButtonLoader}
-                                                  src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif" alt="loading"/> :
+                                                  src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"
+                                                  alt="loading"/> :
                                     <span>Mint</span>}
                             </button>
                             {
@@ -337,7 +257,8 @@ export const EzMintCard = () => {
                                         {
                                             isWlLoading ?
                                                 <img className={styles.mintCardButtonLoader}
-                                                     src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif" alt="loading"/>
+                                                     src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"
+                                                     alt="loading"/>
                                                 : <span>Whitelist Mint</span>
                                         }
                                     </button> : null
@@ -346,9 +267,7 @@ export const EzMintCard = () => {
                     </>
                     :
                     <div className={styles.mintCardButtons}>
-                        <button className={styles.connectWalletButton}
-                                onClick={connectWallet}>Connect Wallet
-                        </button>
+                        <p className={styles.mintCardAnnouncement}>Please Connect your wallet to mint!</p>
                     </div>
             }
         </div>

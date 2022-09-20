@@ -73,18 +73,18 @@ export const Collections = () => {
                             </div>
                             <div className={collectionStyles.detailsRow}>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsLeft}>Pool APR</span>
+                                    <span className={collectionStyles.detailsLeft}>Pool's APR</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight}>117.80%</span>
+                                    <span className={collectionStyles.detailsRight}>108.80%</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsLeft}>Estimated APY</span>
+                                    <span className={collectionStyles.detailsLeft}>Estimated EZ APY</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight}>135%</span>
+                                    <span className={collectionStyles.detailsRight}>199.05%</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
@@ -92,7 +92,7 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsLeft}>Compounds every</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight}>14 Days</span>
+                                    <span className={collectionStyles.detailsRight}>4 Days</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>

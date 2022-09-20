@@ -80,7 +80,7 @@
 
 .introduction {
     display: flex;
-    padding: 8%;
+    padding: 3% 8%;
     justify-content: space-between;
 }
 
@@ -111,6 +111,54 @@
     border-radius: 20px;
     box-shadow: 0px 0px 10px 5px;
     font-weight: 600;
+}
+
+.bountyCardWrapper {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    padding: 1%;
+    /*background: #134357;*/
+    /*border-radius: 20px;*/
+    /*box-shadow: 0px 0px 10px 5px;*/
+    /*font-weight: 600;*/
+}
+
+.bountyCard {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    padding: 0% 2%;
+    background: #134357;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 5px;
+    font-weight: 600;
+}
+
+.bountyCardAnnouncement {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    font-weight: 700;
+    margin: 0px;
+    font-size: xxx-large;
+    width: 33%;
+    white-space: nowrap;
+}
+
+.bountyCardText {
+    display: flex;
+    /*flex-direction: column;*/
+    justify-content: center;
+    align-content: center;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    white-space: nowrap;
+    font-size: medium;
+    width: 33%;
 }
 
 .mintCardAnnouncement {
@@ -172,6 +220,14 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+}
+
+.ezBountyClaimCardButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
 }
 
 .mintCardButtonLoader {
@@ -344,6 +400,21 @@
 }
 
 .docsButtonNav {
+    color: white;
+    background: #5479B3;
+    text-align: center;
+    width: 200px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bolder;
+    font-size: 20px;
+    height: 50px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.connectWalletButtonNav {
+    display: none;
     color: white;
     background: #5479B3;
     text-align: center;
@@ -596,6 +667,10 @@
         padding: 20px 20px;
     }
 
+    .connectWalletButtonNav {
+        display: block;
+    }
+
     .hamburger {
         border: 0px;
         background: transparent;
@@ -730,6 +805,47 @@
     }
 }
 
+@media only screen and (max-width: 1375px) {
+    .bountyCardAnnouncement {
+        font-size: xx-large;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .bountyCardAnnouncement {
+        font-size: x-large;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+
+
+    .bountyCard {
+        padding: 4% 1%;
+        flex-direction: column;
+    }
+
+    .bountyCardAnnouncement {
+        font-size: x-large;
+        flex-direction: row;
+        width: auto;
+        justify-content: center;
+    }
+
+    .bountyCardText {
+        margin-bottom: 10px;
+    }
+
+    .ezBountyClaimCardButtons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+    }
+}
+
 @media only screen and (max-width: 700px) {
     .mintCardAmountAdjustmentButtonContainer {
         width: 35%;
@@ -801,5 +917,29 @@
     .mintCardMintButtons {
         margin-top: 0px;
         flex-direction: column;
+    }
+
+    .bountyCard {
+        padding: 5% 1%;
+        flex-direction: column;
+    }
+
+    .bountyCardAnnouncement {
+        font-size: x-large;
+        flex-direction: row;
+        width: auto;
+        justify-content: center;
+    }
+
+    .bountyCardText {
+        margin-bottom: 0px;
+    }
+
+    .ezBountyClaimCardButtons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
     }
 }

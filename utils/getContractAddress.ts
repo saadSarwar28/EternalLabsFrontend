@@ -27,6 +27,15 @@ export const getDistributorAddress = (chainId: any) => {
     return ADDRESSES.DISTRIBUTOR[chainId]
 }
 
+export const getBountyAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.BOUNTY['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.BOUNTY[chainId]
+}
+
 export const getDrFrankensteinAddress = (chainId: any) => {
     if (chainId === 0) {
         // return mainnet if chain id not initialized yet

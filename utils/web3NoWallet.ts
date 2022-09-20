@@ -1,8 +1,10 @@
 import minterABI from '../abi/minter.json';
 import stakerABI from '../abi/staker.json'
 import distributorABI from '../abi/distributor.json'
+import bountyABI from '../abi/bounty.json'
 import drFrankensteinABI from '../abi/drFrankenstein.json'
 import {
+    getBountyAddress,
     getDistributorAddress,
     getDrFrankensteinAddress,
     getMinterAddress,
@@ -30,6 +32,13 @@ export const getDistributorNoWallet = (chainID: any) => {
     const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
     // @ts-ignore
     return new web3NoWallet.eth.Contract(distributorABI, getDistributorAddress(chainID))
+}
+
+export const getBountyNoWallet = () => {
+    // @ts-ignore
+    const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
+    // @ts-ignore
+    return new web3NoWallet.eth.Contract(bountyABI, getBountyAddress(process.env.NEXT_PUBLIC_CHAIN_ID))
 }
 
 export const getDrFrankensteinNoWallet = (chainID: any) => {
