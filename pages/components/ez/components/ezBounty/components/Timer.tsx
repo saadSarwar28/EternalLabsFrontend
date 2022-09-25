@@ -91,7 +91,7 @@ const BountyTimer: React.FC<TimerInterface> = ({endTs, callback}) => {
 
     return (
         <TimerBoxContainerWrapper>
-            <TimerBoxText>Time til next bounty</TimerBoxText>
+            <TimerBoxText>Next bounty in</TimerBoxText>
             <TimerBoxContainer>
                 {/*<TimerBox>{days.toString().padStart(2, '0')}</TimerBox>*/}
                 <TimerBox>{hours.toString().padStart(2, '0')}</TimerBox>

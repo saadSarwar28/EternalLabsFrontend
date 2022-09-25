@@ -36,7 +36,7 @@ export const Collections = () => {
     return (
         <div id="collections" className={styles.preview}>
             <div className={styles.previewHeaderWrapper}>
-                <h3 className={styles.previewHeader}>Feast your eyes with our Yield Bearing tokens!</h3>
+                <h3 className={styles.previewHeader}>Compounding Yield Boosting tokens!</h3>
             </div>
             <div className={collectionStyles.collectionsCardWrapper} onClick={gotoZmbeCollection}>
                 <div className={collectionStyles.collectionCard}>
