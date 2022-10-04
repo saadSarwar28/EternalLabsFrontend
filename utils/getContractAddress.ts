@@ -45,3 +45,21 @@ export const getDrFrankensteinAddress = (chainId: any) => {
     return ADDRESSES.DR_FRANKENSTEIN[chainId]
 }
 
+export const getPairAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.PAIR['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.PAIR[chainId]
+}
+
+export const getRouterAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.ROUTER['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.ROUTER[chainId]
+}
+

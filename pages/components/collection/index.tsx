@@ -11,15 +11,26 @@ import {getDrFrankensteinNoWallet} from '../../../utils/web3NoWallet';
 import constants from '../../../utils/constants';
 import {weiToNumber} from '../../../utils/units';
 import Link from 'next/link';
+import {getLpTokenValue} from '../../../utils/price';
 
 
 export const Collections = () => {
 
     const [chainID, setChainId] = useState(process.env.NEXT_PUBLIC_CHAIN_ID)
     const [zmbeLpLocked, setZmbeLpLocked] = useState('0')
+    const [lpValue, setLpValue] = useState(0)
     const router = useRouter()
 
-    function updateZmbeLpLocked() {
+    useEffect(() => {
+        if (zmbeLpLocked !== '0') {
+            getLpTokenValue(zmbeLpLocked)
+                .then((res: any) => {
+                    setLpValue(res)
+                })
+        }
+    }, [zmbeLpLocked])
+
+    const updateZmbeLpLocked = () => {
         getDrFrankensteinNoWallet(chainID).methods.userInfo(constants.EZ_POOL_ID, getStakerAddress(chainID)).call().then((res: any) => {
             setZmbeLpLocked(weiToNumber(res?.amount, 2))
         })
@@ -100,7 +111,7 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsLeft}>Total LP Staked</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight}>{zmbeLpLocked}</span>
+                                    <span className={collectionStyles.detailsRight}>{zmbeLpLocked} ($ {lpValue.toFixed(2)})</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
@@ -151,7 +162,7 @@ export const Collections = () => {
                                     <span>Pool</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span>PancakeSwap ZMBE-BNB LP pool</span>
+                                    <span>PancakeSwap CAKE-BNB LP pool</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>

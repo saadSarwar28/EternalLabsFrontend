@@ -11,6 +11,14 @@ import {Team} from './components/team';
 import {Roadmap} from './components/roadmap';
 import {Header} from './components/header';
 import {Navbar} from './components/navbar';
+import {useCallback} from "react";
+import type {Container, Engine} from "tsparticles-engine";
+import Particles from "react-particles";
+import {loadFull} from "tsparticles";
+import CONSTANTS from '../utils/constants';
+import ParticlesBackground from './components/Particles';
+import Pools from './components/pools';
+
 
 const Home: NextPage = () => {
 
@@ -18,19 +26,21 @@ const Home: NextPage = () => {
         <div className={styles.container}>
             <ToastContainer/>
             <Head>
-                <title>Eternal Zombies</title>
-                <meta name="eternalzombies.com" content="a collection of 1111 intrinsic value yield bearing NFTs"/>
+                <title>Eternal Labs</title>
+                <meta name="eternallabs.finance" content="Binance Smart Chain yield optimizer platform"/>
                 <meta name="google-site-verification" content="mLdpfYdmDazUVMLZ9NWfUwH7wBnmMmtb374Hgz6ZiBk"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <main className={styles.main}>
                 <div className={styles.containerCard}>
                     <div className={styles.header}>
+                        <ParticlesBackground/>
                         <Navbar/>
                         <Header/>
                     </div>
                     <Collections/>
-                    <Roadmap/>
+                    <Pools/>
+                    {/*<Roadmap/>*/}
                     <Team/>
                 </div>
             </main>

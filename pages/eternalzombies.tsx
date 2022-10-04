@@ -13,8 +13,8 @@ const EternalZombies: NextPage = () => {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Eternal Zombies</title>
-                <meta name="eternalzombies.com" content="a collection of 1111 intrinsic value yield bearing NFTs"/>
+                <title>Eternal Labs</title>
+                <meta name="eternallabs.finance" content="Binance Smart Chain yield optimizer platform"/>
                 <meta name="google-site-verification" content="mLdpfYdmDazUVMLZ9NWfUwH7wBnmMmtb374Hgz6ZiBk"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>

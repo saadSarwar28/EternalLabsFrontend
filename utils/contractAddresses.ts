@@ -25,6 +25,16 @@ const ADDRESSES = {
         {
             '56': '0x590Ea7699A4E9EaD728F975efC573f6E34a5dC7B',
             '97': '0xb9f3E39f04De6842BEc106254B1A3aEa211F1298',
+        },
+    'PAIR':
+        {
+            '56': '0x4DBaf6479F0Afa9f03C2A7D611151Fa5b53ECdC8',
+            '97': '0x7fEf9C475a0BFfdf4b0411fDBa9B9d9750053032',
+        },
+    'ROUTER':
+        {
+            '56': '0x10ED43C718714eb63d5aA57B78B54704E256024E',
+            '97': '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
         }
 }
 

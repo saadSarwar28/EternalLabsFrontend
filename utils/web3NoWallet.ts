@@ -2,12 +2,14 @@ import minterABI from '../abi/minter.json';
 import stakerABI from '../abi/staker.json'
 import distributorABI from '../abi/distributor.json'
 import bountyABI from '../abi/bounty.json'
+import pairABI from '../abi/IUniswapV2Pair.json'
+import routerABI from '../abi/IUniswapRouter.json'
 import drFrankensteinABI from '../abi/drFrankenstein.json'
 import {
     getBountyAddress,
     getDistributorAddress,
     getDrFrankensteinAddress,
-    getMinterAddress,
+    getMinterAddress, getPairAddress, getRouterAddress,
     getStakerAddress
 } from './getContractAddress';
 import {useState} from 'react';
@@ -46,4 +48,18 @@ export const getDrFrankensteinNoWallet = (chainID: any) => {
     const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
     // @ts-ignore
     return new web3NoWallet.eth.Contract(drFrankensteinABI, getDrFrankensteinAddress(chainID))
+}
+
+export const getPairNoWallet = (chainID: any) => {
+    // @ts-ignore
+    const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
+    // @ts-ignore
+    return new web3NoWallet.eth.Contract(pairABI, getPairAddress(chainID))
+}
+
+export const getRouterNoWallet = (chainID: any) => {
+    // @ts-ignore
+    const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
+    // @ts-ignore
+    return new web3NoWallet.eth.Contract(routerABI, getRouterAddress(chainID))
 }

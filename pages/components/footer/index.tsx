@@ -7,9 +7,9 @@ export const Footer = () => {
             <div className={styles.footerWrapper}>
                 <div className={styles.logoWrapper}>
                     <img
-                        src="/EZLogo1.png"
+                        src="/EternalLabs_Logo.svg"
                         alt="Eternal Zombies"
-                        className={styles.logo}
+                        className={styles.logoFooter}
                     />
                 </div>
                 <div className={styles.footerLinks}>
@@ -37,7 +37,7 @@ export const Footer = () => {
                 </div>
             </div>
             <br/>
-            <p className={styles.copyright}>All rights reserved © Eternal Zombies</p>
+            <p className={styles.copyright}>All rights reserved © EternalLabs</p>
         </footer>
     )
 }

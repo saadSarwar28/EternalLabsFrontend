@@ -1,4 +1,7 @@
 const CONSTANTS = {
+    ZMBE: '0x50ba8bf9e34f0f83f96a340387d1d3888ba4b3b5',
+    WRAPPED_BNB: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    USDT: '0x55d398326f99059fF775485246999027B3197955',
     'EZ_POOL_ID': '11',
     // 'CHAIN_ID': 56, mainnet
     'PROVIDER':
@@ -6,6 +9,91 @@ const CONSTANTS = {
             '56': 'https://bsc-dataseed1.defibit.io/',
             '97': 'https://data-seed-prebsc-1-s1.binance.org:8545/'
         },
+    PARTICLES_ONE: {
+        fullScreen: { enable: false, zIndex: 0 },
+        particles: {
+            color: {
+                value: "#FF0000",
+                animation: {
+                    enable: true,
+                    speed: 10
+                }
+            },
+            move: {
+                attract: {
+                    enable: true,
+                    rotate: {
+                        distance: 100,
+                        x: 2000,
+                        y: 2000
+                    }
+                },
+                direction: "none",
+                enable: true,
+                outModes: {
+                    default: "destroy"
+                },
+                path: {
+                    clamp: false,
+                    enable: true,
+                    delay: {
+                        value: 0
+                    },
+                    generator: "polygonPathGenerator",
+                    options: {
+                        sides: 6,
+                        turnSteps: 30,
+                        angle: 30
+                    }
+                },
+                random: false,
+                speed: 3,
+                straight: false,
+                trail: {
+                    fillColor: "#000",
+                    length: 20,
+                    enable: true
+                }
+            },
+            number: {
+                density: {
+                    enable: true,
+                    area: 800
+                },
+                value: 0
+            },
+            opacity: {
+                value: 1
+            },
+            shape: {
+                type: "circle"
+            },
+            size: {
+                value: 2
+            }
+        },
+        background: {
+            color: "#000"
+        },
+        // fullScreen: {
+        //     zIndex: -1
+        // },
+        emitters: {
+            direction: "none",
+            rate: {
+                quantity: 1,
+                delay: 0.25
+            },
+            size: {
+                width: 0,
+                height: 0
+            },
+            position: {
+                x: 50,
+                y: 50
+            }
+        }
+    }
 }
 
 export default CONSTANTS
