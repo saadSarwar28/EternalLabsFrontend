@@ -76,6 +76,7 @@
     display: inline;
     color: white;
     font-size: larger;
+    font-weight: bold;
 }
 
 .introduction {
@@ -401,7 +402,7 @@
 
 .docsButtonNav {
     color: white;
-    background: #5479B3;
+    background: #5479FF;
     text-align: center;
     width: 200px;
     border-radius: 20px;

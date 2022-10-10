@@ -30,7 +30,7 @@
 }
 
 .containerCard {
-    /*background: #416F73;*/
+    background: #024C8A;
     border-radius: 15px;
     width: 100%;
     box-shadow: 0px 0px 20px 10px #0B3448;
@@ -43,11 +43,15 @@
 }
 
 .logo {
+    width: 300px;
+}
+
+.logoCollections {
     width: 200px;
 }
 
 .logoFooter {
-    width: 100px;
+    width: 200px;
 }
 
 .hamburger {
@@ -231,7 +235,7 @@
     /*display: flex;*/
     /*justify-content: center;*/
     padding: 3% 5%;
-    background: #05233A;
+    /*background: #024C8A;*/
 }
 
 .pool {
@@ -239,7 +243,7 @@
     justify-content: center;
     flex-direction: column;
     padding: 3% 5%;
-    background: #134357;
+    background: #139484;
 }
 
 .previewHeaderWrapper {
@@ -282,7 +286,7 @@
 .team {
     padding-top: 3%;
     width: 100%;
-    background: #416F73;
+    /*background: #139484;*/
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
@@ -384,7 +388,7 @@
 
 .docsButtonNav {
     color: white;
-    background: #5479B3;
+    background: #5479FF;
     text-align: center;
     width: 200px;
     border-radius: 20px;
@@ -601,6 +605,23 @@
     }
 }
 
+@media only screen and (max-width: 1300px) {
+    .nav {
+        display: flex;
+        justify-content: space-evenly;
+        padding: 30px 10px;
+    }
+
+    .navList {
+        padding-left: 0%;
+        justify-content: space-around;
+    }
+
+    .introduction {
+        left: 25%;
+    }
+}
+
 /* for media width less than or equal to 600px */
 @media only screen and (max-width: 950px) {
 
@@ -621,7 +642,7 @@
     }
 
     .logo {
-        width: 100px;
+        width: 250px;
         /*height: 50px;*/
     }
 
@@ -681,8 +702,10 @@
     .introduction {
         display: flex;
         flex-direction: column;
-        padding: 30% 10%;
+        padding: 20% 10%;
         justify-content: space-between;
+        left: 7%;
+        top: 20%;
     }
 
     .introWrapper {
@@ -786,6 +809,11 @@
 }
 
 @media only screen and (max-width: 500px) {
+
+    .introduction {
+        left: 3%;
+        top: 20%;
+    }
     .navListMobile {
         width: 93%;
         left: 15px;
@@ -809,9 +837,18 @@
         margin-top: 0px;
         flex-direction: column;
     }
+
+    .logoFooter {
+        width: 150px;
+    }
 }
 
 @media only screen and (max-width: 400px) {
+
+    .introduction {
+        left: 3%;
+        top: 20%
+    }
     .navListMobile {
         width: 92%;
         left: 15px;

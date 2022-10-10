@@ -7,8 +7,8 @@ export const Footer = () => {
             <div className={styles.footerWrapper}>
                 <div className={styles.logoWrapper}>
                     <img
-                        src="/EternalLabs_Logo.svg"
-                        alt="Eternal Zombies"
+                        src="/EternalLabs_Logo_V2_without_text.svg"
+                        alt="EternalLabs"
                         className={styles.logoFooter}
                     />
                 </div>

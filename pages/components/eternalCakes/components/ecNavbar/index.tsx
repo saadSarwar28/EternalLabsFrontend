@@ -13,7 +13,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 
 const INFURA_ID = '2DdCy0FfJLSBU4CS7yPxYpBiy8I'
 
-export const EzNavbar: React.FC = () => {
+export const EcNavbar: React.FC = () => {
 
     const dispatch = useDispatch()
 
@@ -233,4 +233,4 @@ export const EzNavbar: React.FC = () => {
     )
 }
 
-export default EzNavbar;
+export default EcNavbar;

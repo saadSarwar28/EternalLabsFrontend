@@ -10,7 +10,7 @@ export const Header = () => {
             <div className={styles.introWrapper}>
                 <div className={styles.logoWrapper}>
                     <img
-                        src="/EternalLabs_Logo.svg"
+                        src="/EternalLabs_Logo_V2.svg"
                         alt="EternalLabs"
                         className={styles.logo}
                     />

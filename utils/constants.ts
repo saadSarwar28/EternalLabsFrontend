@@ -10,7 +10,7 @@ const CONSTANTS = {
             '97': 'https://data-seed-prebsc-1-s1.binance.org:8545/'
         },
     PARTICLES_ONE: {
-        fullScreen: { enable: false, zIndex: 0 },
+        fullScreen: {enable: false, zIndex: 0},
         particles: {
             color: {
                 value: "#FF0000",
@@ -70,6 +70,21 @@ const CONSTANTS = {
             },
             size: {
                 value: 2
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: "repulse"
+                }
+            },
+            modes: {
+                repulse: {
+                    distance: 50,
+                    duration: 0.4
+                }
             }
         },
         background: {

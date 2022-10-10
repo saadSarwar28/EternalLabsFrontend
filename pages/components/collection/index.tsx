@@ -148,7 +148,7 @@ export const Collections = () => {
                             src={cakeCardCover}
                             width={500}
                             height={500}
-                            alt="Eternal Zombies Collection"
+                            alt="Eternal Cakes Collection"
                             className={collectionStyles.coverImage}
                         ></Image>
                     </div>
