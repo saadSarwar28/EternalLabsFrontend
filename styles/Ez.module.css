@@ -213,7 +213,7 @@
 
 .mintCardMintButtons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 20px;
 }
 
@@ -458,7 +458,7 @@
 
 .connectWalletButton {
     color: white;
-    background: #6353BD;
+    background: #5479FF;
     text-align: center;
     width: 200px;
     border-radius: 20px;

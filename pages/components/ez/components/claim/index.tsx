@@ -8,6 +8,7 @@ import {getDistributorNoWallet, getMinterNoWallet} from '../../../../../utils/we
 import {weiToNumber} from '../../../../../utils/units';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCreateAccountState, updatePendingZmbe} from '../../../../../reduxStore/accountSlice';
+import Loader from '../../../loader';
 
 export const EzClaimCard = () => {
 
@@ -112,9 +113,7 @@ export const EzClaimCard = () => {
                         <div className={styles.ezClaimCardButtons}>
                             <button onClick={claimAll} disabled={isLoading} className={styles.connectWalletButton}>
                                 {
-                                    isLoading ? <img className={styles.mintCardButtonLoader}
-                                                     src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"
-                                                     alt="loading"/> :
+                                    isLoading ? <Loader/> :
                                         <span>Claim</span>
                                 }
                             </button>

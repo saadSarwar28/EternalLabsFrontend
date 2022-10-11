@@ -52,7 +52,7 @@ export const Pools = () => {
             <div className={styles.previewHeaderWrapper}>
                 <h3 className={styles.previewHeader}>Compounding Yield Boosting Pools!</h3>
             </div>
-            <div className={collectionStyles.collectionsCardWrapper} onClick={gotoZmbeCollection}>
+            <div className={collectionStyles.collectionsCardWrapper}>
                 <div className={collectionStyles.collectionCard}>
                     <div className={collectionStyles.imageWrapper}>
                         <Image
@@ -198,7 +198,7 @@ export const Pools = () => {
                     {/*<Link href="./eternalzombies" className={collectionStyles.link}></Link>*/}
                 </div>
             </div>
-            <div className={collectionStyles.collectionsCardWrapper} onClick={gotoZmbeCollection}>
+            <div className={collectionStyles.collectionsCardWrapper}>
                 <div className={collectionStyles.collectionCard}>
                     <div className={collectionStyles.imageWrapper}>
                         <Image

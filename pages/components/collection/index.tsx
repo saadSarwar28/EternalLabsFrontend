@@ -13,7 +13,6 @@ import {weiToNumber} from '../../../utils/units';
 import Link from 'next/link';
 import {getLpTokenValue} from '../../../utils/price';
 
-
 export const Collections = () => {
 
     const [chainID, setChainId] = useState(process.env.NEXT_PUBLIC_CHAIN_ID)
@@ -49,7 +48,7 @@ export const Collections = () => {
             <div className={styles.previewHeaderWrapper}>
                 <h3 className={styles.previewHeader}>Compounding Yield Boosting tokens!</h3>
             </div>
-            <div className={collectionStyles.collectionsCardWrapper} onClick={gotoZmbeCollection}>
+            <div className={collectionStyles.collectionsCardWrapper}>
                 <div className={collectionStyles.collectionCard}>
                     <div className={collectionStyles.imageWrapper}>
                         <Image
@@ -136,6 +135,11 @@ export const Collections = () => {
                                             </a>
                                         </Link>
                                     </span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRowContentCenter}>
+                                <div className={collectionStyles.buttonContainer}>
+                                    <button className={collectionStyles.mintButton} onClick={gotoZmbeCollection}>Go to Mint</button>
                                 </div>
                             </div>
                         </div>

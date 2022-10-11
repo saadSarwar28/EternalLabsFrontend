@@ -9,6 +9,7 @@ import {ToastContainer} from 'react-toastify';
 import {weiToNumber} from '../../../../../utils/units';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCreateAccountState} from '../../../../../reduxStore/accountSlice';
+import Loader from '../../../loader';
 
 export const EzMintCard = () => {
 
@@ -245,9 +246,7 @@ export const EzMintCard = () => {
                         </div>
                         <div className={styles.mintCardMintButtons}>
                             <button onClick={mint} className={styles.connectWalletButton}>
-                                {isLoading ? <img className={styles.mintCardButtonLoader}
-                                                  src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"
-                                                  alt="loading"/> :
+                                {isLoading ? <Loader/> :
                                     <span>Mint</span>}
                             </button>
                             {
@@ -256,9 +255,7 @@ export const EzMintCard = () => {
                                             className={styles.connectWalletButton}>
                                         {
                                             isWlLoading ?
-                                                <img className={styles.mintCardButtonLoader}
-                                                     src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"
-                                                     alt="loading"/>
+                                                <Loader/>
                                                 : <span>Whitelist Mint</span>
                                         }
                                     </button> : null

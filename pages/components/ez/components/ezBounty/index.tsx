@@ -9,6 +9,7 @@ import {selectCreateAccountState} from '../../../../../reduxStore/accountSlice';
 import Web3 from 'web3';
 import bountyAbi from "../../../../../abi/bounty.json"
 import {getBountyAddress} from '../../../../../utils/getContractAddress';
+import Loader from '../../../loader';
 
 export const EzBountyCard: React.FC = () => {
 
@@ -168,7 +169,7 @@ export const EzBountyCard: React.FC = () => {
                                 <p className={styles.bountyCardText}>Be the first one to claim!</p>
                                 <button onClick={claim} disabled={isLoading} className={styles.connectWalletButton}>
                                     {
-                                        isLoading ? <span>Claiming...</span> :
+                                        isLoading ? <Loader/> :
                                             <span>Claim</span>
                                     }
                                 </button>
@@ -180,7 +181,7 @@ export const EzBountyCard: React.FC = () => {
                                         <button onClick={buyTicket} disabled={ticketPurchaseLoading}
                                                 className={styles.connectWalletButton}>
                                             {
-                                                ticketPurchaseLoading ? <span>Buying...</span> :
+                                                ticketPurchaseLoading ? <Loader/> :
                                                     <span>Buy Ticket</span>
                                             }
                                         </button>

@@ -39,6 +39,15 @@ export const updatePendingZmbe = createAsyncThunk(
     }
 )
 
+export const disconnectWallet = createAsyncThunk(
+    "ACCOUNT/DISCONNECT_WALLET",
+    () => {
+        return new Promise<void>((resolve, reject) => {
+            resolve()
+        })
+    }
+)
+
 const createAccountSlice = createSlice({
     name: "ACCOUNT_SLICE",
     initialState: defaultState,
@@ -55,6 +64,9 @@ const createAccountSlice = createSlice({
         },
         [updatePendingZmbe.fulfilled.toString()]: (state, {payload}) => {
             state.userData.pendingZmbe += payload
+        },
+        [disconnectWallet.fulfilled.toString()]: (state) => {
+            state.userData.walletConnected = false
         }
     }
 })

@@ -2,13 +2,16 @@ import styles from '../../../../../styles/Ez.module.css';
 import {isMobile} from 'react-device-detect';
 import React, {useCallback, useEffect, useState} from 'react';
 import Link from 'next/link';
-import {notifyError, notifyInfo} from '../../../../../utils/toast';
 import Web3 from 'web3';
-import {selectCreateAccountState, updateAccount, updateWeb3Provider} from '../../../../../reduxStore/accountSlice';
+import {
+    disconnectWallet,
+    selectCreateAccountState,
+    updateAccount,
+    updateWeb3Provider
+} from '../../../../../reduxStore/accountSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import Web3Modal from 'web3modal'
-import { providers } from 'ethers'
-import WalletLink from 'walletlink'
+import {providers} from 'ethers'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 
 const INFURA_ID = '2DdCy0FfJLSBU4CS7yPxYpBiy8I'
@@ -101,7 +104,6 @@ export const EzNavbar: React.FC = () => {
     }
 
     const connectWallet = useCallback(async function () {
-        console.log(' in connect wallet')
         // This is the initial `provider` that is returned when
         // using web3Modal to connect. Can be MetaMask or WalletConnect.
         const provider = await web3Modal.connect()
@@ -166,9 +168,18 @@ export const EzNavbar: React.FC = () => {
         }
     }
 
-    // useEffect(() => {
-    //     checkWalletAlreadyConnected()
-    // }, [])
+    const disconnect = useCallback(
+        async function () {
+            await web3Modal.clearCachedProvider()
+            // @ts-ignore
+            dispatch(disconnectWallet())
+        },
+        []
+    )
+
+    useEffect(() => {
+        checkWalletAlreadyConnected()
+    }, [])
 
     // useEffect(() => {
     //     if (process.env.NEXT_PUBLIC_CHAIN_ID === '56') {
@@ -225,8 +236,8 @@ export const EzNavbar: React.FC = () => {
                 }
             </ul>
             {
-                userData.walletConnected ? <button className={styles.docsButtonNav}
-                                                   disabled>{userData?.account.slice(0, 4) + "..." + userData?.account.slice(38, 42)}</button> :
+                userData.walletConnected ? <button className={styles.docsButtonNav} title="Click to disconnect"
+                                                   onClick={disconnect}>{userData?.account.slice(0, 4) + "..." + userData?.account.slice(38, 42)}</button> :
                     <button onClick={connectWallet} className={styles.docsButtonNav}>Connect Wallet</button>
             }
         </nav>
