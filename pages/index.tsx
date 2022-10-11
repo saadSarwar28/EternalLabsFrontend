@@ -33,15 +33,7 @@ const Home: NextPage = () => {
             </Head>
             <main className={styles.main}>
                 <div className={styles.containerCard}>
-                    <div className={styles.header}>
-                        <ParticlesBackground/>
-                        <Navbar/>
-                        <Header/>
-                    </div>
                     <Collections/>
-                    <Pools/>
-                    {/*<Roadmap/>*/}
-                    <Team/>
                 </div>
             </main>
             <Footer/>
