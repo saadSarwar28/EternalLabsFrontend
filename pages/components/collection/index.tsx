@@ -124,10 +124,9 @@ export const Collections = () => {
                                             passHref={true}
                                             className={collectionStyles.detailsContractLink}>
                                             <a target="_blank">
-                                                <span id="span_element">
+                                                <span style={{display: 'flex'}} id="span_element">
                                                     0x5a87d...ff496
                                                     <Image
-                                                        style={{marginTop: '3px'}}
                                                         src={linkIcon}
                                                         width={20}
                                                         height={20}
