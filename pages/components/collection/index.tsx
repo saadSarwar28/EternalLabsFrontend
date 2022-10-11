@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 import zmbeCardCover from '../../../public/rugzombie-logo.png'
 import cakeCardCover from '../../../public/CakeLogo.png'
-import linkIcon from '../../../public/link-icon.png'
+import linkIcon from '../../../public/icons8-linking-32.svg'
 import {useRouter} from 'next/router'
 import {getStakerAddress} from '../../../utils/getContractAddress';
 import {getDrFrankensteinNoWallet} from '../../../utils/web3NoWallet';
@@ -125,8 +125,9 @@ export const Collections = () => {
                                             className={collectionStyles.detailsContractLink}>
                                             <a target="_blank">
                                                 <span id="span_element">
-                                                    0x5a87d...ff496&nbsp;&nbsp;
+                                                    0x5a87d...ff496
                                                     <Image
+                                                        style={{marginTop: '3px'}}
                                                         src={linkIcon}
                                                         width={20}
                                                         height={20}

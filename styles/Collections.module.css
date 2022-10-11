@@ -16,7 +16,7 @@
 
 .collectionCard:hover {
     box-shadow: 0px 0px 10px 10px;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .imageWrapper {
