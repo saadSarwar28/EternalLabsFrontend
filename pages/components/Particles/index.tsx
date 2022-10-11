@@ -19,7 +19,7 @@ const ParticlesBackground = () => {
     //     // await console.log(container);
     // }, []);
 
-    const options =  {
+    const options: any = {
         fullScreen: {enable: false, zIndex: 0},
         particles: {
             color: {
