@@ -67,7 +67,10 @@ export const EzNavbar: React.FC = () => {
         walletconnect: {
             package: WalletConnectProvider, // required
             options: {
-                infuraId: INFURA_ID, // required
+                // infuraId: INFURA_ID, // required
+                rpc: process.env.NEXT_PUBLIC_BINANCE_RPC,
+                bridge: 'https://bridge.walletconnect.org',
+                qrcode: true,
             },
         },
         // 'custom-walletlink': {
