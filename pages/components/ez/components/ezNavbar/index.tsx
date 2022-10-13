@@ -181,6 +181,8 @@ export const EzNavbar: React.FC = () => {
     const disconnect = useCallback(
         async function () {
             await web3Modal.clearCachedProvider()
+            window.localStorage.removeItem('walletconnect')
+            window.localStorage.removeItem('WEB3_CONNECT_CACHED_PROVIDER')
             // @ts-ignore
             dispatch(disconnectWallet())
         },
