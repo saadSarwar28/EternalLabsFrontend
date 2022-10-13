@@ -120,7 +120,11 @@ export const EzBountyCard: React.FC = () => {
             setTicketPurchased(true)
             setTicketPurchaseLoading(false)
         }).catch((error: any) => {
-            notifyError('Something went wrong')
+            if (error.code === 4001) {
+                notifyError('Transaction declined.')
+            } else {
+                notifyError('Something went wrong, Please try again.')
+            }
             setTicketPurchaseLoading(false)
         })
         setTicketPurchaseLoading(false)
@@ -139,7 +143,11 @@ export const EzBountyCard: React.FC = () => {
                         setIsLoading(false)
                     })
                     .catch((error: any) => {
-                        notifyError('Bounty Claim Unsuccessfull.')
+                        if (error.code === 4001) {
+                            notifyError('Transaction declined.')
+                        } else {
+                            notifyError('Bounty Claim Unsuccessfull.')
+                        }
                         setIsLoading(false)
                     })
             }

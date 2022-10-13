@@ -152,6 +152,14 @@ export const EzMintCard = () => {
                         notifySuccess('Minted Successfully')
                         setIsLoading(false)
                     })
+                    .catch((error: any) => {
+                        if (error.code === 4001) {
+                            notifyError('Transaction declined.')
+                        } else {
+                            notifyError('Something went wrong, Please try again.')
+                        }
+                        setIsLoading(false)
+                    })
             }
         } catch (error) {
             // console.log(error)
