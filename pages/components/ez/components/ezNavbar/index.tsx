@@ -13,10 +13,21 @@ import {useDispatch, useSelector} from 'react-redux';
 import Web3Modal from 'web3modal'
 import {providers} from 'ethers'
 import WalletConnectProvider from '@walletconnect/web3-provider'
+import {notifyError} from '../../../../../utils/toast';
 
 const INFURA_ID = '2DdCy0FfJLSBU4CS7yPxYpBiy8I'
 
 export const EzNavbar: React.FC = () => {
+
+    const [chainId, setChainId] = useState('0')
+
+    useEffect(() => {
+        if (process.env.NEXT_PUBLIC_CHAIN_ID === '56' && chainId !== '0') {
+            if (chainId !== '56') {
+                notifyError('Please Switch to Binance Smart Chain!')
+            }
+        }
+    }, [chainId])
 
     const dispatch = useDispatch()
 
@@ -110,6 +121,7 @@ export const EzNavbar: React.FC = () => {
         // This is the initial `provider` that is returned when
         // using web3Modal to connect. Can be MetaMask or WalletConnect.
         const provider = await web3Modal.connect()
+        provider.enable()
 
         // We plug the initial `provider` into ethers.js and get back
         // a Web3Provider. This will add on methods from ethers.js and
@@ -130,15 +142,8 @@ export const EzNavbar: React.FC = () => {
             updateWeb3Provider(network)
         )
 
-        console.log(network.chainId, ' <<< chain id')
+        setChainId(String(network.chainId))
 
-        // dispatch({
-        //     type: 'SET_WEB3_PROVIDER',
-        //     provider,
-        //     web3Provider,
-        //     address,
-        //     chainId: network.chainId,
-        // })
     }, [])
 
     const checkWalletAlreadyConnected = () => {
