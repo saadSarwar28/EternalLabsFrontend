@@ -61,7 +61,7 @@ interface TimerInterface {
 // @ts-ignore
 const BountyTimer: React.FC<TimerInterface> = ({endTs, callback}) => {
 
-    const {seconds, minutes, hours} = useTimer({
+    const {seconds, minutes, hours, days} = useTimer({
         expiryTimestamp: new Date(endTs * 1000),
         onExpire: callback,
     });
@@ -77,7 +77,7 @@ const BountyTimer: React.FC<TimerInterface> = ({endTs, callback}) => {
             <TimerBoxText>Next bounty in</TimerBoxText>
             <TimerBoxContainer>
                 {/*<TimerBox>{days.toString().padStart(2, '0')}</TimerBox>*/}
-                <TimerBox>{hours.toString().padStart(2, '0')}</TimerBox>
+                <TimerBox>{days > 0 ? ((hours * days) + hours).toString().padStart(2, '0') : hours.toString().padStart(2, '0')}</TimerBox>
                 <TimerBox>{minutes.toString().padStart(2, '0')}</TimerBox>
                 <TimerBox>{seconds.toString().padStart(2, '0')}</TimerBox>
             </TimerBoxContainer>
