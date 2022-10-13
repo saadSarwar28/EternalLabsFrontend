@@ -130,6 +130,8 @@ export const EzNavbar: React.FC = () => {
             updateWeb3Provider(network)
         )
 
+        console.log(network.chainId, ' <<< chain id')
+
         // dispatch({
         //     type: 'SET_WEB3_PROVIDER',
         //     provider,
