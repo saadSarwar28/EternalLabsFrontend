@@ -77,7 +77,7 @@ const BountyTimer: React.FC<TimerInterface> = ({endTs, callback}) => {
             <TimerBoxText>Next bounty in</TimerBoxText>
             <TimerBoxContainer>
                 {/*<TimerBox>{days.toString().padStart(2, '0')}</TimerBox>*/}
-                <TimerBox>{days > 0 ? ((hours * days) + hours).toString().padStart(2, '0') : hours.toString().padStart(2, '0')}</TimerBox>
+                <TimerBox>{days > 0 ? ((24 * days) + hours).toString().padStart(2, '0') : hours.toString().padStart(2, '0')}</TimerBox>
                 <TimerBox>{minutes.toString().padStart(2, '0')}</TimerBox>
                 <TimerBox>{seconds.toString().padStart(2, '0')}</TimerBox>
             </TimerBoxContainer>
