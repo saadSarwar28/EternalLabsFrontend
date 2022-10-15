@@ -16,19 +16,19 @@ export const Footer = () => {
                     <ul className={styles.footerList}>
                         <li>
                             <a className={styles.footerListLinks}
-                               href="https://discord.gg/gnN7k9am83" target="_blank" rel="noreferrer">
+                               href="https://discord.gg/2qFsymKv" target="_blank" rel="noreferrer">
                                 <img src="/discord-brands.png" height={30} width={30} alt="discord"/>
                             </a>
                         </li>
                         <li>
-                            <a className={styles.footerListLinks} href="https://t.me/EternalZombies" target="_blank"
+                            <a className={styles.footerListLinks} href="https://t.me/EternalLabs" target="_blank"
                                rel="noreferrer">
                                 <img src="/telegram-brands.png" height={30} width={30} alt="telegram"/>
                             </a>
                         </li>
                         <li>
                             <a className={styles.footerListLinks}
-                               href="https://twitter.com/EternalZombies?s=20&t=fZpZNbcCbPBtdlfNGMAgqA"
+                               href="https://twitter.com/EternalLabs__"
                                target="_blank" rel="noreferrer">
                                 <img src="/twitter-logo.png" height={30} width={30} alt="twitter"/>
                             </a>
