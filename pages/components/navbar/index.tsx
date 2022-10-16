@@ -24,7 +24,7 @@ export const Navbar = () => {
             {/*    className={styles.logo}*/}
             {/*/>*/}
             {/*</div>*/}
-            <Link href="https://docs.eternalzombies.com/welcome-to-eternal-zombies">
+            <Link href="https://docs.eternallabs.finance/welcome-to-eternallabs">
                 <a target="_blank" className={styles.docsButtonNav} rel="noreferrer">Read The Docs</a></Link>
             <button className={styles.hamburger} onClick={toggleNavBar}>
                 <img src="/menu.png"/>
