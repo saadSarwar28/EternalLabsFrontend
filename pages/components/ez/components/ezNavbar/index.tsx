@@ -117,32 +117,68 @@ export const EzNavbar: React.FC = () => {
         })
     }
 
-    const connectWallet = useCallback(async function () {
-        // This is the initial `provider` that is returned when
-        // using web3Modal to connect. Can be MetaMask or WalletConnect.
-        const provider = await web3Modal.connect()
-        await provider.enable()
+    const walletConnect = useCallback(async function () {
+        try {
+            const provider = new WalletConnectProvider({
+                rpc: {
+                    // @ts-ignore
+                    56: process.env.NEXT_PUBLIC_BINANCE_RPC,
+                    // @ts-ignore
+                    97: process.env.NEXT_PUBLIC_BINANCE_RPC,
+                },
+                qrcodeModalOptions: {
+                    desktopLinks: [
+                        'ledger',
+                        'tokenary',
+                        'wallet',
+                        'wallet 3',
+                        'secuX',
+                        'ambire',
+                        'wallet3',
+                        'apolloX',
+                        'zerion',
+                        'sequence',
+                        'punkWallet',
+                        'kryptoGO',
+                        'nft',
+                        'riceWallet',
+                        'vision',
+                        'keyring'
+                    ],
+                    mobileLinks: [
+                        "rainbow",
+                        "metamask",
+                        "argent",
+                        "trust",
+                        "imtoken",
+                        "pillar",
+                    ],
+                },
+            });
 
-        // We plug the initial `provider` into ethers.js and get back
-        // a Web3Provider. This will add on methods from ethers.js and
-        // event listeners such as `.on()` will be different.
-        const web3Provider = new providers.Web3Provider(provider)
+            //  Enable session (triggers QR Code modal)
+            await provider.enable();
+            // We plug the initial `provider` into ethers.js and get back
+            // a Web3Provider. This will add on methods from ethers.js and
+            // event listeners such as `.on()` will be different.
+            const web3Provider = new providers.Web3Provider(provider)
 
-        const signer = web3Provider.getSigner()
-        const address = await signer.getAddress()
+            const signer = web3Provider.getSigner()
+            const address = await signer.getAddress()
+            const network = await web3Provider.getNetwork()
 
-        const network = await web3Provider.getNetwork()
-
-        dispatch(
-            // @ts-ignore
-            updateAccount(address)
-        )
-        dispatch(
-            // @ts-ignore
-            updateWeb3Provider(provider)
-        )
-
-        setChainId(String(network.chainId))
+            dispatch(
+                // @ts-ignore
+                updateAccount(address)
+            )
+            dispatch(
+                // @ts-ignore
+                updateWeb3Provider(provider)
+            )
+            setChainId(String(network.chainId))
+        } catch (e:any) {
+            console.log(e.toString(), ' <<< ')
+        }
 
     }, [])
 
@@ -241,7 +277,7 @@ export const EzNavbar: React.FC = () => {
                             {
                                 userData.walletConnected ? <button className={styles.connectWalletButtonNav}
                                                                    disabled>{userData?.account.slice(0, 4) + "..." + userData?.account.slice(38, 42)}</button> :
-                                    <button onClick={connectWallet} className={styles.connectWalletButtonNav}>Connect
+                                    <button onClick={walletConnect} className={styles.connectWalletButtonNav}>Connect
                                         Wallet</button>
                             }
                         </li> : null
@@ -250,7 +286,7 @@ export const EzNavbar: React.FC = () => {
             {
                 userData.walletConnected ? <button className={styles.docsButtonNav} title="Click to disconnect"
                                                    onClick={disconnect}>{userData?.account.slice(0, 4) + "..." + userData?.account.slice(38, 42)}</button> :
-                    <button onClick={connectWallet} className={styles.docsButtonNav}>Connect Wallet</button>
+                    <button onClick={walletConnect} className={styles.docsButtonNav}>Connect Wallet</button>
             }
         </nav>
     )

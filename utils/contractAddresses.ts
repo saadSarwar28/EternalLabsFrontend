@@ -24,7 +24,7 @@ const ADDRESSES = {
     'DR_FRANKENSTEIN':
         {
             '56': '0x590Ea7699A4E9EaD728F975efC573f6E34a5dC7B',
-            '97': '0xb9f3E39f04De6842BEc106254B1A3aEa211F1298',
+            '97': '0xFa656065DeC44f9f24A112D4908C4E0cFa0D6939',
         },
     'PAIR':
         {

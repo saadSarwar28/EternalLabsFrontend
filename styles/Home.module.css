@@ -67,7 +67,7 @@
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     /*padding-top: 35px;*/
-    height: 90vh;
+    height: 95vh;
 }
 
 .nav {
@@ -116,7 +116,7 @@
     justify-content: center;
     position: absolute;
     top: 25%;
-    left: 31%;
+    left: 26%;
     z-index: 5;
 }
 
@@ -234,7 +234,8 @@
 .preview {
     /*display: flex;*/
     /*justify-content: center;*/
-    padding: 3% 5%;
+    padding: 0% 5%;
+    height: 100vh;
     /*background: #024C8A;*/
 }
 
@@ -286,6 +287,7 @@
 .team {
     padding-top: 3%;
     width: 100%;
+    height: 80vh;
     /*background: #139484;*/
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -297,12 +299,23 @@
     padding: 0% 10%;
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .teamMemberContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0% 5%;
     width: 50%;
+    animation-name: fadeIn;
+    animation-duration: 3s;
 }
 
 .teamMemberTextContainer {
@@ -606,10 +619,12 @@
 }
 
 @media only screen and (max-width: 1300px) {
+
     .nav {
         display: flex;
         justify-content: space-evenly;
         padding: 30px 10px;
+        z-index: 10;
     }
 
     .navList {
@@ -619,6 +634,14 @@
 
     .introduction {
         left: 25%;
+    }
+
+    .preview {
+        /*display: flex;*/
+        /*justify-content: center;*/
+        padding: 0% 3% 10% 3%;
+        height: auto;
+        /*background: #024C8A;*/
     }
 }
 
@@ -637,8 +660,8 @@
     }
 
     .header {
-        padding-top: 20px;
-        height: 80vh;
+        padding-top: 10px;
+        height: 93vh;
     }
 
     .logo {
@@ -702,10 +725,10 @@
     .introduction {
         display: flex;
         flex-direction: column;
-        padding: 20% 10%;
+        padding: 0% 10%;
         justify-content: space-between;
         left: 7%;
-        top: 20%;
+        /*top: 20%;*/
     }
 
     .introWrapper {
@@ -777,6 +800,10 @@
         display: none;
     }
 
+    .team {
+        height: 95vh;
+    }
+
     .teamInfoContainer {
         display: flex;
         flex-direction: column;
@@ -845,6 +872,10 @@
 
 @media only screen and (max-width: 400px) {
 
+    .main {
+        padding: 15px 5px;
+    }
+
     .introduction {
         left: 3%;
         top: 20%
@@ -877,6 +908,18 @@
     .mintCardMintButtons {
         margin-top: 0px;
         flex-direction: column;
+    }
+
+    .preview {
+        /*display: flex;*/
+        /*justify-content: center;*/
+        padding: 0% 3% 10% 3%;
+        height: 1205px;
+        /*background: #024C8A;*/
+    }
+
+    .team {
+        height: 90vh;
     }
 }
 
