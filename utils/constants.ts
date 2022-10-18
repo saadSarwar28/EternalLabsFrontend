@@ -1,3 +1,7 @@
+import BigNumber from 'bignumber.js';
+
+export const BSC_BLOCK_TIME = 3
+
 const CONSTANTS = {
     ZMBE: '0x50ba8bf9e34f0f83f96a340387d1d3888ba4b3b5',
     WRAPPED_BNB: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
@@ -108,7 +112,9 @@ const CONSTANTS = {
                 y: 50
             }
         }
-    }
+    },
+    ZMBE_PER_BLOCK: new BigNumber(10),
+    BLOCKS_PER_YEAR: new BigNumber((60 / BSC_BLOCK_TIME) * 60 * 24 * 365) // 10512000
 }
 
 export default CONSTANTS

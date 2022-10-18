@@ -22,6 +22,9 @@ export const Collections = () => {
     const [showCards, setShowCards] = useState(false)
     const [offset, setOffset] = useState(0);
     const router = useRouter()
+    const [poolWeight, setPoolWeight] = useState(0)
+    const [zmbePriceUsd, setZmbePriceUsd] = useState(0)
+    const [poolLiquidityUsd, setPoolLiquidityUsd] = useState(0)
 
     useEffect(() => {
         if (zmbeLpLocked !== '0' && chainID === '56') {
@@ -66,8 +69,6 @@ export const Collections = () => {
             setShowCards(true)
         }
     }, [offset])
-
-    console.log(offset, ' << offset ')
 
     return (
         <div id="collections" className={styles.preview}>

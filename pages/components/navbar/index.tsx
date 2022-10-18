@@ -24,11 +24,10 @@ export const Navbar = () => {
             {/*    className={styles.logo}*/}
             {/*/>*/}
             {/*</div>*/}
-            <Link href="https://docs.eternallabs.finance/welcome-to-eternallabs">
-                <a target="_blank" className={styles.docsButtonNav} rel="noreferrer">Read The Docs</a></Link>
             <button className={styles.hamburger} onClick={toggleNavBar}>
-                <img src="/menu.png"/>
+                <img src="/icons8-menu-squared-96.svg" style={{height: '50px'}}/>
             </button>
+            <div className={styles.navButtonContainer}></div>
             <ul className={isNavExpanded ? styles.navListMobile : styles.navList}>
                 <li className={styles.navLinks} onClick={closeNavBar}><Link href="#home"><a>Home</a></Link></li>
                 {/*{isMobile ? <hr/> : null}*/}
@@ -40,6 +39,11 @@ export const Navbar = () => {
                 {/*{isMobile ? <hr/> : null}*/}
                 <li className={styles.navLinks} onClick={closeNavBar}><Link href="#team"><a>Team</a></Link></li>
             </ul>
+            <div className={styles.navButtonContainer}>
+                <Link href="https://docs.eternallabs.finance/welcome-to-eternallabs">
+                    <a target="_blank" className={styles.docsButtonNav} rel="noreferrer">Read The Docs</a>
+                </Link>
+            </div>
         </nav>
     )
 }
