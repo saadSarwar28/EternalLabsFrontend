@@ -22,7 +22,7 @@ export const Pools = () => {
     return (
         <div id="pools" className={styles.pool}>
             <div className={styles.previewHeaderWrapper}>
-                <h3 className={styles.previewHeader}>Compounding Yield Boosting Pools!</h3>
+                <h2 className={styles.previewHeader}>Compounding Yield Boosting Pools!</h2>
             </div>
             <div className={poolStyles.collectionsCardWrapper}>
                 <div className={poolStyles.collectionCard}>

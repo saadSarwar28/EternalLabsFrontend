@@ -1,10 +1,13 @@
 import styles from '../../../styles/Home.module.css';
 import collectionStyles from '../../../styles/Collections.module.css'
+import animate from '../../../styles/Animate.module.css'
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 import zmbeCardCover from '../../../public/rugzombie-logo.png'
 import cakeCardCover from '../../../public/CakeLogo.png'
-import linkIcon from '../../../public/icons8-linking-32.svg'
+// import linkIcon from '../../../public/icons8-linking-32.svg'
+import contractIcon from '../../../public/file-contract-solid.svg'
+import background from "../../../public/gradient-blue-background.png"
 import {useRouter} from 'next/router'
 import {getStakerAddress} from '../../../utils/getContractAddress';
 import {getDrFrankensteinNoWallet} from '../../../utils/web3NoWallet';
@@ -71,16 +74,14 @@ export const Collections = () => {
     }, [offset])
 
     return (
-        <div id="collections" className={styles.preview}>
+        <div id="collections" className={styles.preview} style={{backgroundImage: `url(${background.src})`}}>
             <div className={styles.previewHeaderWrapper}>
-                <h3 className={styles.previewHeader}>Compounding Yield Boosting tokens!</h3>
+                <h2 className={styles.previewHeader}>Compounding Yield Boosting tokens!</h2>
             </div>
             {
                 showCards ?
                     <div className={collectionStyles.collectionsCardWrapper}>
-                        <div className={collectionStyles.collectionCardLeft}
-                             style={{animationName: isMobile ? 'fadeIn' : 'slideInFromLeft', animationDuration: isMobile ? '3s' : '1s'}}
-                        >
+                        <div className={collectionStyles.collectionCardLeft}>
                             <div className={collectionStyles.imageWrapper}>
                                 <Image
                                     src={zmbeCardCover}
@@ -159,7 +160,7 @@ export const Collections = () => {
                                                 <span style={{display: 'flex'}} id="span_element">
                                                     0x5a87d...ff496
                                                     <Image
-                                                        src={linkIcon}
+                                                        src={contractIcon}
                                                         width={20}
                                                         height={20}
                                                     />
@@ -179,10 +180,7 @@ export const Collections = () => {
                                 </div>
                             </div>
                         </div>
-
-                        <div className={collectionStyles.collectionCardRight}
-                             style={{animationName: isMobile ? 'fadeIn' : 'slideInFromRight', animationDuration: isMobile ? '3s' : '1s'}}
-                        >
+                        <div className={collectionStyles.collectionCardRight}>
                             <div className={collectionStyles.imageWrapper}>
                                 <Image
                                     src={cakeCardCover}
@@ -224,7 +222,7 @@ export const Collections = () => {
                                     {/*    </div>*/}
                                     {/*</div>*/}
                                     <div className={collectionStyles.detailsComingSoon}>
-                                        <h2>Coming soon!</h2>
+                                        <h2>Launching at 1/11/2022 16:00 UTC</h2>
                                     </div>
                                 </div>
                             </div>
