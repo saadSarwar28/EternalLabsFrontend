@@ -13,13 +13,60 @@ import {useDispatch, useSelector} from 'react-redux';
 import Web3Modal from 'web3modal'
 import {providers} from 'ethers'
 import WalletConnectProvider from '@walletconnect/web3-provider'
-import {notifyError} from '../../../../../utils/toast';
+import {notifyError, notifyInfo} from '../../../../../utils/toast';
+import Modal from 'react-modal';
+import styled from 'styled-components';
+import foxImage from '../../../../../public/metamask-icon.svg'
+import walletConnectImage from '../../../../../public/walletconnect-seeklogo.com.svg'
 
-const INFURA_ID = '2DdCy0FfJLSBU4CS7yPxYpBiy8I'
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        borderRadius: '25px'
+    },
+};
+
+const ModalContainer = styled.div`
+  padding: 5%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  border: 2px solid white;
+  border-radius: 15px;
+`
+
+const Separator = styled.hr`
+  color: black;
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`
+
+const ModalImage = styled.img`
+  width: 80%;
+  padding: 10%;
+  cursor: pointer;
+  align-self: center;
+`
 
 export const EzNavbar: React.FC = () => {
 
     const [chainId, setChainId] = useState('0')
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
 
     useEffect(() => {
         if (process.env.NEXT_PUBLIC_CHAIN_ID === '56' && chainId !== '0') {
@@ -36,43 +83,38 @@ export const EzNavbar: React.FC = () => {
         selectCreateAccountState
     )
 
-    // const connectWallet = () => {
-    //     if (userData.account === '') {
-    //         // @ts-ignore
-    //         if (window.ethereum) {
-    //             // @ts-ignore
-    //             window.ethereum.request({method: 'eth_requestAccounts'})
-    //                 // @ts-ignore
-    //                 .then(result => {
-    //                     dispatch(
-    //                         // @ts-ignore
-    //                         updateAccount(result[0])
-    //                     )
-    //                     dispatch(
-    //                         // @ts-ignore
-    //                         updateWeb3Provider(window.ethereum)
-    //                     )
-    //                     // @ts-ignore
-    //                     // store.dispatch(updateAccount(result[0]))
-    //                     // store.dispatch(updateWalletConnected(true))
-    //                     // // @ts-ignore
-    //                     // store.dispatch(updateWeb3Provider(window.ethereum))
-    //                     // store.dispatch(updateWeb3WithWallet(new Web3(web3Provider())))
-    //                 })
-    //                 // @ts-ignore
-    //                 .catch(error => {
-    //                     notifyError('Please connect your wallet to interact with this website')
-    //                 });
-    //         } else {
-    //             // for mobile
-    //             if (isMobile) {
-    //                 window.open('https://metamask.app.link/dapp/eternalzombies.com')
-    //             } else {
-    //                 notifyInfo('Please Install metamask first.')
-    //             }
-    //         }
-    //     }
-    // }
+    const connectMetamaskWallet = () => {
+        if (userData.account === '') {
+            // @ts-ignore
+            if (window.ethereum) {
+                // @ts-ignore
+                window.ethereum.request({method: 'eth_requestAccounts'})
+                    // @ts-ignore
+                    .then(result => {
+                        closeModal()
+                        dispatch(
+                            // @ts-ignore
+                            updateAccount(result[0])
+                        )
+                        dispatch(
+                            // @ts-ignore
+                            updateWeb3Provider(window.ethereum)
+                        )
+                    })
+                    // @ts-ignore
+                    .catch(error => {
+                        notifyError('Please connect your wallet to interact with this website')
+                    });
+            } else {
+                // for mobile
+                if (isMobile) {
+                    window.open('https://metamask.app.link/dapp/eternalzombies.com')
+                } else {
+                    notifyInfo('Please Install metamask first.')
+                }
+            }
+        }
+    }
 
     const providerOptions = {
         walletconnect: {
@@ -84,28 +126,6 @@ export const EzNavbar: React.FC = () => {
                 qrcode: true,
             },
         },
-        // 'custom-walletlink': {
-        //     display: {
-        //         logo: 'https://play-lh.googleusercontent.com/PjoJoG27miSglVBXoXrxBSLveV6e3EeBPpNY55aiUUBM9Q1RCETKCOqdOkX2ZydqVf0',
-        //         name: 'Coinbase',
-        //         description: 'Connect to Coinbase Wallet (not Coinbase App)',
-        //     },
-        //     options: {
-        //         appName: 'Coinbase', // Your app name
-        //         networkUrl: `https://mainnet.infura.io/v3/`,
-        //         chainId: 1,
-        //     },
-        //     package: WalletLink,
-        //     connector: async (_, options) => {
-        //         const { appName, networkUrl, chainId } = options
-        //         const walletLink = new WalletLink({
-        //             appName,
-        //         })
-        //         const provider = walletLink.makeWeb3Provider(networkUrl, chainId)
-        //         await provider.enable()
-        //         return provider
-        //     },
-        // },
     }
 
     let web3Modal: Web3Modal;
@@ -115,6 +135,11 @@ export const EzNavbar: React.FC = () => {
             cacheProvider: true,
             providerOptions, // required
         })
+    }
+
+    const openWalletConnect = () => {
+        closeModal()
+        walletConnect()
     }
 
     const walletConnect = useCallback(async function () {
@@ -176,7 +201,7 @@ export const EzNavbar: React.FC = () => {
                 updateWeb3Provider(provider)
             )
             setChainId(String(network.chainId))
-        } catch (e:any) {
+        } catch (e: any) {
             console.log(e.toString(), ' <<< ')
         }
 
@@ -258,6 +283,19 @@ export const EzNavbar: React.FC = () => {
 
     return (
         <nav className={styles.nav}>
+            <Modal
+                isOpen={modalIsOpen}
+                // onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+                <ModalContainer>
+                    <ModalImage src={foxImage.src} alt="metamask" onClick={connectMetamaskWallet}/>
+                    <Separator/>
+                    <ModalImage src={walletConnectImage.src} alt="wallet connect" onClick={openWalletConnect}/>
+                </ModalContainer>
+            </Modal>
             <div className={styles.logoWrapper}>
                 <img
                     src="/EternalLabs_Logo_V2_without_text.svg"
@@ -277,7 +315,7 @@ export const EzNavbar: React.FC = () => {
                             {
                                 userData.walletConnected ? <button className={styles.connectWalletButtonNav}
                                                                    disabled>{userData?.account.slice(0, 4) + "..." + userData?.account.slice(38, 42)}</button> :
-                                    <button onClick={walletConnect} className={styles.connectWalletButtonNav}>Connect
+                                    <button onClick={openModal} className={styles.connectWalletButtonNav}>Connect
                                         Wallet</button>
                             }
                         </li> : null
@@ -286,10 +324,10 @@ export const EzNavbar: React.FC = () => {
             {
                 userData.walletConnected ? <button className={styles.docsButtonNav} title="Click to disconnect"
                                                    onClick={disconnect}>{userData?.account.slice(0, 4) + "..." + userData?.account.slice(38, 42)}</button> :
-                    <button onClick={walletConnect} className={styles.docsButtonNav}>Connect Wallet</button>
+                    <button onClick={openModal} className={styles.docsButtonNav}>Connect Wallet</button>
             }
         </nav>
-    )
+)
 }
 
 export default EzNavbar;

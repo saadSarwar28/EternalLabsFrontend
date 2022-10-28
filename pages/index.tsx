@@ -18,6 +18,8 @@ import {loadFull} from "tsparticles";
 import CONSTANTS from '../utils/constants';
 import ParticlesBackground from './components/Particles';
 import Pools from './components/pools';
+import halloweenBackground from '../public/HalloweenBG.png'
+import {isMobile} from 'react-device-detect';
 
 
 const Home: NextPage = () => {
@@ -33,8 +35,8 @@ const Home: NextPage = () => {
             </Head>
             <main className={styles.main}>
                 <div className={styles.containerCard}>
-                    <div className={styles.header}>
-                        <ParticlesBackground/>
+                    <div className={styles.header} style={{backgroundImage: `url(${halloweenBackground.src})`}}>
+                        {/*<ParticlesBackground/>*/}
                         <Navbar/>
                         <Header/>
                     </div>

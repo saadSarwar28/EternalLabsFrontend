@@ -66,6 +66,7 @@ const createAccountSlice = createSlice({
             state.userData.pendingZmbe += payload
         },
         [disconnectWallet.fulfilled.toString()]: (state) => {
+            state.userData.account = ''
             state.userData.walletConnected = false
         }
     }
