@@ -8,7 +8,7 @@ export const getZmbeTombApr = (
 ): number => {
     const yearlyZmbeRewardAllocation = CONSTANTS.ZMBE_PER_BLOCK.times(CONSTANTS.BLOCKS_PER_YEAR).times(poolWeight)
     const apr = yearlyZmbeRewardAllocation.times(zmbePriceUsd).div(poolLiquidityUsd)
-    return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
+    return 0
 }
 
 export default null
