@@ -1,4 +1,4 @@
-import styles from '../../../styles/Ez.module.css';
+import styles from '../../../styles/Ec.module.css';
 import React from 'react';
 import {EcNavbar} from './components/ecNavbar';
 import {EcHeader} from './components/ecHeader';
@@ -12,7 +12,7 @@ export const EternalCakes = () => {
                 <div className={styles.containerCard}>
                     <div className={styles.header}>
                         <EcNavbar/>
-                        <EcBountyCard/>
+                        {/*<EcBountyCard/>*/}
                         <EcHeader/>
                     </div>
                 </div>

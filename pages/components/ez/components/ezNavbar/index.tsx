@@ -327,7 +327,7 @@ export const EzNavbar: React.FC = () => {
                     <button onClick={openModal} className={styles.docsButtonNav}>Connect Wallet</button>
             }
         </nav>
-)
+    )
 }
 
 export default EzNavbar;

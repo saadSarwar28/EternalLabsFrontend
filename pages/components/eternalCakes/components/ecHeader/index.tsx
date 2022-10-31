@@ -1,4 +1,4 @@
-import styles from '../../../../../styles/Ez.module.css';
+import styles from '../../../../../styles/Ec.module.css';
 import React from 'react';
 import {EcMintCard} from '../ecMintCard';
 import {EcClaimCard} from '../claim';

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {notifyError, notifySuccess} from '../../../../../utils/toast';
-import styles from '../../../../../styles/Ez.module.css';
+import styles from '../../../../../styles/Ec.module.css';
 import BountyTimer from './components/Timer';
 import {ToastContainer} from 'react-toastify';
 import {getBountyNoWallet, getMinterNoWallet} from '../../../../../utils/web3NoWallet';

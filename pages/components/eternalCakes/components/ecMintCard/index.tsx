@@ -1,18 +1,19 @@
-import styles from '../../../../../styles/Ez.module.css';
+import styles from '../../../../../styles/Ec.module.css';
 import React, {useEffect, useState} from 'react';
 import Web3 from 'web3';
 import {notifyError, notifyInfo, notifySuccess} from '../../../../../utils/toast';
-import minterABI from '../../../../../abi/minter.json';
-import {getMinterAddress} from '../../../../../utils/getContractAddress';
-import {getMerkleProof} from '../../../../../utils/merkleProof';
+import minterABI from '../../../../../abi/EternalCakesMinter.json';
+import {getEternalCakesMinterAddress} from '../../../../../utils/getContractAddress';
+import {getHexRoot, getMerkleProof} from '../../../../../utils/merkleProof';
 import {ToastContainer} from 'react-toastify';
 import {weiToNumber} from '../../../../../utils/units';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {selectCreateAccountState} from '../../../../../reduxStore/accountSlice';
+import plusIcon from '../../../../../public/icons/plus.svg'
+import minusIcon from '../../../../../public/icons/minus.svg'
+import Loader from '../../../loader';
 
 export const EcMintCard = () => {
-
-    const dispatch = useDispatch()
 
     // @ts-ignore
     const {userData, web3Provider} = useSelector(
@@ -49,17 +50,17 @@ export const EcMintCard = () => {
         }
     }, [chainID])
 
-    const getMinterWithWallet = () => {
-        if (userData.walletConnected) {
-            const web3 = new Web3(web3Provider)
-            // @ts-ignore
-            return new web3.eth.Contract(minterABI, getMinterAddress(chainID))
-        }
-    }
+    // const getMinterWithWallet = () => {
+    //     if (userData.walletConnected) {
+    //         const web3 = new Web3(web3Provider)
+    //         // @ts-ignore
+    //         return new web3.eth.Contract(minterABI, getEternalCakesMinterAddress(chainID))
+    //     }
+    // }
 
     const getMinterNoWallet = () => {
         // @ts-ignore
-        return new web3NoWallet.eth.Contract(minterABI, getMinterAddress(chainID))
+        return new web3NoWallet.eth.Contract(minterABI, getEternalCakesMinterAddress(chainID))
     }
 
     function updateMintPrice() {
@@ -136,8 +137,8 @@ export const EcMintCard = () => {
                 const total = amount * price
                 const web3 = new Web3(web3Provider)
                 // @ts-ignore
-                const minterContract = new web3.eth.Contract(minterABI, getMinterAddress(chainID))
-                minterContract.methods.mint(amount).send({
+                const minterContract = new web3.eth.Contract(minterABI, getEternalCakesMinterAddress(chainID))
+                minterContract.methods.mint(amount, userData.account).send({
                     'from': userData.account,
                     // @ts-ignore
                     value: web3.utils.toWei(total.toString(), 'ether'),
@@ -146,9 +147,12 @@ export const EcMintCard = () => {
                 })
                     // @ts-ignore
                     .then(res => {
-                        console.log(' in mint')
                         updateTotalSupply()
                         notifySuccess('Minted Successfully')
+                        setIsLoading(false)
+                    })
+                    .error(() => {
+                        notifyError('Something went wrong')
                         setIsLoading(false)
                     })
             }
@@ -166,39 +170,31 @@ export const EcMintCard = () => {
         try {
             // @ts-ignore
             if (window.ethereum) {
-                if (balance < whitelistPrice) {
+                const total = amount * whitelistPrice;
+                if (balance < (whitelistPrice * amount)) {
                     notifyError('Not enough balance')
                     return
                 }
                 setIsWlLoading(true)
                 const web3 = new Web3(web3Provider)
                 // @ts-ignore
-                const minterContract = new web3.eth.Contract(minterABI, getMinterAddress(chainID))
+                const minterContract = new web3.eth.Contract(minterABI, getEternalCakesMinterAddress(chainID))
                 // @ts-ignore
-                minterContract.methods.whitelistClaimed(userData.account).call()
+                minterContract.methods.whitelistMint(getMerkleProof(userData.account), amount, userData.account).send({
+                    from: userData.account,
+                    // @ts-ignore
+                    value: web3.utils.toWei(total.toString(), 'ether'),
+                    // @ts-ignore
+                    // gasPrice: web3WithWallet.utils.toWei('5', 'gwei')
+                })
                     // @ts-ignore
                     .then(res => {
-                        if (!res) {
-                            // @ts-ignore
-                            minterContract.methods.whitelistMint(getMerkleProof(userData.account)).send({
-                                from: userData.account,
-                                // @ts-ignore
-                                value: web3.utils.toWei(whitelistPrice.toString(), 'ether'),
-                                // @ts-ignore
-                                // gasPrice: web3WithWallet.utils.toWei('5', 'gwei')
-                            })
-                                // @ts-ignore
-                                .then(res => {
-                                    updateTotalSupply()
-                                    notifySuccess('Minted Successfully')
-                                    setIsWlLoading(false)
-                                    updateTotalSupply()
-                                })
-                        } else {
-                            notifyError('Already Claimed!')
-                            setIsWlLoading(false)
-                        }
+                        updateTotalSupply()
+                        notifySuccess('Minted Successfully')
+                        setIsWlLoading(false)
+                        updateTotalSupply()
                     })
+
             }
         } catch (e) {
             setIsWlLoading(false)
@@ -209,8 +205,8 @@ export const EcMintCard = () => {
     return (
         <div className={styles.mintCard}>
             <ToastContainer/>
-            <p className={styles.mintCardAnnouncement}>Eternal Zombies mint is Live!</p>
-            <p className={styles.mintCardTotalMinted}>{totalMinted} / 1111</p>
+            <p className={styles.mintCardAnnouncement}>Eternal Cakes mint is Live!</p>
+            <p className={styles.mintCardTotalMinted}>{totalMinted} / 2222</p>
             <div className={styles.mintCardAmounts}>
                 <div className={styles.mintCardNormalPrice}>
                     <p className={styles.mintCardTotalMinted}>Price</p>
@@ -230,12 +226,12 @@ export const EcMintCard = () => {
                         <div className={styles.mintCardAmountAdjustment}>
                             <p className={styles.mintCardTotalMinted}>Amount</p>
                             <div className={styles.mintCardAmountAdjustmentButtonContainer}>
-                                <button onClick={decreaseAmount}
-                                        className={styles.amountAdjustmentButton}>-
+                                <button onClick={decreaseAmount} className={styles.amountAdjustmentButton}>
+                                    <img className={styles.amountAdjustmentIcons} src={minusIcon.src} alt="+"/>
                                 </button>
                                 <p className={styles.mintCardTotalMinted}>&nbsp;&nbsp;&nbsp;{amount}&nbsp;&nbsp;&nbsp;</p>
-                                <button onClick={increaseAmount}
-                                        className={styles.amountAdjustmentButton}>+
+                                <button onClick={increaseAmount} className={styles.amountAdjustmentButton}>
+                                    <img className={styles.amountAdjustmentIcons} src={plusIcon.src} alt="+"/>
                                 </button>
                             </div>
                         </div>
@@ -245,21 +241,17 @@ export const EcMintCard = () => {
                         </div>
                         <div className={styles.mintCardMintButtons}>
                             <button onClick={mint} className={styles.connectWalletButton}>
-                                {isLoading ? <img className={styles.mintCardButtonLoader}
-                                                  src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"
-                                                  alt="loading"/> :
-                                    <span>Mint</span>}
+                                {
+                                    isLoading ? <Loader/> : <span>Mint</span>
+                                }
                             </button>
+                            &nbsp;&nbsp;
                             {
                                 whitelistActive ?
                                     <button onClick={whitelistMint}
                                             className={styles.connectWalletButton}>
                                         {
-                                            isWlLoading ?
-                                                <img className={styles.mintCardButtonLoader}
-                                                     src="https://i.pinimg.com/originals/a6/21/0f/a6210fd59c68852a3143ccde924e6cf2.gif"
-                                                     alt="loading"/>
-                                                : <span>Whitelist Mint</span>
+                                            isWlLoading ? <Loader/> : <span>Whitelist Mint</span>
                                         }
                                     </button> : null
                             }

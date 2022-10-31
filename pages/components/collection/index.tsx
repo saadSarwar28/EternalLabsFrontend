@@ -10,18 +10,21 @@ import contractIcon from '../../../public/file-contract-solid.svg'
 import background from "../../../public/gradient-blue-background.png"
 import {useRouter} from 'next/router'
 import {getStakerAddress} from '../../../utils/getContractAddress';
-import {getDrFrankensteinNoWallet} from '../../../utils/web3NoWallet';
+import {getDrFrankensteinNoWallet, getPancakeMasterchefNoWallet} from '../../../utils/web3NoWallet';
 import constants from '../../../utils/constants';
 import {weiToNumber} from '../../../utils/units';
 import Link from 'next/link';
-import {getLpTokenValue} from '../../../utils/price';
 import {isMobile} from 'react-device-detect';
+import ADDRESSES from '../../../utils/contractAddresses';
+import {getCakeBnbLpTokenValue, getZmbeBnbLpTokenValue} from '../../../utils/lpPrice';
 
 export const Collections = () => {
 
     const [chainID, setChainId] = useState(process.env.NEXT_PUBLIC_CHAIN_ID)
     const [zmbeLpLocked, setZmbeLpLocked] = useState('0')
+    const [cakeLpLocked, setCakeLpLocked] = useState('0')
     const [lpValue, setLpValue] = useState(0)
+    const [cakeLpValue, setCakeLpValue] = useState(0)
     const [showCards, setShowCards] = useState(false)
     const [offset, setOffset] = useState(0);
     const router = useRouter()
@@ -31,12 +34,12 @@ export const Collections = () => {
 
     useEffect(() => {
         if (zmbeLpLocked !== '0' && chainID === '56') {
-            getLpTokenValue(zmbeLpLocked)
+            getZmbeBnbLpTokenValue(zmbeLpLocked)
                 .then((res: any) => {
                     setLpValue(res)
                 })
         } else {
-            setLpValue(100)
+            setLpValue(0)
         }
     }, [zmbeLpLocked])
 
@@ -46,12 +49,35 @@ export const Collections = () => {
         })
     }
 
+    // useEffect(() => {
+    //     if (cakeLpLocked !== '0' && chainID === '56') {
+    //         getCakeBnbLpTokenValue(cakeLpLocked)
+    //             .then((res: any) => {
+    //                 setCakeLpValue(res)
+    //             })
+    //     } else {
+    //         setCakeLpValue(0)
+    //     }
+    // }, [cakeLpLocked])
+
+    const updateCakeLpLocked = () => {
+        // @ts-ignore
+        getPancakeMasterchefNoWallet(chainID).methods.userInfo(constants.CAKE_POOL_ID, ADDRESSES.PANCAKE_FARM_BOOSTER_PROXY[chainID]).call().then((res: any) => {
+            setCakeLpLocked(weiToNumber(res?.amount, 3))
+        })
+    }
+
     useEffect(() => {
         updateZmbeLpLocked()
+        updateCakeLpLocked()
     }, [chainID])
 
     const gotoZmbeCollection = (event: any) => {
         router.push('/eternalzombies')
+    }
+
+    const gotoCakeCollection = (event: any) => {
+        router.push('/eternalcakes')
     }
 
     useEffect(() => {
@@ -118,7 +144,7 @@ export const Collections = () => {
                                             <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight}>108.80%</span>
+                                            <span className={collectionStyles.detailsRight}>91.10%</span>
                                         </div>
                                     </div>
                                     <div className={collectionStyles.detailsRow}>
@@ -126,7 +152,7 @@ export const Collections = () => {
                                             <span className={collectionStyles.detailsLeft}>Estimated EZ APY</span>
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight}>199.05%</span>
+                                            <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>
                                         </div>
                                     </div>
                                     <div className={collectionStyles.detailsRow}>
@@ -143,7 +169,7 @@ export const Collections = () => {
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
                                             <span
-                                                className={collectionStyles.detailsRight}>{zmbeLpLocked} ($ {lpValue.toFixed(2)})</span>
+                                                className={collectionStyles.detailsRight}>{zmbeLpLocked} (${lpValue.toFixed(2)})</span>
                                         </div>
                                     </div>
                                     <div className={collectionStyles.detailsRow}>
@@ -151,29 +177,29 @@ export const Collections = () => {
                                             <span className={collectionStyles.detailsLeft}>Contract</span>
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight}>
-                                        <Link
-                                            href="https://bscscan.com/address/0x5a87d0173a2a22579b878a27048c8a9b09bff496"
-                                            passHref={true}
-                                            className={collectionStyles.detailsContractLink}>
-                                            <a target="_blank">
-                                                <span style={{display: 'flex'}} id="span_element">
-                                                    0x5a87d...ff496
-                                                    <Image
-                                                        src={contractIcon}
-                                                        width={20}
-                                                        height={20}
-                                                    />
-                                                </span>
-                                            </a>
-                                        </Link>
-                                    </span>
+                                            <span className={collectionStyles.detailsRight}>
+                                                <Link
+                                                    href="https://bscscan.com/address/0x5a87d0173a2a22579b878a27048c8a9b09bff496"
+                                                    passHref={true}
+                                                    className={collectionStyles.detailsContractLink}>
+                                                    <a target="_blank">
+                                                        <span style={{display: 'flex'}} id="span_element">
+                                                            0x5a87d...ff496&nbsp;
+                                                            <Image
+                                                                src={contractIcon}
+                                                                width={20}
+                                                                height={20}
+                                                            />
+                                                        </span>
+                                                    </a>
+                                                </Link>
+                                            </span>
                                         </div>
                                     </div>
                                     <div className={collectionStyles.detailsRowContentCenter}>
                                         <div className={collectionStyles.buttonContainer}>
                                             <button className={collectionStyles.mintButton}
-                                                    onClick={gotoZmbeCollection}>Go to Mint
+                                                    onClick={gotoZmbeCollection}>Mint
                                             </button>
                                         </div>
                                     </div>
@@ -197,32 +223,86 @@ export const Collections = () => {
                                 <div className={collectionStyles.detailsContainer}>
                                     <div className={collectionStyles.detailsRow}>
                                         <div className={collectionStyles.detailsColumn}>
-                                            <span>Pool</span>
+                                            <span className={collectionStyles.detailsLeft}>Pool</span>
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
-                                            <span>PancakeSwap CAKE-BNB LP pool</span>
+                                            <span className={collectionStyles.detailsRight}>PancakeSwap CAKE-BNB LP Pool</span>
                                         </div>
                                     </div>
                                     <div className={collectionStyles.detailsRow}>
                                         <div className={collectionStyles.detailsColumn}>
-                                            <span>Earns</span>
+                                            <span className={collectionStyles.detailsLeft}>Earns</span>
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
-                                            <span>CAKE</span>
+                                            <span className={collectionStyles.detailsRight}>CAKE</span>
                                         </div>
                                     </div>
-                                    {/*<div className={collectionStyles.detailsRow}>*/}
-                                    {/*    <div className={collectionStyles.detailsColumn}>*/}
-                                    {/*        <span>Contract</span>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className={collectionStyles.detailsColumn}>*/}
-                                    {/*        <span>*/}
-                                    {/*            <a href="https://bscscan.com/address/0x5a87d0173a2a22579b878a27048c8a9b09bff496">0x5a87d...ff496</a>*/}
-                                    {/*        </span>*/}
-                                    {/*    </div>*/}
+                                    <div className={collectionStyles.detailsRow}>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
+                                        </div>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsRight}>23.89%</span>
+                                        </div>
+                                    </div>
+                                    <div className={collectionStyles.detailsRow}>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsLeft}>Estimated EC APY</span>
+                                        </div>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>
+                                        </div>
+                                    </div>
+                                    <div className={collectionStyles.detailsRow}>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsLeft}>Compounds every</span>
+                                        </div>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsRight} title="To be decided">TBD</span>
+                                        </div>
+                                    </div>
+                                    <div className={collectionStyles.detailsRow}>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsLeft}>Total LP Staked</span>
+                                        </div>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span
+                                                className={collectionStyles.detailsRight}>{cakeLpLocked} (${cakeLpValue.toFixed(2)})</span>
+                                        </div>
+                                    </div>
+                                    <div className={collectionStyles.detailsRow}>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsLeft}>Contract</span>
+                                        </div>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsRight}>
+                                                <Link
+                                                    href="https://bscscan.com/address/0xc626d5aea14c84061dc2fe6719e20767de354304"
+                                                    passHref={true}
+                                                    className={collectionStyles.detailsContractLink}>
+                                                    <a target="_blank">
+                                                        <span style={{display: 'flex'}} id="span_element">
+                                                            0xc626...54304&nbsp;
+                                                            <Image
+                                                                src={contractIcon}
+                                                                width={20}
+                                                                height={20}
+                                                            />
+                                                        </span>
+                                                    </a>
+                                                </Link>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    {/*<div className={collectionStyles.detailsComingSoon}>*/}
+                                    {/*    <h2>Launching at 1/11/2022 16:00 UTC</h2>*/}
                                     {/*</div>*/}
-                                    <div className={collectionStyles.detailsComingSoon}>
-                                        <h2>Launching at 1/11/2022 16:00 UTC</h2>
+                                    <div className={collectionStyles.detailsRowContentCenter}>
+                                        <div className={collectionStyles.buttonContainer}>
+                                            <button className={collectionStyles.mintButton}
+                                                    onClick={gotoCakeCollection}>Mint
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

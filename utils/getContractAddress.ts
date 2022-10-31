@@ -54,6 +54,15 @@ export const getPairAddress = (chainId: any) => {
     return ADDRESSES.PAIR[chainId]
 }
 
+export const getCakeBnbPairAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.CAKE_BNB_PAIR['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.CAKE_BNB_PAIR[chainId]
+}
+
 export const getRouterAddress = (chainId: any) => {
     if (chainId === 0) {
         // return mainnet if chain id not initialized yet
@@ -63,3 +72,47 @@ export const getRouterAddress = (chainId: any) => {
     return ADDRESSES.ROUTER[chainId]
 }
 
+export const getEternalCakesMinterAddress = (chainId: string) => {
+    if (chainId === '0') {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.ETERNAL_CAKES_MINTER['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.ETERNAL_CAKES_MINTER[chainId]
+}
+
+export const getEternalCakesStakerAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.ETERNAL_CAKES_STAKER['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.ETERNAL_CAKES_STAKER[chainId]
+}
+
+export const getEternalCakesDistributorAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.ETERNAL_CAKES_DISTRIBUTOR['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.ETERNAL_CAKES_DISTRIBUTOR[chainId]
+}
+
+export const getEternalCakesBountyAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.ETERNAL_CAKES_BOUNTY['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.ETERNAL_CAKES_BOUNTY[chainId]
+}
+
+export const getPancakeMasterchefAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.PANCAKE_MASTERCHEF['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.PANCAKE_MASTERCHEF[chainId]
+}

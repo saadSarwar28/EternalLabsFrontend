@@ -1,19 +1,81 @@
-import styles from '../../../../../styles/Ez.module.css';
+import styles from '../../../../../styles/Ec.module.css';
 import {isMobile} from 'react-device-detect';
 import React, {useCallback, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {notifyError, notifyInfo} from '../../../../../utils/toast';
 import Web3 from 'web3';
-import {selectCreateAccountState, updateAccount, updateWeb3Provider} from '../../../../../reduxStore/accountSlice';
+import {
+    disconnectWallet,
+    selectCreateAccountState,
+    updateAccount,
+    updateWeb3Provider
+} from '../../../../../reduxStore/accountSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import Web3Modal from 'web3modal'
 import { providers } from 'ethers'
-import WalletLink from 'walletlink'
 import WalletConnectProvider from '@walletconnect/web3-provider'
+import Modal from 'react-modal';
+import foxImage from '../../../../../public/metamask-icon.svg';
+import walletConnectImage from '../../../../../public/walletconnect-seeklogo.com.svg';
+import styled from 'styled-components';
 
-const INFURA_ID = '2DdCy0FfJLSBU4CS7yPxYpBiy8I'
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        borderRadius: '25px'
+    },
+};
+
+const ModalContainer = styled.div`
+  padding: 5%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  border: 2px solid white;
+  border-radius: 15px;
+`
+
+const Separator = styled.hr`
+  color: black;
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`
+
+const ModalImage = styled.img`
+  width: 80%;
+  padding: 10%;
+  cursor: pointer;
+  align-self: center;
+`
 
 export const EcNavbar: React.FC = () => {
+
+
+    const [chainId, setChainId] = useState('0')
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
+    useEffect(() => {
+        if (process.env.NEXT_PUBLIC_CHAIN_ID === '56' && chainId !== '0') {
+            if (chainId !== '56') {
+                notifyError('Please Switch to Binance Smart Chain!')
+            }
+        }
+    }, [chainId])
 
     const dispatch = useDispatch()
 
@@ -22,73 +84,49 @@ export const EcNavbar: React.FC = () => {
         selectCreateAccountState
     )
 
-    // const connectWallet = () => {
-    //     if (userData.account === '') {
-    //         // @ts-ignore
-    //         if (window.ethereum) {
-    //             // @ts-ignore
-    //             window.ethereum.request({method: 'eth_requestAccounts'})
-    //                 // @ts-ignore
-    //                 .then(result => {
-    //                     dispatch(
-    //                         // @ts-ignore
-    //                         updateAccount(result[0])
-    //                     )
-    //                     dispatch(
-    //                         // @ts-ignore
-    //                         updateWeb3Provider(window.ethereum)
-    //                     )
-    //                     // @ts-ignore
-    //                     // store.dispatch(updateAccount(result[0]))
-    //                     // store.dispatch(updateWalletConnected(true))
-    //                     // // @ts-ignore
-    //                     // store.dispatch(updateWeb3Provider(window.ethereum))
-    //                     // store.dispatch(updateWeb3WithWallet(new Web3(web3Provider())))
-    //                 })
-    //                 // @ts-ignore
-    //                 .catch(error => {
-    //                     notifyError('Please connect your wallet to interact with this website')
-    //                 });
-    //         } else {
-    //             // for mobile
-    //             if (isMobile) {
-    //                 window.open('https://metamask.app.link/dapp/eternalzombies.com')
-    //             } else {
-    //                 notifyInfo('Please Install metamask first.')
-    //             }
-    //         }
-    //     }
-    // }
+    const connectMetamaskWallet = () => {
+        if (userData.account === '') {
+            // @ts-ignore
+            if (window.ethereum) {
+                // @ts-ignore
+                window.ethereum.request({method: 'eth_requestAccounts'})
+                    // @ts-ignore
+                    .then(result => {
+                        closeModal()
+                        dispatch(
+                            // @ts-ignore
+                            updateAccount(result[0])
+                        )
+                        dispatch(
+                            // @ts-ignore
+                            updateWeb3Provider(window.ethereum)
+                        )
+                    })
+                    // @ts-ignore
+                    .catch(error => {
+                        notifyError('Please connect your wallet to interact with this website')
+                    });
+            } else {
+                // for mobile
+                if (isMobile) {
+                    window.open('https://metamask.app.link/dapp/eternalzombies.com')
+                } else {
+                    notifyInfo('Please Install metamask first.')
+                }
+            }
+        }
+    }
 
     const providerOptions = {
         walletconnect: {
             package: WalletConnectProvider, // required
             options: {
-                infuraId: INFURA_ID, // required
+                // infuraId: INFURA_ID, // required
+                rpc: process.env.NEXT_PUBLIC_BINANCE_RPC,
+                bridge: 'https://bridge.walletconnect.org',
+                qrcode: true,
             },
         },
-        // 'custom-walletlink': {
-        //     display: {
-        //         logo: 'https://play-lh.googleusercontent.com/PjoJoG27miSglVBXoXrxBSLveV6e3EeBPpNY55aiUUBM9Q1RCETKCOqdOkX2ZydqVf0',
-        //         name: 'Coinbase',
-        //         description: 'Connect to Coinbase Wallet (not Coinbase App)',
-        //     },
-        //     options: {
-        //         appName: 'Coinbase', // Your app name
-        //         networkUrl: `https://mainnet.infura.io/v3/`,
-        //         chainId: 1,
-        //     },
-        //     package: WalletLink,
-        //     connector: async (_, options) => {
-        //         const { appName, networkUrl, chainId } = options
-        //         const walletLink = new WalletLink({
-        //             appName,
-        //         })
-        //         const provider = walletLink.makeWeb3Provider(networkUrl, chainId)
-        //         await provider.enable()
-        //         return provider
-        //     },
-        // },
     }
 
     let web3Modal: Web3Modal;
@@ -100,38 +138,74 @@ export const EcNavbar: React.FC = () => {
         })
     }
 
-    const connectWallet = useCallback(async function () {
-        console.log(' in connect wallet')
-        // This is the initial `provider` that is returned when
-        // using web3Modal to connect. Can be MetaMask or WalletConnect.
-        const provider = await web3Modal.connect()
+    const openWalletConnect = () => {
+        closeModal()
+        walletConnect()
+    }
 
-        // We plug the initial `provider` into ethers.js and get back
-        // a Web3Provider. This will add on methods from ethers.js and
-        // event listeners such as `.on()` will be different.
-        const web3Provider = new providers.Web3Provider(provider)
+    const walletConnect = useCallback(async function () {
+        try {
+            const provider = new WalletConnectProvider({
+                rpc: {
+                    // @ts-ignore
+                    56: process.env.NEXT_PUBLIC_BINANCE_RPC,
+                    // @ts-ignore
+                    97: process.env.NEXT_PUBLIC_BINANCE_RPC,
+                },
+                qrcodeModalOptions: {
+                    desktopLinks: [
+                        'ledger',
+                        'tokenary',
+                        'wallet',
+                        'wallet 3',
+                        'secuX',
+                        'ambire',
+                        'wallet3',
+                        'apolloX',
+                        'zerion',
+                        'sequence',
+                        'punkWallet',
+                        'kryptoGO',
+                        'nft',
+                        'riceWallet',
+                        'vision',
+                        'keyring'
+                    ],
+                    mobileLinks: [
+                        "rainbow",
+                        "metamask",
+                        "argent",
+                        "trust",
+                        "imtoken",
+                        "pillar",
+                    ],
+                },
+            });
 
-        const signer = web3Provider.getSigner()
-        const address = await signer.getAddress()
+            //  Enable session (triggers QR Code modal)
+            await provider.enable();
+            // We plug the initial `provider` into ethers.js and get back
+            // a Web3Provider. This will add on methods from ethers.js and
+            // event listeners such as `.on()` will be different.
+            const web3Provider = new providers.Web3Provider(provider)
 
-        const network = await web3Provider.getNetwork()
+            const signer = web3Provider.getSigner()
+            const address = await signer.getAddress()
+            const network = await web3Provider.getNetwork()
 
-        dispatch(
-            // @ts-ignore
-            updateAccount(address)
-        )
-        dispatch(
-            // @ts-ignore
-            updateWeb3Provider(network)
-        )
+            dispatch(
+                // @ts-ignore
+                updateAccount(address)
+            )
+            dispatch(
+                // @ts-ignore
+                updateWeb3Provider(provider)
+            )
+            setChainId(String(network.chainId))
+        } catch (e: any) {
+            console.log(e.toString(), ' <<< ')
+        }
 
-        // dispatch({
-        //     type: 'SET_WEB3_PROVIDER',
-        //     provider,
-        //     web3Provider,
-        //     address,
-        //     chainId: network.chainId,
-        // })
     }, [])
 
     const checkWalletAlreadyConnected = () => {
@@ -166,9 +240,20 @@ export const EcNavbar: React.FC = () => {
         }
     }
 
-    // useEffect(() => {
-    //     checkWalletAlreadyConnected()
-    // }, [])
+    const disconnect = useCallback(
+        async function () {
+            await web3Modal.clearCachedProvider()
+            window.localStorage.removeItem('walletconnect')
+            window.localStorage.removeItem('WEB3_CONNECT_CACHED_PROVIDER')
+            // @ts-ignore
+            dispatch(disconnectWallet())
+        },
+        []
+    )
+
+    useEffect(() => {
+        checkWalletAlreadyConnected()
+    }, [])
 
     // useEffect(() => {
     //     if (process.env.NEXT_PUBLIC_CHAIN_ID === '56') {
@@ -199,6 +284,19 @@ export const EcNavbar: React.FC = () => {
 
     return (
         <nav className={styles.nav}>
+            <Modal
+                isOpen={modalIsOpen}
+                // onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+                <ModalContainer>
+                    <ModalImage src={foxImage.src} alt="metamask" onClick={connectMetamaskWallet}/>
+                    <Separator/>
+                    <ModalImage src={walletConnectImage.src} alt="wallet connect" onClick={openWalletConnect}/>
+                </ModalContainer>
+            </Modal>
             <div className={styles.logoWrapper}>
                 <img
                     src="/EternalLabs_Logo_V2_without_text.svg"
@@ -218,16 +316,16 @@ export const EcNavbar: React.FC = () => {
                             {
                                 userData.walletConnected ? <button className={styles.connectWalletButtonNav}
                                                                    disabled>{userData?.account.slice(0, 4) + "..." + userData?.account.slice(38, 42)}</button> :
-                                    <button onClick={connectWallet} className={styles.connectWalletButtonNav}>Connect
+                                    <button onClick={openModal} className={styles.connectWalletButtonNav}>Connect
                                         Wallet</button>
                             }
                         </li> : null
                 }
             </ul>
             {
-                userData.walletConnected ? <button className={styles.docsButtonNav}
-                                                   disabled>{userData?.account.slice(0, 4) + "..." + userData?.account.slice(38, 42)}</button> :
-                    <button onClick={connectWallet} className={styles.docsButtonNav}>Connect Wallet</button>
+                userData.walletConnected ? <button className={styles.docsButtonNav} title="Click to disconnect"
+                                                   onClick={disconnect}>{userData?.account.slice(0, 4) + "..." + userData?.account.slice(38, 42)}</button> :
+                    <button onClick={openModal} className={styles.docsButtonNav}>Connect Wallet</button>
             }
         </nav>
     )

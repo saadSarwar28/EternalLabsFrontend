@@ -62,29 +62,52 @@
 }
 
 .collectionCardRight {
-    position: relative;
-    display: flex;
-    max-width: 33%;
+    display: inline-flex;
+    /*border: double 5px transparent;*/
+    max-width: 100%;
     flex-direction: column;
-    box-shadow: 0px 0px 10px 5px;
+    /*box-shadow: 0px 0px 10px 5px;*/
     border-radius: 15px;
     background: #0a1622;
+    /*background-image: linear-gradient(black, black), radial-gradient(circle at top left, #ffffff, #3020ff);*/
+    background-origin: border-box;
+    background-clip: content-box, border-box;
     animation-name: fadeIn;
     animation-duration: 2s;
     overflow: hidden;
+    animation: gradient 3s ease infinite;
+    background-size: 400% 400%;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .collectionCardLeft {
     position: relative;
-    display: flex;
+    display: inline-flex;
+    /*border: double 5px transparent;*/
     max-width: 100%;
     flex-direction: column;
-    box-shadow: 0px 0px 10px 5px;
+    /*box-shadow: 0px 0px 10px 5px;*/
     border-radius: 15px;
     background: #0a1622;
+    /*background-image: linear-gradient(black, black), radial-gradient(circle at top left, #ffffff, #3020ff);*/
+    background-origin: border-box;
+    background-clip: content-box, border-box;
     animation-name: fadeIn;
     animation-duration: 2s;
     overflow: hidden;
+    animation: gradient 3s ease infinite;
+    background-size: 400% 400%;
 }
 
 .collectionCard:hover {
@@ -162,16 +185,21 @@
 
 .mintButton {
     color: white;
-    background: #5479FF;
+    background: transparent;
     text-align: center;
     width: 200px;
-    border-radius: 20px;
-    border: none;
+    border-radius: 10px;
+    border: 3px solid #7C00FF;
     font-weight: bolder;
     font-size: 20px;
     height: 50px;
     cursor: pointer;
     padding: 10px;
+    transition-duration: 0.5s;
+}
+
+.mintButton:hover {
+    box-shadow: 0px 0px 10px 5px white;
 }
 
 .detailsContractLink {

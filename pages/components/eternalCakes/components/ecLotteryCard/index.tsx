@@ -1,4 +1,4 @@
-import styles from '../../../../../styles/Ez.module.css';
+import styles from '../../../../../styles/Ec.module.css';
 import React, {useEffect, useState} from 'react';
 import Web3 from 'web3';
 import {isMobile} from 'react-device-detect';

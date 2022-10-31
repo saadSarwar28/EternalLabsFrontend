@@ -4,9 +4,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head'
 import styles from '../styles/Ez.module.css'
 import "react-multi-carousel/lib/styles.css";
-import {Ez} from './components/ez';
+import EternalCakes from './components/eternalCakes';
 
-const EternalZombies: NextPage = () => {
+const EternalCakesPage: NextPage = () => {
 
     return (
         <div className={styles.container}>
@@ -16,9 +16,9 @@ const EternalZombies: NextPage = () => {
                 <meta name="google-site-verification" content="mLdpfYdmDazUVMLZ9NWfUwH7wBnmMmtb374Hgz6ZiBk"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <Ez/>
+            <EternalCakes/>
         </div>
     )
 }
 
-export default EternalZombies
+export default EternalCakesPage

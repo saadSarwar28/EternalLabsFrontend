@@ -11,6 +11,8 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
     "@reduxjs/toolkit": "^1.8.5",
+    "@types/react-modal": "^3.13.1",
+    "@types/styled-components": "^5.1.26",
     "@walletconnect/web3-provider": "^1.8.0",
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletlink-connector": "^6.2.14",

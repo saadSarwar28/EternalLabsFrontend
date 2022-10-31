@@ -35,7 +35,43 @@ const ADDRESSES = {
         {
             '56': '0x10ED43C718714eb63d5aA57B78B54704E256024E',
             '97': '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
+        },
+    'ETERNAL_CAKES_MINTER':
+        {
+            '56': '0xE4cE0E5b3B70B5132807CE725eC93d6eE33B5Eca',
+            '97': '0x1C7B298E554AfDAd2d432FEDb86Cd4048315556C',
+        },
+    'ETERNAL_CAKES_STAKER':
+        {
+            '56': '0xc626D5aEa14c84061dC2FE6719E20767De354304',
+            '97': '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
+        },
+    'ETERNAL_CAKES_BOUNTY':
+        {
+            '56': '0x07c569b26A820C99A136ec6f7d684db5815b7f43',
+            '97': '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
+        },
+    'ETERNAL_CAKES_DISTRIBUTOR':
+        {
+            '56': '0xb4688b86E1e5D7983310351a7097E7DA38506A91',
+            '97': '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
+        },
+    'CAKE_BNB_PAIR':
+        {
+            '56': '0x0eD7e52944161450477ee417DE9Cd3a859b14fD0',
+            '97': '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
+        },
+    'PANCAKE_FARM_BOOSTER_PROXY':
+        {
+            '56': '0xd8C408676B6af16dFD131c90F4bb5448301C54D3',
+            '97': '0xd8C408676B6af16dFD131c90F4bb5448301C54D3',
+        },
+    'PANCAKE_MASTERCHEF':
+        {
+            '56': '0xa5f8C5Dbd5F286960b9d90548680aE5ebFf07652',
+            '97': '0xd8C408676B6af16dFD131c90F4bb5448301C54D3',
         }
+
 }
 
 export default ADDRESSES
