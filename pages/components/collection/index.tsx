@@ -20,9 +20,12 @@ import {getCakeBnbLpTokenValue, getZmbeBnbLpTokenValue} from '../../../utils/lpP
 import minterABI from '../../../abi/minter.json';
 import eternalCakesMinterABI from '../../../abi/EternalCakesMinter.json'
 import Web3 from 'web3';
+import {useDispatch} from 'react-redux';
+import {updateTvl} from '../../../reduxStore/accountSlice';
 
 export const Collections = () => {
 
+    const dispatch = useDispatch()
     const [chainID, setChainId] = useState(process.env.NEXT_PUBLIC_CHAIN_ID)
     const [zmbeLpLocked, setZmbeLpLocked] = useState('0')
     const [cakeLpLocked, setCakeLpLocked] = useState('0')
@@ -90,6 +93,8 @@ export const Collections = () => {
             getZmbeBnbLpTokenValue(zmbeLpLocked)
                 .then((res: any) => {
                     setLpValue(res)
+                    // @ts-ignore
+                    dispatch(updateTvl(res))
                 })
         } else {
             setLpValue(0)
@@ -107,6 +112,8 @@ export const Collections = () => {
             getCakeBnbLpTokenValue(cakeLpLocked)
                 .then((res: any) => {
                     setCakeLpValue(res)
+                    // @ts-ignore
+                    dispatch(updateTvl(res))
                 })
         } else {
             setCakeLpValue(0)

@@ -139,6 +139,40 @@
     text-align: center;
 }
 
+@keyframes gradient {
+    0% {
+        border-image-source: linear-gradient(-45deg, #743ad5, #d53a9d);
+    }
+    50% {
+        border-image-source: linear-gradient(-45deg, #d53a9d, #743ad5);
+    }
+    100% {
+        border-image-source: linear-gradient(-45deg, #743ad5, #d53a9d);
+    }
+}
+
+.tvlContainer {
+    display: flex;
+    justify-content: space-around;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+    border-radius: 10px;
+    width: fit-content;
+    align-self: center;
+    padding: 0% 5%;
+    animation: gradient 2s ease infinite;
+}
+
+.tvlHeading {
+    color: #1EB2E3;
+}
+
+.tvlValue {
+    color: #1EB2E3;
+}
+
 .introText {
     text-align: center;
     font-weight: bolder;

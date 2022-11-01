@@ -11,6 +11,7 @@ const defaultState = {
     chainId: 0,
     web3Provider: null,
     web3WithWallet: null,
+    tvl: 0,
 }
 
 export const updateAccount = createAsyncThunk(
@@ -36,6 +37,15 @@ export const updatePendingZmbe = createAsyncThunk(
     (zmbe: any,) => {
         return new Promise<void>((resolve, reject) => {
             resolve(zmbe)
+        })
+    }
+)
+
+export const updateTvl = createAsyncThunk(
+    "ACCOUNT/UPDATE_TVL",
+    (value: any,) => {
+        return new Promise<void>((resolve, reject) => {
+            resolve(value)
         })
     }
 )
@@ -77,6 +87,9 @@ const createAccountSlice = createSlice({
         },
         [updatePendingCake.fulfilled.toString()]: (state, {payload}) => {
             state.userData.pendingCake += payload
+        },
+        [updateTvl.fulfilled.toString()]: (state, {payload}) => {
+            state.tvl += payload
         },
         [disconnectWallet.fulfilled.toString()]: (state) => {
             state.userData.account = ''
