@@ -193,7 +193,10 @@ export const EcMintCard = () => {
                         notifySuccess('Minted Successfully')
                         setIsWlLoading(false)
                         updateTotalSupply()
-                    })
+                    }).catch(() => {
+                    setIsWlLoading(false)
+                    notifyInfo('Transaction rejected or something went wrong!')
+                })
 
             }
         } catch (e) {

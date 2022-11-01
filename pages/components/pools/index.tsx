@@ -14,7 +14,6 @@ import {getDrFrankensteinNoWallet} from '../../../utils/web3NoWallet';
 import constants from '../../../utils/constants';
 import {weiToNumber} from '../../../utils/units';
 import Link from 'next/link';
-import {getLpTokenValue} from '../../../utils/price';
 
 
 export const Pools = () => {
