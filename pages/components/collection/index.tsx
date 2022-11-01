@@ -89,12 +89,17 @@ export const Collections = () => {
     }, [lpValue, totalEzTokens])
 
     useEffect(() => {
+        if (lpValue !== 0 && cakeLpValue !== 0) {
+            // @ts-ignore
+            dispatch(updateTvl(lpValue + cakeLpValue))
+        }
+    },[lpValue, cakeLpValue])
+
+    useEffect(() => {
         if (zmbeLpLocked !== '0' && chainID === '56') {
             getZmbeBnbLpTokenValue(zmbeLpLocked)
                 .then((res: any) => {
                     setLpValue(res)
-                    // @ts-ignore
-                    dispatch(updateTvl(res))
                 })
         } else {
             setLpValue(0)
@@ -112,8 +117,6 @@ export const Collections = () => {
             getCakeBnbLpTokenValue(cakeLpLocked)
                 .then((res: any) => {
                     setCakeLpValue(res)
-                    // @ts-ignore
-                    dispatch(updateTvl(res))
                 })
         } else {
             setCakeLpValue(0)
