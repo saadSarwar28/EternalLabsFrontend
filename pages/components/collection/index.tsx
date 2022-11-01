@@ -9,7 +9,7 @@ import cakeCardCover from '../../../public/CakeLogo.png'
 import contractIcon from '../../../public/file-contract-solid.svg'
 import background from "../../../public/gradient-blue-background.png"
 import {useRouter} from 'next/router'
-import {getStakerAddress} from '../../../utils/getContractAddress';
+import {getEternalCakesMinterAddress, getStakerAddress, getMinterAddress} from '../../../utils/getContractAddress';
 import {getDrFrankensteinNoWallet, getPancakeMasterchefNoWallet} from '../../../utils/web3NoWallet';
 import constants from '../../../utils/constants';
 import {weiToNumber} from '../../../utils/units';
@@ -17,6 +17,9 @@ import Link from 'next/link';
 import {isMobile} from 'react-device-detect';
 import ADDRESSES from '../../../utils/contractAddresses';
 import {getCakeBnbLpTokenValue, getZmbeBnbLpTokenValue} from '../../../utils/lpPrice';
+import minterABI from '../../../abi/minter.json';
+import eternalCakesMinterABI from '../../../abi/EternalCakesMinter.json'
+import Web3 from 'web3';
 
 export const Collections = () => {
 
@@ -28,9 +31,59 @@ export const Collections = () => {
     const [showCards, setShowCards] = useState(false)
     const [offset, setOffset] = useState(0);
     const router = useRouter()
+    const [totalEzTokens, setTotalEzTokens] = useState(0)
+    const [totalEcTokens, setTotalEcTokens] = useState(0)
+    const [eZTokenWorth, setEzTokenWorth] = useState(0)
+    const [eCTokenWorth, setEcTokenWorth] = useState(0)
     const [poolWeight, setPoolWeight] = useState(0)
     const [zmbePriceUsd, setZmbePriceUsd] = useState(0)
     const [poolLiquidityUsd, setPoolLiquidityUsd] = useState(0)
+
+    // @ts-ignore
+    const [web3NoWallet, setWeb3NoWallet] = useState(new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)) // for fetching info
+
+    const getEternalZombiesMinterNoWallet = () => {
+        // @ts-ignore
+        return new web3NoWallet.eth.Contract(minterABI, getMinterAddress(chainID))
+    }
+
+    const getEternalCakesMinterNoWallet = () => {
+        // @ts-ignore
+        return new web3NoWallet.eth.Contract(eternalCakesMinterABI, getEternalCakesMinterAddress(chainID))
+    }
+
+    function updateEternalCakesTotalSupply() {
+        getEternalCakesMinterNoWallet().methods.totalSupply().call()
+            .then((res: any) => {
+                setTotalEcTokens(Number(res.toString()))
+            })
+    }
+
+    function updateZmbeTotalSupply() {
+        getEternalZombiesMinterNoWallet().methods.totalSupply().call()
+            .then((res: any) => {
+                setTotalEzTokens(Number(res.toString()))
+            })
+    }
+
+    useEffect(() => {
+        updateZmbeTotalSupply()
+        updateEternalCakesTotalSupply()
+    }, [])
+
+    useEffect(() => {
+        if (cakeLpValue !== 0 && totalEcTokens !== 0) {
+            // @ts-ignore
+            setEcTokenWorth((cakeLpValue / totalEcTokens).toFixed(2))
+        }
+    }, [cakeLpValue, totalEcTokens])
+
+    useEffect(() => {
+        if (lpValue !== 0 && totalEzTokens !== 0) {
+            // @ts-ignore
+            setEzTokenWorth((lpValue / totalEzTokens).toFixed(2))
+        }
+    }, [lpValue, totalEzTokens])
 
     useEffect(() => {
         if (zmbeLpLocked !== '0' && chainID === '56') {
@@ -49,21 +102,21 @@ export const Collections = () => {
         })
     }
 
-    // useEffect(() => {
-    //     if (cakeLpLocked !== '0' && chainID === '56') {
-    //         getCakeBnbLpTokenValue(cakeLpLocked)
-    //             .then((res: any) => {
-    //                 setCakeLpValue(res)
-    //             })
-    //     } else {
-    //         setCakeLpValue(0)
-    //     }
-    // }, [cakeLpLocked])
+    useEffect(() => {
+        if (cakeLpLocked !== '0' && chainID === '56') {
+            getCakeBnbLpTokenValue(cakeLpLocked)
+                .then((res: any) => {
+                    setCakeLpValue(res)
+                })
+        } else {
+            setCakeLpValue(0)
+        }
+    }, [cakeLpLocked])
 
     const updateCakeLpLocked = () => {
         // @ts-ignore
         getPancakeMasterchefNoWallet(chainID).methods.userInfo(constants.CAKE_POOL_ID, ADDRESSES.PANCAKE_FARM_BOOSTER_PROXY[chainID]).call().then((res: any) => {
-            setCakeLpLocked(weiToNumber(res?.amount, 3))
+            setCakeLpLocked(weiToNumber(res?.amount, 2))
         })
     }
 
@@ -153,6 +206,14 @@ export const Collections = () => {
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
                                             <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>
+                                        </div>
+                                    </div>
+                                    <div className={collectionStyles.detailsRow}>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsLeft} title="Estimated worth of each EZ token">Estimated EZ Worth</span>
+                                        </div>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsRight} title="To be estimated">${eZTokenWorth}</span>
                                         </div>
                                     </div>
                                     <div className={collectionStyles.detailsRow}>
@@ -251,6 +312,14 @@ export const Collections = () => {
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
                                             <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>
+                                        </div>
+                                    </div>
+                                    <div className={collectionStyles.detailsRow}>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsLeft} title="Estimated worth of each EZ token">Estimated EC Worth</span>
+                                        </div>
+                                        <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsRight} title="To be estimated">${eCTokenWorth}</span>
                                         </div>
                                     </div>
                                     <div className={collectionStyles.detailsRow}>
