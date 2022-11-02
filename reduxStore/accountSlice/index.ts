@@ -89,7 +89,9 @@ const createAccountSlice = createSlice({
             state.userData.pendingCake += payload
         },
         [updateTvl.fulfilled.toString()]: (state, {payload}) => {
-            state.tvl = payload
+            if (state.tvl === 0) {
+                state.tvl = payload
+            }
         },
         [disconnectWallet.fulfilled.toString()]: (state) => {
             state.userData.account = ''
