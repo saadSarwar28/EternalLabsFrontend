@@ -108,7 +108,7 @@ export const EzNavbar: React.FC = () => {
             } else {
                 // for mobile
                 if (isMobile) {
-                    window.open('https://metamask.app.link/dapp/eternalzombies.com')
+                    window.open('https://metamask.app.link/dapp/eternallabs.finance')
                 } else {
                     notifyInfo('Please Install metamask first.')
                 }
