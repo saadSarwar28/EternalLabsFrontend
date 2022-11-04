@@ -12,6 +12,7 @@ import {selectCreateAccountState} from '../../../../../reduxStore/accountSlice';
 import plusIcon from '../../../../../public/icons/plus.svg'
 import minusIcon from '../../../../../public/icons/minus.svg'
 import Loader from '../../../loader';
+import verticalLine from '../../../../../public/tiltedLine.png'
 
 export const EcMintCard = () => {
 
@@ -209,7 +210,11 @@ export const EcMintCard = () => {
         <div className={styles.mintCard}>
             <ToastContainer/>
             <p className={styles.mintCardAnnouncement}>Eternal Cakes mint is Live!</p>
-            <p className={styles.mintCardTotalMinted}>{totalMinted} / 2222</p>
+            <div className={styles.mintNumberContainer}>
+                <p className={styles.mintCardTotalMintedHeader}>{totalMinted}</p>
+                <img className={styles.mintNumberSeparator} src={verticalLine.src} alt=""/>
+                <p className={styles.mintCardTotalMintedHeader}>2222</p>
+            </div>
             <div className={styles.mintCardAmounts}>
                 <div className={styles.mintCardNormalPrice}>
                     <p className={styles.mintCardTotalMinted}>Price</p>

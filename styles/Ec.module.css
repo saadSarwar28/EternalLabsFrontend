@@ -190,7 +190,20 @@
     display: flex;
     justify-content: center;
     font-weight: 700;
+    font-size: 20px;
     margin: 0px;
+}
+
+.mintNumberContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.mintNumberSeparator {
+    width: 50px;
+    height: 65px;
 }
 
 .mintCardTotalMinted {
@@ -198,6 +211,22 @@
     justify-content: center;
     font-weight: 700;
     /*margin: 0px;*/
+}
+
+.colorGolden {
+    color: goldenrod;
+}
+
+.mintCardTotalMintedHeader {
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    margin-top: auto;
+    margin-bottom: auto;
+    /*margin-left: 10px;*/
+    /*margin-right: 10px;*/
+    color: #FF5757;
+    font-size: 25px;
 }
 
 .mintCardAmounts {
