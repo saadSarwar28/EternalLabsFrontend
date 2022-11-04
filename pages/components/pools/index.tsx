@@ -28,8 +28,8 @@ export const Pools = () => {
                     <div className={poolStyles.imageWrapper}>
                         <Image
                             src={bnbCardCover}
-                            width={350}
-                            height={350}
+                            width={300}
+                            height={300}
                             alt="BNB pool logo"
                             className={poolStyles.coverImage}
                         ></Image>
@@ -76,8 +76,8 @@ export const Pools = () => {
                     <div className={poolStyles.imageWrapper}>
                         <Image
                             src={cakeCardCover}
-                            width={500}
-                            height={500}
+                            width={300}
+                            height={300}
                             alt="CAKE pool"
                             className={poolStyles.coverImage}
                         ></Image>
@@ -124,8 +124,8 @@ export const Pools = () => {
                     <div className={poolStyles.imageWrapper}>
                         <Image
                             src={bananaCardCover}
-                            width={500}
-                            height={500}
+                            width={300}
+                            height={300}
                             alt="BANANA pool"
                             className={poolStyles.coverImage}
                         ></Image>
@@ -174,8 +174,8 @@ export const Pools = () => {
                     <div className={poolStyles.imageWrapper}>
                         <Image
                             src={zmbeCardCover}
-                            height={500}
-                            width={500}
+                            height={300}
+                            width={300}
                             alt="ZMBE pool"
                             className={poolStyles.coverImage}
                         ></Image>
@@ -268,8 +268,8 @@ export const Pools = () => {
                     <div className={poolStyles.imageWrapper}>
                         <Image
                             src={babyCardCover}
-                            width={500}
-                            height={500}
+                            width={300}
+                            height={300}
                             alt="Eternal Zombies Collection"
                             className={poolStyles.coverImage}
                         ></Image>
