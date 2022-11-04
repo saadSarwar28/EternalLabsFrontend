@@ -97,7 +97,7 @@ export const EcClaimCard = () => {
 
     return (
         <div className={styles.mintCard}>
-            <p className={styles.mintCardAnnouncement}>Claim Your Earned CAKE here</p>
+            <p className={styles.mintCardAnnouncement}>Your $CAKE earnings</p>
             <div className={styles.mintCardAmounts}>
                 <div className={styles.mintCardNormalPrice}>
                     <p className={styles.mintCardTotalMinted}>Your EC Balance</p>

@@ -192,6 +192,7 @@
     font-weight: 700;
     font-size: 20px;
     margin: 0px;
+    text-align: center;
 }
 
 .mintNumberContainer {
@@ -807,7 +808,7 @@
     .introduction {
         display: flex;
         flex-direction: column;
-        padding: 8%;
+        padding: 4%;
         justify-content: space-between;
     }
 
@@ -820,7 +821,7 @@
 
     .mintCard {
         width: 100%;
-        padding: 10%;
+        padding: 9%;
         margin-top: 10%;
     }
 
