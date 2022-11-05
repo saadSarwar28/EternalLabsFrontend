@@ -193,10 +193,12 @@
 
 .tvlHeading {
     color: #1EB2E3;
+    font-weight: bolder;
 }
 
 .tvlValue {
     color: #1EB2E3;
+    font-weight: bolder;
 }
 
 .introText {
