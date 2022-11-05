@@ -8,11 +8,11 @@
 
 .particleCanvas {
     position: absolute;
-    left:0;
-    top:0;
+    left: 0;
+    top: 0;
     z-index: 1;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
@@ -141,25 +141,54 @@
 
 @keyframes gradient {
     0% {
-        border-image-source: linear-gradient(-45deg, #743ad5, #d53a9d);
+        background-position: 0px;
     }
-    50% {
-        border-image-source: linear-gradient(-45deg, #d53a9d, #743ad5);
-    }
+    /*25% {*/
+    /*    background: linear-gradient(90deg, red, orange);*/
+    /*}*/
+    /*50% {*/
+    /*    background: linear-gradient(180deg, red, orange);*/
+    /*}*/
     100% {
-        border-image-source: linear-gradient(-45deg, #743ad5, #d53a9d);
+        background-position: 1300px;
     }
 }
 
 .tvlContainer {
     display: flex;
+    align-items: center;
     justify-content: center;
-    width: fit-content;
-    padding: 0% 5%;
-    align-self: center;
-    border: 5px solid;
-    border-image-slice: 1;
-    animation: gradient 2s ease-in-out infinite;
+     /*width: 50vw;*/
+    width: 90%;
+    margin: auto;
+    max-width: 22em;
+
+    position: relative;
+    padding: 0% 1em;
+    box-sizing: border-box;
+
+    border: 5px;
+    color: #FFF;
+    background: #000;
+    background-clip: padding-box; /* !importanté */
+    border: solid 5px transparent; /* !importanté */
+    border-radius: 1em;
+}
+
+.tvlContainer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: -5px; /* !importanté */
+    border-radius: inherit; /* !importanté */
+    background: linear-gradient(90deg, red, orange, red, orange, red);
+    background-size: 600%;
+    background-position: 0px;
+    animation: gradient 3s infinite;
 }
 
 .tvlHeading {
@@ -443,7 +472,7 @@
     color: white;
     background: transparent;
     text-align: center;
-    width: 200px;
+    min-width: 200px;
     border-radius: 10px;
     border: 3px solid #7C00FF;
     font-weight: bolder;
@@ -673,10 +702,12 @@
     .navList {
         padding-left: 0%;
         justify-content: space-evenly;
+        margin-right: 20px;
     }
 
     .introduction {
-        left: 25%;
+        top: 20%;
+        left: 15%;
     }
 
     .preview {
@@ -827,7 +858,7 @@
         font-size: 1rem;
     }
 
-    .timeline__event__date__two{
+    .timeline__event__date__two {
         font-size: 1rem;
     }
 
@@ -892,6 +923,7 @@
         left: 3%;
         top: 30%;
     }
+
     .navListMobile {
         width: 93%;
         left: 15px;
@@ -899,7 +931,7 @@
     }
 
     .mintCardIcons {
-     justify-content: center;
+        justify-content: center;
     }
 
     .mintCardAmountAdjustmentButtonContainer {
@@ -931,6 +963,7 @@
         left: 3%;
         top: 30%;
     }
+
     .navListMobile {
         width: 92%;
         left: 15px;
@@ -942,7 +975,7 @@
         font-size: 0.7rem;
     }
 
-    .timeline__event__date__two{
+    .timeline__event__date__two {
         padding: 10px;
         font-size: 0.7rem;
     }
