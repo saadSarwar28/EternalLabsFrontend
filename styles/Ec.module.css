@@ -55,7 +55,7 @@
 }
 
 .header {
-    background: url("/pancakeswap-cake-nobg.png");
+    /*background: url("/pancakeswap-cake-nobg.png");*/
     background-size: 100%;
     background-position-x: -0px;
     background-position-y: -100px;
@@ -63,9 +63,9 @@
     /*border-top-right-radius: 15px;*/
     border-radius: 15px;
     padding-top: 35px;
-    animation: float infinite ease-in-out;
-    animation-duration: 7s;
-    animation-timing-function: linear;
+    /*animation: float infinite ease-in-out;*/
+    /*animation-duration: 7s;*/
+    /*animation-timing-function: linear;*/
 }
 
 .nav {
