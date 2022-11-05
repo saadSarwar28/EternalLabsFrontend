@@ -14,7 +14,7 @@
 }
 
 .containerCard {
-    background: linear-gradient(45deg, #1E5F83, #439B71);
+    /*background: linear-gradient(45deg, #1E5F83, #439B71);*/
     border-radius: 15px;
     width: 100%;
     box-shadow: 0px 0px 20px 10px #0B3448;
@@ -55,10 +55,10 @@
 }
 
 .header {
-    /*background: url("/pancakeswap-cake-nobg.png");*/
-    background-size: 100%;
-    background-position-x: -0px;
-    background-position-y: -100px;
+    background: linear-gradient(45deg, #1E5F83, #439B71);
+    /*background-size: 100%;*/
+    /*background-position-x: -0px;*/
+    /*background-position-y: -100px;*/
     /*border-top-left-radius: 15px;*/
     /*border-top-right-radius: 15px;*/
     border-radius: 15px;
@@ -739,7 +739,7 @@
 
     .header {
         padding-top: 20px;
-        background-repeat: no-repeat;
+        /*background-repeat: no-repeat;*/
         /*animation-timing-function: linear;*/
     }
 
