@@ -38,8 +38,8 @@ const Home: NextPage = () => {
             </Head>
             <main className={styles.main}>
                 <div className={styles.containerCard}>
-                    <div className={styles.header} style={{backgroundImage: `url(${halloweenBackground.src})`}}>
-                        {/*<ParticlesBackground/>*/}
+                    <div className={styles.header}>
+                        <ParticlesBackground/>
                         <Navbar/>
                         <Header/>
                     </div>

@@ -26,9 +26,6 @@ export const Header = () => {
                     <h2 className={styles.tvlHeading}>TVL</h2>&nbsp;&nbsp;&nbsp;&nbsp;
                     <h2 className={styles.tvlValue}>${Number(tvl).toFixed(2)}</h2>
                 </div>
-                {/*<p className={styles.introText}>*/}
-                {/*    Binance Smart Chain yield optimizer platform*/}
-                {/*</p>*/}
             </div>
         </div>
     )
