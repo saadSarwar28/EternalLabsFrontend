@@ -1,5 +1,7 @@
 import minterABI from '../abi/minter.json';
 import eternalCakesMinterAbi from '../abi/EternalCakesMinter.json'
+import cakeABI from '../abi/cake.json'
+import zmbeABI from '../abi/zmbe.json'
 import stakerABI from '../abi/staker.json'
 import distributorABI from '../abi/distributor.json'
 import bountyABI from '../abi/bounty.json'
@@ -11,12 +13,18 @@ import {
     getBountyAddress,
     getDistributorAddress,
     getDrFrankensteinAddress,
-    getMinterAddress, getPairAddress, getRouterAddress,
+    getMinterAddress,
+    getPairAddress,
+    getRouterAddress,
     getStakerAddress,
     getEternalCakesMinterAddress,
     getEternalCakesBountyAddress,
     getEternalCakesStakerAddress,
-    getEternalCakesDistributorAddress, getPancakeMasterchefAddress, getCakeBnbPairAddress,
+    getEternalCakesDistributorAddress,
+    getPancakeMasterchefAddress,
+    getCakeBnbPairAddress,
+    getCakeAddress,
+    getZmbeAddress,
 } from './getContractAddress';
 import {useState} from 'react';
 import Web3 from 'web3';
@@ -110,4 +118,18 @@ export const getPancakeMasterchefNoWallet = (chainID: any) => {
     const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
     // @ts-ignore
     return new web3NoWallet.eth.Contract(masterchefABI, getPancakeMasterchefAddress(chainID))
+}
+
+export const getCakeNoWallet = (chainID: any) => {
+    // @ts-ignore
+    const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
+    // @ts-ignore
+    return new web3NoWallet.eth.Contract(cakeABI, getCakeAddress(chainID))
+}
+
+export const getZmbeNoWallet = (chainID: any) => {
+    // @ts-ignore
+    const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
+    // @ts-ignore
+    return new web3NoWallet.eth.Contract(zmbeABI, getZmbeAddress(chainID))
 }

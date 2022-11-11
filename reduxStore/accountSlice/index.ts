@@ -1,4 +1,5 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import {getCakePoolApr, getZmbeTombApr} from '../../utils/apr';
 
 const defaultState = {
     userData: {
@@ -8,11 +9,33 @@ const defaultState = {
         pendingZmbe: 0,
         pendingCake: 0,
     },
+    zmbeBnbPoolApr: 0,
+    cakeBnbPoolApr: 0,
     chainId: 0,
     web3Provider: null,
     web3WithWallet: null,
     tvl: 0,
 }
+
+export const updateRugzombiePancakeswapTombApr = createAsyncThunk(
+    "ACCOUNT/UPDATE_ZMBE_BNB_POOL_APR",
+    ()=> {
+        return new Promise<void>((resolve, reject) => {
+            // @ts-ignore
+            resolve(getZmbeTombApr());
+        });
+    }
+)
+
+export const updateCakePoolApr = createAsyncThunk(
+    "ACCOUNT/UPDATE_CAKE_BNB_POOL_APR",
+    ()=> {
+        return new Promise<void>((resolve, reject) => {
+            // @ts-ignore
+            resolve(getCakePoolApr());
+        });
+    }
+)
 
 export const updateAccount = createAsyncThunk(
     "ACCOUNT/UPDATE",
@@ -96,7 +119,14 @@ const createAccountSlice = createSlice({
         [disconnectWallet.fulfilled.toString()]: (state) => {
             state.userData.account = ''
             state.userData.walletConnected = false
-        }
+        },
+        [updateRugzombiePancakeswapTombApr.fulfilled.toString()]: (state, {payload}) => {
+            state.zmbeBnbPoolApr = payload
+        },
+        [updateCakePoolApr.fulfilled.toString()]: (state, {payload}) => {
+            state.cakeBnbPoolApr = payload
+        },
+
     }
 })
 

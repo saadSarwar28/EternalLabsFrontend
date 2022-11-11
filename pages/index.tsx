@@ -20,9 +20,20 @@ import ParticlesBackground from './components/Particles';
 import Pools from './components/pools';
 import halloweenBackground from '../public/HalloweenBG.png'
 import {isMobile} from 'react-device-detect';
+import {updateCakePoolApr, updateRugzombiePancakeswapTombApr} from '../reduxStore/accountSlice';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../reduxStore';
 
 
 const Home: NextPage = () => {
+
+    const dispatch = useDispatch<AppDispatch>();
+    dispatch(
+        updateRugzombiePancakeswapTombApr()
+    )
+    dispatch(
+        updateCakePoolApr()
+    )
 
     return (
         <div className={styles.container}>

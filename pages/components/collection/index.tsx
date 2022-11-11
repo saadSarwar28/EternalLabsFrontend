@@ -20,12 +20,13 @@ import {getCakeBnbLpTokenValue, getZmbeBnbLpTokenValue} from '../../../utils/lpP
 import minterABI from '../../../abi/minter.json';
 import eternalCakesMinterABI from '../../../abi/EternalCakesMinter.json'
 import Web3 from 'web3';
-import {useDispatch} from 'react-redux';
-import {updateTvl} from '../../../reduxStore/accountSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {selectCreateAccountState, updateRugzombiePancakeswapTombApr, updateTvl} from '../../../reduxStore/accountSlice';
+import {AppDispatch} from '../../../reduxStore';
 
 export const Collections = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>();
     const [chainID, setChainId] = useState(process.env.NEXT_PUBLIC_CHAIN_ID)
     const [zmbeLpLocked, setZmbeLpLocked] = useState('0')
     const [cakeLpLocked, setCakeLpLocked] = useState('0')
@@ -38,9 +39,8 @@ export const Collections = () => {
     const [totalEcTokens, setTotalEcTokens] = useState(0)
     const [eZTokenWorth, setEzTokenWorth] = useState(0)
     const [eCTokenWorth, setEcTokenWorth] = useState(0)
-    const [poolWeight, setPoolWeight] = useState(0)
-    const [zmbePriceUsd, setZmbePriceUsd] = useState(0)
-    const [poolLiquidityUsd, setPoolLiquidityUsd] = useState(0)
+
+    const {zmbeBnbPoolApr, cakeBnbPoolApr} = useSelector(selectCreateAccountState)
 
     // @ts-ignore
     const [web3NoWallet, setWeb3NoWallet] = useState(new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)) // for fetching info
@@ -207,7 +207,7 @@ export const Collections = () => {
                                             <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight}>91.10%</span>
+                                            <span className={collectionStyles.detailsRightStriked}>{Number(zmbeBnbPoolApr).toFixed(2)}%</span>
                                         </div>
                                     </div>
                                     <div className={collectionStyles.detailsRow}>
@@ -313,7 +313,7 @@ export const Collections = () => {
                                             <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight}>23.89%</span>
+                                            <span className={collectionStyles.detailsRightStriked}>{cakeBnbPoolApr.toFixed(2)} %</span>
                                         </div>
                                     </div>
                                     <div className={collectionStyles.detailsRow}>

@@ -116,7 +116,23 @@ const CONSTANTS = {
         }
     },
     ZMBE_PER_BLOCK: new BigNumber(10),
-    BLOCKS_PER_YEAR: new BigNumber((60 / BSC_BLOCK_TIME) * 60 * 24 * 365) // 10512000
+    CAKE_PER_BLOCK: new BigNumber(2.03),
+    BLOCKS_PER_YEAR: new BigNumber((60 / BSC_BLOCK_TIME) * 60 * 24 * 365), // 10512000
+    COINGECKO: {
+        BASE_URI: "https://api.coingecko.com/api/v3/",
+        // ALREADY_MAX_NFT_MINTABLE: (maxMint, nftBalance) => `Max ${maxMint} nft mintable and you already have ${nftBalance.toString()}`,
+        PRICE_API: ({id, currency}: any) => `simple/price?ids=${id}&vs_currencies=${currency}`,
+        ZMBE: {
+            ID: "rugzombie"
+        },
+        CAKE: {
+            ID: "pancakeswap-token"
+        },
+        BNB: {
+            ID: "binancecoin"
+        },
+        VS_CURRENCIES: "usd"
+    }
 }
 
 export default CONSTANTS

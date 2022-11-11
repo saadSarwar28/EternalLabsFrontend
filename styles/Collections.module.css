@@ -178,6 +178,11 @@
     font-weight: bolder;
 }
 
+.detailsRightStriked {
+    font-weight: bolder;
+    text-decoration: line-through;
+}
+
 .buttonContainer {
     display: flex;
     justify-content: center;

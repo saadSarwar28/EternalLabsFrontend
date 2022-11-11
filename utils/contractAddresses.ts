@@ -70,7 +70,19 @@ const ADDRESSES = {
         {
             '56': '0xa5f8C5Dbd5F286960b9d90548680aE5ebFf07652',
             '97': '0xd8C408676B6af16dFD131c90F4bb5448301C54D3',
-        }
+        },
+    tokens: {
+        'CAKE':
+            {
+                '56': '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
+                '97': '0xcf468a63992059B77EFee1c7d4954b3A31649C38',
+            },
+        'ZMBE':
+            {
+                '56': '0x50ba8bf9e34f0f83f96a340387d1d3888ba4b3b5',
+                '97': '0xcf468a63992059B77EFee1c7d4954b3A31649C38',
+            },
+    }
 
 }
 

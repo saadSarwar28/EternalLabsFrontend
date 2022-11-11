@@ -116,3 +116,21 @@ export const getPancakeMasterchefAddress = (chainId: any) => {
     // @ts-ignore
     return ADDRESSES.PANCAKE_MASTERCHEF[chainId]
 }
+
+export const getCakeAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.tokens.CAKE['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.tokens.CAKE[chainId]
+}
+
+export const getZmbeAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.tokens.ZMBE['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.tokens.ZMBE[chainId]
+}
