@@ -356,12 +356,12 @@ export const Collections = () => {
                                         <div className={collectionStyles.detailsColumn}>
                                             <span className={collectionStyles.detailsRight}>
                                                 <Link
-                                                    href="https://bscscan.com/address/0xc626d5aea14c84061dc2fe6719e20767de354304"
+                                                    href="https://bscscan.com/address/0xE4cE0E5b3B70B5132807CE725eC93d6eE33B5Eca"
                                                     passHref={true}
                                                     className={collectionStyles.detailsContractLink}>
                                                     <a target="_blank">
                                                         <span style={{display: 'flex'}} id="span_element">
-                                                            0xc626...54304&nbsp;
+                                                            0xE4cE0...3B5Eca&nbsp;
                                                             <Image
                                                                 src={contractIcon}
                                                                 width={20}
