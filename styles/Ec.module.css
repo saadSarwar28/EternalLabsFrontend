@@ -155,9 +155,9 @@
     justify-content: space-between;
     width: 85%;
     padding: 0% 2%;
-    background: #134357;
-    border-radius: 20px;
-    box-shadow: 0px 0px 10px 5px;
+    background: rgb(10,22,34,95%);
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px 5px #42d4db;
     font-weight: 600;
 }
 
@@ -906,6 +906,34 @@
     .bountyCardAnnouncement {
         font-size: xx-large;
     }
+
+    .bountyCard {
+        padding: 4% 5%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bountyCardText{
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 1575px) {
+
+    .bountyCard {
+        padding: 4% 0%;
+        width: 92%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bountyCardText {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -917,9 +945,14 @@
 
 @media only screen and (max-width: 900px) {
 
+    .bountyCardWrapper {
+        padding: 0%;
+        /*width: 93%;*/
+    }
 
     .bountyCard {
-        padding: 4% 1%;
+        padding: 4% 0%;
+        width: 92%;
         flex-direction: column;
     }
 
@@ -940,6 +973,18 @@
         justify-content: center;
         align-items: center;
         width: auto;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .mintCardAmountAdjustmentButtonContainer {
+        width: 45%;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .mintCardAmountAdjustmentButtonContainer {
+        width: 25%;
     }
 }
 
@@ -982,6 +1027,12 @@
     .mintCardMintButtons {
         margin-top: 0px;
         flex-direction: column;
+    }
+
+    .bountyCardText{
+        margin-top: 20px;
+        margin-bottom: 5px;
+        font-size: 15px;
     }
 }
 
@@ -1029,6 +1080,7 @@
     }
 
     .bountyCardText {
+        margin-top: 10px;
         margin-bottom: 0px;
     }
 

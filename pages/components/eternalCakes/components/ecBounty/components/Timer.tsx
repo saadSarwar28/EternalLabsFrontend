@@ -34,7 +34,7 @@ const TimerBox = styled.p`
   padding: 20px;
   border: white 0px solid;
   border-radius: 15px;
-  box-shadow: inset 0px 0px 20px 2px;
+  box-shadow: inset 0px 0px 20px 2px #42d4db;
   margin: 10px;
   @media only screen and (max-width: 500px) {
     font-size: 13px;

@@ -3,12 +3,15 @@ import {notifyError, notifySuccess} from '../../../../../utils/toast';
 import styles from '../../../../../styles/Ec.module.css';
 import BountyTimer from './components/Timer';
 import {ToastContainer} from 'react-toastify';
-import {getBountyNoWallet, getMinterNoWallet} from '../../../../../utils/web3NoWallet';
-import {useDispatch, useSelector} from 'react-redux';
+import {
+    getEternalCakesBountyNoWallet,
+    getEternalCakesMinterNoWallet,
+} from '../../../../../utils/web3NoWallet';
+import {useSelector} from 'react-redux';
 import {selectCreateAccountState} from '../../../../../reduxStore/accountSlice';
 import Web3 from 'web3';
-import bountyAbi from "../../../../../abi/bounty.json"
-import {getBountyAddress} from '../../../../../utils/getContractAddress';
+import bountyAbi from "../../../../../abi/eternalCakesBounty.json"
+import {getEternalCakesBountyAddress} from '../../../../../utils/getContractAddress';
 
 export const EcBountyCard: React.FC = () => {
 
@@ -24,29 +27,29 @@ export const EcBountyCard: React.FC = () => {
     const [lastClaimedAt, setLastClaimedAt] = useState(0)
     const [bountyDuration, setBountyDuration] = useState(0)
     const [canClaim, setCanClaim] = useState(false)
-    const [ezBalance, setEzBalance] = useState(0)
+    const [ecBalance, setEcBalance] = useState(0)
     const [ticketPurchased, setTicketPurchased] = useState(false)
     const [ticketPurchaseLoading, setTicketPurchaseLoading] = useState(false)
     const [ticketPrice, setTicketPrice] = useState(0)
     // @ts-ignore
     const [web3NoWallet, setWeb3NoWallet] = useState(new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)) // for fetching info
 
-    const updateEzBalance = () => {
+    const updateEcBalance = () => {
         if (userData.walletConnected) {
-            getMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.balanceOf(userData.account).call()
+            getEternalCakesMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.balanceOf(userData.account).call()
                 .then((res: any) => {
-                    setEzBalance(res)
+                    setEcBalance(res)
                 })
         }
     }
 
     useEffect(() => {
-        updateEzBalance()
+        updateEcBalance()
     }, [userData.account])
 
     const checkTicketHolder = () => {
         if (userData.walletConnected) {
-            getBountyNoWallet().methods.tickets(userData.account).call()
+            getEternalCakesBountyNoWallet().methods.tickets(userData.account).call()
                 .then((res: any) => {
                     setTicketPurchased(res)
                 })
@@ -58,7 +61,7 @@ export const EcBountyCard: React.FC = () => {
     }, [userData.account])
 
     const getTicketPrice = () => {
-        getBountyNoWallet().methods.ticketPrice().call()
+        getEternalCakesBountyNoWallet().methods.ticketPrice().call()
             .then((res: any) => {
                 // @ts-ignore
                 setTicketPrice(web3NoWallet.utils.fromWei(res))
@@ -66,7 +69,7 @@ export const EcBountyCard: React.FC = () => {
     }
 
     useEffect(() => {
-        if (userData.walletConnected && !ticketPurchased && ezBalance < 1) {
+        if (userData.walletConnected && !ticketPurchased && ecBalance < 1) {
             getTicketPrice()
         }
     }, [userData.account])
@@ -83,7 +86,7 @@ export const EcBountyCard: React.FC = () => {
 
     const updateLastClaimedAt = () => {
         if (lastClaimedAt === 0) {
-            getBountyNoWallet().methods.LAST_CLAIMED().call()
+            getEternalCakesBountyNoWallet().methods.LAST_CLAIMED().call()
                 .then((res: any) => {
                     setLastClaimedAt(res)
                 })
@@ -92,7 +95,7 @@ export const EcBountyCard: React.FC = () => {
 
     const updateBountyDuration = () => {
         if (bountyDuration === 0) {
-            getBountyNoWallet().methods.BOUNTY_DURATION().call()
+            getEternalCakesBountyNoWallet().methods.BOUNTY_DURATION().call()
                 .then((res: any) => {
                     setBountyDuration(res)
                 })
@@ -108,7 +111,7 @@ export const EcBountyCard: React.FC = () => {
         setTicketPurchaseLoading(true)
         const web3 = new Web3(web3Provider)
         // @ts-ignore
-        const bountyContract = new web3.eth.Contract(bountyAbi, getBountyAddress(process.env.NEXT_PUBLIC_CHAIN_ID))
+        const bountyContract = new web3.eth.Contract(bountyAbi, getEternalCakesBountyAddress(process.env.NEXT_PUBLIC_CHAIN_ID))
         bountyContract.methods.purchaseTicket().send(
             {
                 from: userData.account,
@@ -131,7 +134,7 @@ export const EcBountyCard: React.FC = () => {
                 setIsLoading(true)
                 const web3 = new Web3(web3Provider)
                 // @ts-ignore
-                const bountyContract = new web3.eth.Contract(bountyAbi, getBountyAddress(process.env.NEXT_PUBLIC_CHAIN_ID))
+                const bountyContract = new web3.eth.Contract(bountyAbi, getEternalCakesBountyAddress(process.env.NEXT_PUBLIC_CHAIN_ID))
                 bountyContract.methods.claim().send({from: userData.account})
                     .then((res: any) => {
                         notifySuccess('Bounty Claimed Successfully.')
@@ -156,7 +159,7 @@ export const EcBountyCard: React.FC = () => {
         <div className={styles.bountyCardWrapper}>
             <div className={styles.bountyCard}>
                 <ToastContainer/>
-                <p className={styles.bountyCardAnnouncement}>$ZMBE Bounty!</p>
+                <p className={styles.bountyCardAnnouncement}>$CAKE Bounty!</p>
                 {
                     // @ts-ignore
                     bountyTime > 0 ? <BountyTimer endTs={bountyTime} callback={timerCallbackHandler}></BountyTimer> : null
@@ -174,7 +177,7 @@ export const EcBountyCard: React.FC = () => {
                                 </button>
                             </div>
                             {
-                                ezBalance < 1 && !ticketPurchased ?
+                                ecBalance < 1 && !ticketPurchased ?
                                     <div className={styles.ezBountyClaimCardButtons}>
                                         <p className={styles.bountyCardText}>Buy Ticket to be able to claim bounty!</p>
                                         <button onClick={buyTicket} disabled={ticketPurchaseLoading}
