@@ -337,7 +337,7 @@ export const Collections = () => {
                                             <span className={collectionStyles.detailsLeft}>Compounds every</span>
                                         </div>
                                         <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight} title="To be decided">TBD</span>
+                                            <span className={collectionStyles.detailsRight} title="To be decided">5 Days</span>
                                         </div>
                                     </div>
                                     <div className={collectionStyles.detailsRow}>
