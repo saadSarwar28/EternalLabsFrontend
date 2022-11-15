@@ -34,7 +34,7 @@ export const EcClaimCard = () => {
                         .then((res: any) => {
                             dispatch(
                                 // @ts-ignore
-                                updatePendingCake(Number(weiToNumber(res, 2)))
+                                updatePendingCake(Number(weiToNumber(res, 5)))
                             )
                         })
                 })
