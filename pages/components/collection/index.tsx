@@ -1,11 +1,9 @@
 import styles from '../../../styles/Home.module.css';
 import collectionStyles from '../../../styles/Collections.module.css'
-import animate from '../../../styles/Animate.module.css'
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 import zmbeCardCover from '../../../public/rugzombie-logo.png'
 import cakeCardCover from '../../../public/CakeLogo.png'
-// import linkIcon from '../../../public/icons8-linking-32.svg'
 import contractIcon from '../../../public/file-contract-solid.svg'
 import background from "../../../public/gradient-blue-background.png"
 import {useRouter} from 'next/router'
@@ -14,7 +12,6 @@ import {getDrFrankensteinNoWallet, getPancakeMasterchefNoWallet} from '../../../
 import constants from '../../../utils/constants';
 import {weiToNumber} from '../../../utils/units';
 import Link from 'next/link';
-import {isMobile} from 'react-device-detect';
 import ADDRESSES from '../../../utils/contractAddresses';
 import {getCakeBnbLpTokenValue, getZmbeBnbLpTokenValue} from '../../../utils/lpPrice';
 import minterABI from '../../../abi/minter.json';
@@ -23,6 +20,34 @@ import Web3 from 'web3';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCreateAccountState, updateRugzombiePancakeswapTombApr, updateTvl} from '../../../reduxStore/accountSlice';
 import {AppDispatch} from '../../../reduxStore';
+import styled from 'styled-components'
+
+const LeftCard = styled.div`
+  position: relative;
+  display: inline-flex;
+  /*border: double 5px transparent;*/
+  max-width: 100%;
+  flex-direction: column;
+  /*box-shadow: 0px 0px 10px 5px;*/
+  border-radius: 5px;
+  background: #0a1622;
+  animation-duration: 1s;
+  @media only screen and (max-width: 800px) {
+    margin-bottom: 20px;
+  }
+`
+
+const RightCard = styled.div`
+  position: relative;
+  display: inline-flex;
+  /*border: double 5px transparent;*/
+  max-width: 100%;
+  flex-direction: column;
+  /*box-shadow: 0px 0px 10px 5px;*/
+  border-radius: 5px;
+  background: #0a1622;
+  animation-duration: 1s;
+`
 
 export const Collections = () => {
 
@@ -32,8 +57,6 @@ export const Collections = () => {
     const [cakeLpLocked, setCakeLpLocked] = useState('0')
     const [lpValue, setLpValue] = useState(0)
     const [cakeLpValue, setCakeLpValue] = useState(0)
-    const [showCards, setShowCards] = useState(false)
-    const [offset, setOffset] = useState(0);
     const router = useRouter()
     const [totalEzTokens, setTotalEzTokens] = useState(0)
     const [totalEcTokens, setTotalEcTokens] = useState(0)
@@ -93,7 +116,7 @@ export const Collections = () => {
             // @ts-ignore
             dispatch(updateTvl(lpValue + cakeLpValue))
         }
-    },[lpValue, cakeLpValue])
+    }, [lpValue, cakeLpValue])
 
     useEffect(() => {
         if (zmbeLpLocked !== '0' && chainID === '56') {
@@ -143,111 +166,93 @@ export const Collections = () => {
         router.push('/eternalcakes')
     }
 
-    useEffect(() => {
-        if (!showCards) {
-            if (window.pageYOffset > 300) {
-                setShowCards(true)
-            }
-            const onScroll = () => setOffset(window.pageYOffset);
-            // clean up code
-            window.removeEventListener('scroll', onScroll);
-            window.addEventListener('scroll', onScroll, {passive: true});
-            return () => window.removeEventListener('scroll', onScroll);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (offset > 300) {
-            setShowCards(true)
-        }
-    }, [offset])
-
     return (
         <div id="collections" className={styles.preview} style={{backgroundImage: `url(${background.src})`}}>
             <div className={styles.previewHeaderWrapper}>
                 <h2 className={styles.previewHeader}>Compounding Yield Boosting tokens!</h2>
             </div>
-            {
-                showCards ?
-                    <div className={collectionStyles.collectionsCardWrapper}>
-                        <div className={collectionStyles.collectionCardLeft}>
-                            <div className={collectionStyles.imageWrapper}>
-                                <Image
-                                    src={zmbeCardCover}
-                                    height={500}
-                                    width={500}
-                                    alt="Eternal Zombies Collection"
-                                    className={collectionStyles.coverImage}
-                                ></Image>
-                            </div>
-                            <div className={collectionStyles.bottomContainer}>
-                                <div className={collectionStyles.bottomHeadingContainer}>
-                                    <h3 className={collectionStyles.bottomHeading}>Eternal Zombies</h3>
+            <div className={collectionStyles.collectionsCardWrapper}>
+                <LeftCard className="w3-animate-left">
+                    <div className={collectionStyles.imageWrapper}>
+                        <Image
+                            src={zmbeCardCover}
+                            height={500}
+                            width={500}
+                            alt="Eternal Zombies Collection"
+                            className={collectionStyles.coverImage}
+                        ></Image>
+                    </div>
+                    <div className={collectionStyles.bottomContainer}>
+                        <div className={collectionStyles.bottomHeadingContainer}>
+                            <h3 className={collectionStyles.bottomHeading}>Eternal Zombies</h3>
+                        </div>
+                        <div className={collectionStyles.detailsContainer}>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Pool</span>
                                 </div>
-                                <div className={collectionStyles.detailsContainer}>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Pool</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
+                                <div className={collectionStyles.detailsColumn}>
                                         <span
                                             className={collectionStyles.detailsRight}>Rugzombie PancakeSwap Tomb</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Earns</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight}>ZMBE</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRightStriked}>{Number(zmbeBnbPoolApr).toFixed(2)}%</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Estimated EZ APY</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft} title="Estimated worth of each EZ token">Estimated EZ Worth</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight} title="To be estimated">${eZTokenWorth}</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Compounds every</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight}>4 Days</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Total LP Staked</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Earns</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight}>ZMBE</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span
+                                        className={collectionStyles.detailsRightStriked}>{Number(zmbeBnbPoolApr).toFixed(2)}%</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Estimated EZ APY</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}
+                                          title="Estimated worth of each EZ token">Estimated EZ Worth</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight}
+                                          title="To be estimated">${eZTokenWorth}</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Compounds every</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight}>4 Days</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Total LP Staked</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
                                             <span
                                                 className={collectionStyles.detailsRight}>{zmbeLpLocked} (${lpValue.toFixed(2)})</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Contract</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Contract</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
                                             <span className={collectionStyles.detailsRight}>
                                                 <Link
                                                     href="https://bscscan.com/address/0x5a87d0173a2a22579b878a27048c8a9b09bff496"
@@ -265,95 +270,98 @@ export const Collections = () => {
                                                     </a>
                                                 </Link>
                                             </span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRowContentCenter}>
-                                        <div className={collectionStyles.buttonContainer}>
-                                            <button className={collectionStyles.mintButton}
-                                                    onClick={gotoZmbeCollection}>Mint
-                                            </button>
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRowContentCenter}>
+                                <div className={collectionStyles.buttonContainer}>
+                                    <button className={collectionStyles.mintButton}
+                                            onClick={gotoZmbeCollection}>Mint
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div className={collectionStyles.collectionCardRight}>
-                            <div className={collectionStyles.imageWrapper}>
-                                <Image
-                                    src={cakeCardCover}
-                                    width={500}
-                                    height={500}
-                                    alt="Eternal Cakes Collection"
-                                    className={collectionStyles.coverImage}
-                                ></Image>
-                            </div>
-                            <div className={collectionStyles.bottomContainer}>
-                                <div className={collectionStyles.bottomHeadingContainer}>
-                                    <h3 className={collectionStyles.bottomHeading}>Eternal Cakes</h3>
+                    </div>
+                </LeftCard>
+                <RightCard className="w3-animate-right">
+                    <div className={collectionStyles.imageWrapper}>
+                        <Image
+                            src={cakeCardCover}
+                            width={500}
+                            height={500}
+                            alt="Eternal Cakes Collection"
+                            className={collectionStyles.coverImage}
+                        ></Image>
+                    </div>
+                    <div className={collectionStyles.bottomContainer}>
+                        <div className={collectionStyles.bottomHeadingContainer}>
+                            <h3 className={collectionStyles.bottomHeading}>Eternal Cakes</h3>
+                        </div>
+                        <div className={collectionStyles.detailsContainer}>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Pool</span>
                                 </div>
-                                <div className={collectionStyles.detailsContainer}>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Pool</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight}>PancakeSwap CAKE-BNB LP Pool</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Earns</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight}>CAKE</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRightStriked}>{cakeBnbPoolApr.toFixed(2)} %</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Estimated EC APY</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft} title="Estimated worth of each EZ token">Estimated EC Worth</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight} title="To be estimated">${eCTokenWorth}</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Compounds every</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsRight} title="To be decided">5 Days</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Total LP Staked</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight}>PancakeSwap CAKE-BNB LP Pool</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Earns</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight}>CAKE</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span
+                                        className={collectionStyles.detailsRightStriked}>{cakeBnbPoolApr.toFixed(2)} %</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Estimated EC APY</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}
+                                          title="Estimated worth of each EZ token">Estimated EC Worth</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight}
+                                          title="To be estimated">${eCTokenWorth}</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Compounds every</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight} title="To be decided">5 Days</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Total LP Staked</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
                                             <span
                                                 className={collectionStyles.detailsRight}>{cakeLpLocked} (${cakeLpValue.toFixed(2)})</span>
-                                        </div>
-                                    </div>
-                                    <div className={collectionStyles.detailsRow}>
-                                        <div className={collectionStyles.detailsColumn}>
-                                            <span className={collectionStyles.detailsLeft}>Contract</span>
-                                        </div>
-                                        <div className={collectionStyles.detailsColumn}>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Contract</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
                                             <span className={collectionStyles.detailsRight}>
                                                 <Link
                                                     href="https://bscscan.com/address/0xE4cE0E5b3B70B5132807CE725eC93d6eE33B5Eca"
@@ -371,24 +379,23 @@ export const Collections = () => {
                                                     </a>
                                                 </Link>
                                             </span>
-                                        </div>
-                                    </div>
-                                    {/*<div className={collectionStyles.detailsComingSoon}>*/}
-                                    {/*    <h2>Launching at 1/11/2022 16:00 UTC</h2>*/}
-                                    {/*</div>*/}
-                                    <div className={collectionStyles.detailsRowContentCenter}>
-                                        <div className={collectionStyles.buttonContainer}>
-                                            <button className={collectionStyles.mintButton}
-                                                    onClick={gotoCakeCollection}>Mint
-                                            </button>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                            {/*<Link href="./eternalzombies" className={collectionStyles.link}></Link>*/}
+                            {/*<div className={collectionStyles.detailsComingSoon}>*/}
+                            {/*    <h2>Launching at 1/11/2022 16:00 UTC</h2>*/}
+                            {/*</div>*/}
+                            <div className={collectionStyles.detailsRowContentCenter}>
+                                <div className={collectionStyles.buttonContainer}>
+                                    <button className={collectionStyles.mintButton}
+                                            onClick={gotoCakeCollection}>Mint
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div> : null
-            }
+                    </div>
+                    {/*<Link href="./eternalzombies" className={collectionStyles.link}></Link>*/}
+                </RightCard>
+            </div>
         </div>
     )
 }
