@@ -20,34 +20,6 @@ import Web3 from 'web3';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCreateAccountState, updateRugzombiePancakeswapTombApr, updateTvl} from '../../../reduxStore/accountSlice';
 import {AppDispatch} from '../../../reduxStore';
-import styled from 'styled-components'
-
-const LeftCard = styled.div`
-  position: relative;
-  display: inline-flex;
-  /*border: double 5px transparent;*/
-  max-width: 100%;
-  flex-direction: column;
-  /*box-shadow: 0px 0px 10px 5px;*/
-  border-radius: 5px;
-  background: #0a1622;
-  animation-duration: 1s;
-  @media only screen and (max-width: 800px) {
-    margin-bottom: 20px;
-  }
-`
-
-const RightCard = styled.div`
-  position: relative;
-  display: inline-flex;
-  /*border: double 5px transparent;*/
-  max-width: 100%;
-  flex-direction: column;
-  /*box-shadow: 0px 0px 10px 5px;*/
-  border-radius: 5px;
-  background: #0a1622;
-  animation-duration: 1s;
-`
 
 export const Collections = () => {
 
@@ -172,7 +144,7 @@ export const Collections = () => {
                 <h2 className={styles.previewHeader}>Compounding Yield Boosting tokens!</h2>
             </div>
             <div className={collectionStyles.collectionsCardWrapper}>
-                <LeftCard className="w3-animate-left">
+                <div className={collectionStyles.collectionCardLeft}>
                     <div className={collectionStyles.imageWrapper}>
                         <Image
                             src={zmbeCardCover}
@@ -281,8 +253,8 @@ export const Collections = () => {
                             </div>
                         </div>
                     </div>
-                </LeftCard>
-                <RightCard className="w3-animate-right">
+                </div>
+                <div className={collectionStyles.collectionCardRight}>
                     <div className={collectionStyles.imageWrapper}>
                         <Image
                             src={cakeCardCover}
@@ -394,7 +366,7 @@ export const Collections = () => {
                         </div>
                     </div>
                     {/*<Link href="./eternalzombies" className={collectionStyles.link}></Link>*/}
-                </RightCard>
+                </div>
             </div>
         </div>
     )

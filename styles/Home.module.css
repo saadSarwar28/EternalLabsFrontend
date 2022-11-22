@@ -123,7 +123,7 @@
     justify-content: center;
     position: absolute;
     top: 30%;
-    left: 31%;
+    left: 27%;
     z-index: 5;
 }
 
@@ -804,15 +804,15 @@
         flex-direction: column;
         padding: 2% 10%;
         justify-content: space-between;
-        left: 7%;
-        /*top: 20%;*/
+        left: 0%;
+        top: 40%;
     }
 
     .introWrapper {
         display: flex;
         flex-direction: column;
         width: 100%;
-        padding: 4%;
+        padding: 0%;
     }
 
     .mintCard {
@@ -922,7 +922,7 @@
 @media only screen and (max-width: 500px) {
 
     .introduction {
-        left: 3%;
+        left: 0%;
         top: 30%;
     }
 
@@ -972,8 +972,8 @@
     }
 
     .introduction {
-        left: 3%;
-        top: 30%;
+        left: 0%;
+        top: 35%;
     }
 
     .navListMobile {
