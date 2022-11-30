@@ -52,7 +52,7 @@ const Home: NextPage = () => {
             <main className={styles.main}>
                 <div className={styles.containerCard}>
                     <div className={styles.header}>
-                        <ParticlesBackground/>
+                        {/*<ParticlesBackground/>*/}
                         <Navbar/>
                         <Header/>
                     </div>

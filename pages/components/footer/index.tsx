@@ -16,7 +16,7 @@ export const Footer = () => {
                     <ul className={styles.footerList}>
                         <li>
                             <a className={styles.footerListLinks}
-                               href="https://discord.gg/2qFsymKv" target="_blank" rel="noreferrer">
+                               href="https://discord.gg/Hz2hkND6yb" target="_blank" rel="noreferrer">
                                 <img src="/discord-brands.png" height={30} width={30} alt="discord"/>
                             </a>
                         </li>

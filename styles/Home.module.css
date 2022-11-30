@@ -61,7 +61,7 @@
 }
 
 .header {
-    /*background: url("/HalloweenBG.png");*/
+    background: url("/orange-neon-glow-perf-rectangle-frame.jpg");
     background-position: center;
     position: relative;
     background-size: cover;
@@ -121,10 +121,14 @@
     display: flex;
     padding: 4%;
     justify-content: center;
+    align-items: center;
     position: absolute;
-    top: 30%;
-    left: 27%;
-    z-index: 5;
+    /* top: 30%; */
+    /* left: 27%; */
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    margin: auto;
 }
 
 .introWrapper {
@@ -707,10 +711,10 @@
         margin-right: 20px;
     }
 
-    .introduction {
-        top: 20%;
-        left: 12%;
-    }
+    /*.introduction {*/
+    /*    top: 20%;*/
+    /*    left: 12%;*/
+    /*}*/
 
     .preview {
         /*display: flex;*/
@@ -738,6 +742,7 @@
     .header {
         padding-top: 10px;
         height: 93vh;
+        background-size: 1400px 1200px;
     }
 
     .logo {
@@ -799,14 +804,14 @@
         padding: 5px;
     }
 
-    .introduction {
-        display: flex;
-        flex-direction: column;
-        padding: 2% 10%;
-        justify-content: space-between;
-        left: 0%;
-        top: 40%;
-    }
+    /*.introduction {*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    padding: 2% 10%;*/
+    /*    justify-content: space-between;*/
+    /*    left: 0%;*/
+    /*    top: 40%;*/
+    /*}*/
 
     .introWrapper {
         display: flex;
@@ -898,9 +903,9 @@
 }
 
 @media only screen and (max-width: 800px) {
-    .introduction {
-        left: 5%;
-    }
+    /*.introduction {*/
+    /*    left: 5%;*/
+    /*}*/
 }
 
 @media only screen and (max-width: 700px) {
@@ -921,10 +926,14 @@
 
 @media only screen and (max-width: 500px) {
 
-    .introduction {
-        left: 0%;
-        top: 30%;
+    .header {
+        background-size: 1000px 900px;
     }
+
+    /*.introduction {*/
+    /*    left: 0%;*/
+    /*    top: 30%;*/
+    /*}*/
 
     .navListMobile {
         width: 93%;
@@ -971,10 +980,10 @@
         padding: 15px 5px;
     }
 
-    .introduction {
-        left: 0%;
-        top: 35%;
-    }
+    /*.introduction {*/
+    /*    left: 0%;*/
+    /*    top: 35%;*/
+    /*}*/
 
     .navListMobile {
         width: 92%;
