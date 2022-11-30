@@ -141,6 +141,8 @@ export const EzBountyCard: React.FC = () => {
                     .then((res: any) => {
                         notifySuccess('Bounty Claimed Successfully.')
                         setIsLoading(false)
+                        updateLastClaimedAt()
+                        updateBountyDuration()
                     })
                     .catch((error: any) => {
                         if (error.code === 4001) {

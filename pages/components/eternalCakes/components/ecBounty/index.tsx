@@ -139,6 +139,8 @@ export const EcBountyCard: React.FC = () => {
                     .then((res: any) => {
                         notifySuccess('Bounty Claimed Successfully.')
                         setIsLoading(false)
+                        updateLastClaimedAt()
+                        updateBountyDuration()
                     })
                     .catch((error: any) => {
                         notifyError('Bounty Claim Unsuccessfull.')
