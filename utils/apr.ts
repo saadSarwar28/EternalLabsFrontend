@@ -2,8 +2,8 @@ import BigNumber from 'bignumber.js';
 import CONSTANTS from './constants';
 import {
     getCakeBnbPairNoWallet,
-    getCakeNoWallet,
-    getDrFrankensteinNoWallet,
+    getCakeNoWallet, getDistributorNoWallet,
+    getDrFrankensteinNoWallet, getEternalCakesDistributorNoWallet,
     getPairNoWallet, getPancakeMasterchefNoWallet,
     getRouterNoWallet,
     getZmbeNoWallet
@@ -29,6 +29,20 @@ export const getZmbeTombApr = async () => {
     const yearlyZmbeRewardAllocation = CONSTANTS.ZMBE_PER_BLOCK.times(CONSTANTS.BLOCKS_PER_YEAR).times(weight)
     const apr = yearlyZmbeRewardAllocation.times(zmbePrice).div(poolLiquidityUsd)
     return Number(apr) * 100
+}
+
+export const getZmbeYield = async () => {
+    const distributor = getDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
+    const cycleCount = await distributor.methods.CYCLE_COUNT().call()
+    const cycleDetails = await distributor.methods.distributionCycles(cycleCount).call()
+    return Number(ethers.utils.formatUnits(cycleDetails.distributionAmount))
+}
+
+export const getCakeYield = async () => {
+    const distributor = getEternalCakesDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
+    const cycleCount = await distributor.methods.CYCLE_COUNT().call()
+    const cycleDetails = await distributor.methods.distributionCycles(cycleCount).call()
+    return Number(ethers.utils.formatUnits(cycleDetails.distributionAmount))
 }
 
 /**

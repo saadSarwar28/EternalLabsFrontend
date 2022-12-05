@@ -35,7 +35,7 @@ export const Collections = () => {
     const [eZTokenWorth, setEzTokenWorth] = useState(0)
     const [eCTokenWorth, setEcTokenWorth] = useState(0)
 
-    const {zmbeBnbPoolApr, cakeBnbPoolApr} = useSelector(selectCreateAccountState)
+    const {zmbeBnbPoolApr, cakeBnbPoolApr, zmbeYield, cakeYield} = useSelector(selectCreateAccountState)
 
     // @ts-ignore
     const [web3NoWallet, setWeb3NoWallet] = useState(new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)) // for fetching info
@@ -178,21 +178,30 @@ export const Collections = () => {
                             </div>
                             <div className={collectionStyles.detailsRow}>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
+                                    <span className={collectionStyles.detailsLeft}>Yield</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
                                     <span
-                                        className={collectionStyles.detailsRightStriked}>{Number(zmbeBnbPoolApr).toFixed(2)}%</span>
+                                        className={collectionStyles.detailsRight} title="Per Distribution cycle">{zmbeYield.toFixed(2)} ZMBE / 4 Days</span>
                                 </div>
                             </div>
-                            <div className={collectionStyles.detailsRow}>
-                                <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsLeft}>Estimated EZ APY</span>
-                                </div>
-                                <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>
-                                </div>
-                            </div>
+                            {/*<div className={collectionStyles.detailsRow}>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>*/}
+                            {/*    </div>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span*/}
+                            {/*            className={collectionStyles.detailsRightStriked}>{Number(zmbeBnbPoolApr).toFixed(2)}%</span>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className={collectionStyles.detailsRow}>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span className={collectionStyles.detailsLeft}>Estimated EZ APY</span>*/}
+                            {/*    </div>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                             <div className={collectionStyles.detailsRow}>
                                 <div className={collectionStyles.detailsColumn}>
                                     <span className={collectionStyles.detailsLeft}
@@ -285,21 +294,21 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsRight}>CAKE</span>
                                 </div>
                             </div>
+                            {/*<div className={collectionStyles.detailsRow}>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>*/}
+                            {/*    </div>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span*/}
+                            {/*            className={collectionStyles.detailsRightStriked}>{cakeBnbPoolApr.toFixed(2)} %</span>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                             <div className={collectionStyles.detailsRow}>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>
+                                    <span className={collectionStyles.detailsLeft}>Yield</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span
-                                        className={collectionStyles.detailsRightStriked}>{cakeBnbPoolApr.toFixed(2)} %</span>
-                                </div>
-                            </div>
-                            <div className={collectionStyles.detailsRow}>
-                                <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsLeft}>Estimated EC APY</span>
-                                </div>
-                                <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>
+                                    <span className={collectionStyles.detailsRight} title="Per Distribution cycle">{cakeYield.toFixed(4)} CAKE / 4 Days</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
@@ -317,7 +326,7 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsLeft}>Compounds every</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight} title="To be decided">5 Days</span>
+                                    <span className={collectionStyles.detailsRight}>4 Days</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>

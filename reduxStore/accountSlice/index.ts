@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import {getCakePoolApr, getZmbeTombApr} from '../../utils/apr';
+import {getCakePoolApr, getCakeYield, getZmbeTombApr, getZmbeYield} from '../../utils/apr';
 
 const defaultState = {
     userData: {
@@ -10,7 +10,9 @@ const defaultState = {
         pendingCake: 0,
     },
     zmbeBnbPoolApr: 0,
+    zmbeYield: 0,
     cakeBnbPoolApr: 0,
+    cakeYield: 0,
     chainId: 0,
     web3Provider: null,
     web3WithWallet: null,
@@ -23,6 +25,26 @@ export const updateRugzombiePancakeswapTombApr = createAsyncThunk(
         return new Promise<void>((resolve, reject) => {
             // @ts-ignore
             resolve(getZmbeTombApr());
+        });
+    }
+)
+
+export const updateZmbeYield = createAsyncThunk(
+    "ACCOUNT/UPDATE_ZMBE_YIELD",
+    ()=> {
+        return new Promise<void>((resolve, reject) => {
+            // @ts-ignore
+            resolve(getZmbeYield());
+        });
+    }
+)
+
+export const updateCakeYield = createAsyncThunk(
+    "ACCOUNT/UPDATE_CAKE_YIELD",
+    ()=> {
+        return new Promise<void>((resolve, reject) => {
+            // @ts-ignore
+            resolve(getCakeYield());
         });
     }
 )
@@ -126,7 +148,12 @@ const createAccountSlice = createSlice({
         [updateCakePoolApr.fulfilled.toString()]: (state, {payload}) => {
             state.cakeBnbPoolApr = payload
         },
-
+        [updateZmbeYield.fulfilled.toString()]: (state, {payload}) => {
+            state.zmbeYield = payload
+        },
+        [updateCakeYield.fulfilled.toString()]: (state, {payload}) => {
+            state.cakeYield = payload
+        }
     }
 })
 
