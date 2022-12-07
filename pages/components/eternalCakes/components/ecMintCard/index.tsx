@@ -247,10 +247,10 @@ export const EcMintCard = () => {
                             <p className={styles.mintCardTotalMinted}>Total</p>
                             <p className={styles.mintCardTotalMinted}>{(price * amount).toFixed(2)} BNB</p>
                         </div>
-                        <div className={styles.mintCardWhitelistPrice}>
-                            <p className={styles.mintCardTotalMinted}>Total (Whitelist)</p>
-                            <p className={styles.mintCardTotalMinted}>{(whitelistPrice * amount).toFixed(3)} BNB</p>
-                        </div>
+                        {/*<div className={styles.mintCardWhitelistPrice}>*/}
+                        {/*    <p className={styles.mintCardTotalMinted}>Total (Whitelist)</p>*/}
+                        {/*    <p className={styles.mintCardTotalMinted}>{(whitelistPrice * amount).toFixed(3)} BNB</p>*/}
+                        {/*</div>*/}
                         <div className={styles.mintCardMintButtons}>
                             <button onClick={mint} className={styles.connectWalletButton}>
                                 {
