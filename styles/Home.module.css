@@ -964,7 +964,7 @@
     }
 
     .team {
-        height: 95vh;
+        height: fit-content;
     }
 
     .teamInfoContainer {
@@ -1107,7 +1107,7 @@
     }
 
     .team {
-        height: 90vh;
+        height: fit-content;
     }
 }
 
