@@ -835,7 +835,7 @@
         position: absolute;
         display: flex;
         justify-content: space-between;
-        padding: 45px;
+        padding: 35px 20px;
         flex-direction: row-reverse;
     }
 
