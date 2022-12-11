@@ -1,6 +1,6 @@
 import styles from '../../../styles/Home.module.css';
 import {isMobile} from 'react-device-detect';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from 'next/link';
 
 export const Navbar = () => {
@@ -15,8 +15,33 @@ export const Navbar = () => {
         setIsNavExpanded(false)
     }
 
+    const [displayBackground, setDisplayBackground] = useState(false)
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setScrollPosition(position);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, {passive: true});
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (scrollPosition === 0) {
+            setDisplayBackground(false)
+        } else {
+            setDisplayBackground(true)
+        }
+    }, [scrollPosition])
+
     return (
-        <nav className={styles.nav}>
+        <nav className={
+            isMobile ? styles.nav : displayBackground ? styles.navLocked : styles.nav
+        }>
             {/*<div className={styles.logoWrapper}>*/}
             {/*<img*/}
             {/*    src="/eternal_labs_logo.png"*/}

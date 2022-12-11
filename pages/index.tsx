@@ -11,15 +11,7 @@ import {Team} from './components/team';
 import {Roadmap} from './components/roadmap';
 import {Header} from './components/header';
 import {Navbar} from './components/navbar';
-import {useCallback} from "react";
-import type {Container, Engine} from "tsparticles-engine";
-import Particles from "react-particles";
-import {loadFull} from "tsparticles";
-import CONSTANTS from '../utils/constants';
-import ParticlesBackground from './components/Particles';
 import Pools from './components/pools';
-import halloweenBackground from '../public/HalloweenBG.png'
-import {isMobile} from 'react-device-detect';
 import {
     updateCakePoolApr,
     updateCakeYield,
@@ -58,11 +50,8 @@ const Home: NextPage = () => {
             </Head>
             <main className={styles.main}>
                 <div className={styles.containerCard}>
-                    <div className={styles.header}>
-                        {/*<ParticlesBackground/>*/}
-                        <Navbar/>
-                        <Header/>
-                    </div>
+                    <Navbar/>
+                    <Header/>
                     <Collections/>
                     <Pools/>
                     {/*<Roadmap/>*/}
