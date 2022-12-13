@@ -24,7 +24,7 @@ import {
     getPancakeMasterchefAddress,
     getCakeBnbPairAddress,
     getCakeAddress,
-    getZmbeAddress,
+    getZmbeAddress, getMoneyMonkeysDistributorAddress, getMoneyMonkeysBountyAddress, getMoneyMonkeysMinterAddress,
 } from './getContractAddress';
 import {useState} from 'react';
 import Web3 from 'web3';
@@ -41,6 +41,13 @@ export const getEternalCakesMinterNoWallet = (chainID: any) => {
     const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
     // @ts-ignore
     return new web3NoWallet.eth.Contract(eternalCakesMinterAbi, getEternalCakesMinterAddress(chainID))
+}
+
+export const getMoneyMonkeysMinterNoWallet = (chainID: any) => {
+    // @ts-ignore
+    const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
+    // @ts-ignore
+    return new web3NoWallet.eth.Contract(eternalCakesMinterAbi, getMoneyMonkeysMinterAddress(chainID))
 }
 
 export const getStakerNoWallet = (chainID: any) => {
@@ -71,6 +78,13 @@ export const getEternalCakesDistributorNoWallet = (chainID: any) => {
     return new web3NoWallet.eth.Contract(distributorABI, getEternalCakesDistributorAddress(chainID))
 }
 
+export const getMoneyMonkeysDistributorNoWallet = (chainID: any) => {
+    // @ts-ignore
+    const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
+    // @ts-ignore
+    return new web3NoWallet.eth.Contract(distributorABI, getMoneyMonkeysDistributorAddress(chainID))
+}
+
 export const getBountyNoWallet = () => {
     // @ts-ignore
     const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
@@ -83,6 +97,13 @@ export const getEternalCakesBountyNoWallet = () => {
     const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
     // @ts-ignore
     return new web3NoWallet.eth.Contract(bountyABI, getEternalCakesBountyAddress(process.env.NEXT_PUBLIC_CHAIN_ID))
+}
+
+export const getMoneyMonkeysBountyNoWallet = () => {
+    // @ts-ignore
+    const web3NoWallet = new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)
+    // @ts-ignore
+    return new web3NoWallet.eth.Contract(bountyABI, getMoneyMonkeysBountyAddress(process.env.NEXT_PUBLIC_CHAIN_ID))
 }
 
 export const getDrFrankensteinNoWallet = (chainID: any) => {

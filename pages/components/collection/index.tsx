@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 import zmbeCardCover from '../../../public/rugzombie-logo.png'
 import cakeCardCover from '../../../public/CakeLogo.png'
+import moneyMonkeysCardCover from '../../../public/moneyMonkeysLogo.png'
 import contractIcon from '../../../public/file-contract-solid.svg'
 import background from "../../../public/gradient-blue-background.png"
 import {useRouter} from 'next/router'
@@ -35,7 +36,7 @@ export const Collections = () => {
     const [eZTokenWorth, setEzTokenWorth] = useState(0)
     const [eCTokenWorth, setEcTokenWorth] = useState(0)
 
-    const {zmbeBnbPoolApr, cakeBnbPoolApr, zmbeYield, cakeYield} = useSelector(selectCreateAccountState)
+    const {zmbeBnbPoolApr, cakeBnbPoolApr, zmbeYield, cakeYield, mainstYield} = useSelector(selectCreateAccountState)
 
     // @ts-ignore
     const [web3NoWallet, setWeb3NoWallet] = useState(new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)) // for fetching info
@@ -134,6 +135,10 @@ export const Collections = () => {
         router.push('/eternalzombies')
     }
 
+    const gotoMoneyMonkeysCollection = (event: any) => {
+        router.push('/moneymonkeys')
+    }
+
     const gotoCakeCollection = (event: any) => {
         router.push('/eternalcakes')
     }
@@ -144,7 +149,7 @@ export const Collections = () => {
                 <h2 className={styles.previewHeader}>Compounding Yield Boosting tokens!</h2>
             </div>
             <div className={collectionStyles.collectionsCardWrapper}>
-                <div className={collectionStyles.collectionCardLeft}>
+                <div className={collectionStyles.collectionCard}>
                     <div className={collectionStyles.imageWrapper}>
                         <Image
                             src={zmbeCardCover}
@@ -263,7 +268,7 @@ export const Collections = () => {
                         </div>
                     </div>
                 </div>
-                <div className={collectionStyles.collectionCardRight}>
+                <div className={collectionStyles.collectionCard}>
                     <div className={collectionStyles.imageWrapper}>
                         <Image
                             src={cakeCardCover}
@@ -375,6 +380,125 @@ export const Collections = () => {
                         </div>
                     </div>
                     {/*<Link href="./eternalzombies" className={collectionStyles.link}></Link>*/}
+                </div>
+                <div className={collectionStyles.collectionCard}>
+                    <div className={collectionStyles.imageWrapper} style={{padding: '0%'}}>
+                        <Image
+                            src={moneyMonkeysCardCover}
+                            height={500}
+                            width={500}
+                            alt="Money Monkeys Collection"
+                            className={collectionStyles.coverImage}
+                        ></Image>
+                    </div>
+                    <div className={collectionStyles.bottomContainer}>
+                        <div className={collectionStyles.bottomHeadingContainer}>
+                            <h3 className={collectionStyles.bottomHeading}>Money Monkeys</h3>
+                        </div>
+                        <div className={collectionStyles.detailsContainer}>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Pool</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                        <span
+                                            className={collectionStyles.detailsRight}>Apeswap BANANA/GNANA Pool</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Earns</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight}>$MAINST</span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Yield</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span
+                                        className={collectionStyles.detailsRight} title="Per Distribution cycle">{mainstYield.toFixed(2)} $MAINST / 3 Days</span>
+                                </div>
+                            </div>
+                            {/*<div className={collectionStyles.detailsRow}>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span className={collectionStyles.detailsLeft}>Pool&apos;s APR</span>*/}
+                            {/*    </div>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span*/}
+                            {/*            className={collectionStyles.detailsRightStriked}>{Number(zmbeBnbPoolApr).toFixed(2)}%</span>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className={collectionStyles.detailsRow}>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span className={collectionStyles.detailsLeft}>Estimated EZ APY</span>*/}
+                            {/*    </div>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span className={collectionStyles.detailsRight} title="To be estimated">TBE</span>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className={collectionStyles.detailsRow}>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span className={collectionStyles.detailsLeft}*/}
+                            {/*              title="Estimated worth of each EZ token">Estimated MM Worth</span>*/}
+                            {/*    </div>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span className={collectionStyles.detailsRight}*/}
+                            {/*              title="To be estimated">${eZTokenWorth}</span>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Compounds every</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsRight}>3 Days</span>
+                                </div>
+                            </div>
+                            {/*<div className={collectionStyles.detailsRow}>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*        <span className={collectionStyles.detailsLeft}>Total Staked</span>*/}
+                            {/*    </div>*/}
+                            {/*    <div className={collectionStyles.detailsColumn}>*/}
+                            {/*                <span*/}
+                            {/*                    className={collectionStyles.detailsRight}>{zmbeLpLocked} (${lpValue.toFixed(2)})</span>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            <div className={collectionStyles.detailsRow}>
+                                <div className={collectionStyles.detailsColumn}>
+                                    <span className={collectionStyles.detailsLeft}>Contract</span>
+                                </div>
+                                <div className={collectionStyles.detailsColumn}>
+                                            <span className={collectionStyles.detailsRight}>
+                                                <Link
+                                                    href="https://bscscan.com/address/0xa36c806c13851F8B27780753563fdDAA6566f996"
+                                                    passHref={true}
+                                                    className={collectionStyles.detailsContractLink}>
+                                                    <a target="_blank">
+                                                        <span style={{display: 'flex'}} id="span_element">
+                                                            0x5a87d...ff496&nbsp;
+                                                            <Image
+                                                                src={contractIcon}
+                                                                width={20}
+                                                                height={20}
+                                                            />
+                                                        </span>
+                                                    </a>
+                                                </Link>
+                                            </span>
+                                </div>
+                            </div>
+                            <div className={collectionStyles.detailsRowContentCenter}>
+                                <div className={collectionStyles.buttonContainer}>
+                                    <button className={collectionStyles.mintButton}
+                                            onClick={gotoMoneyMonkeysCollection}>Claim
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

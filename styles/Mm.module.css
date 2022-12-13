@@ -1,24 +1,8 @@
 .container {
-    /*z-index: 1;*/
-}
 
-.particlesContainer {
-    width: 80%;
-}
-
-.particleCanvas {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
 }
 
 .main {
-    z-index: -10;
     min-height: 100vh;
     padding: 2rem 5rem;
     flex: 1;
@@ -30,7 +14,7 @@
 }
 
 .containerCard {
-    background: #024C8A;
+    /*background: linear-gradient(45deg, #1E5F83, #439B71);*/
     border-radius: 15px;
     width: 100%;
     box-shadow: 0px 0px 20px 10px #0B3448;
@@ -39,18 +23,9 @@
 .logoWrapper {
     display: flex;
     align-content: center;
-    justify-content: center;
 }
 
 .logo {
-    max-width: 250px;
-}
-
-.logoCollections {
-    width: 200px;
-}
-
-.logoFooter {
     width: 200px;
 }
 
@@ -60,38 +35,45 @@
     display: none;
 }
 
+@keyframes float {
+
+    0% {
+        background-position-x: -10px;
+        background-position-y: -110px;
+    }
+
+    50% {
+        background-position-x: 0px;
+        background-position-y: -100px;
+    }
+
+    100% {
+        background-position-x: -10px;
+        background-position-y: -110px;
+    }
+
+}
+
 .header {
-    /*background: url("/orange-neon-glow-perf-rectangle-frame.jpg");*/
+    background-image: url("/MainStLogo.png");
     background-position: center;
-    position: relative;
-    background-size: cover;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    /*padding-top: 35px;*/
-    height: 95vh;
+    background-repeat: no-repeat;
+    /*background-size: 100%;*/
+    /*background-position-x: -0px;*/
+    /*background-position-y: -100px;*/
+    /*border-top-left-radius: 15px;*/
+    /*border-top-right-radius: 15px;*/
+    border-radius: 15px;
+    padding-top: 35px;
+    /*animation: float infinite ease-in-out;*/
+    /*animation-duration: 7s;*/
+    /*animation-timing-function: linear;*/
 }
 
 .nav {
     display: flex;
-    justify-content: center;
-    padding: 1% 5%;
-    /*position: fixed;*/
-    top: 0px;
-    width: 100%;
-    left: 0px;
-    /*z-index: 999;*/
-}
-
-.navLocked {
-    display: flex;
-    justify-content: center;
-    padding: 10px 130px;
-    position: fixed;
-    top: 0px;
-    width: 100%;
-    left: 0px;
-    z-index: 9999;
-    background: #024C8A;
+    justify-content: space-around;
+    padding: 20px 40px;
 }
 
 .navList {
@@ -101,13 +83,6 @@
     align-content: center;
     justify-content: space-evenly;
     color: white;
-    padding-left: 0%;
-}
-
-.navButtonContainer {
-    width: 20%;
-    display: flex;
-    justify-content: flex-end;
 }
 
 .navListMobile {
@@ -131,119 +106,24 @@
 }
 
 .introduction {
-    background: url("/orange-neon-glow-perf-rectangle-frame.jpg");
     display: flex;
-    padding: 4%;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-height: 600px;
-    background-position: center;
-    background-size: cover;
-    /*border-top-left-radius: 15px;*/
-    /*border-top-right-radius: 15px;*/
-    /*padding-top: 35px;*/
-    height: 95vh;
-    margin: auto;
-
+    padding: 3% 8%;
+    justify-content: space-between;
 }
 
 .introWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 100%;
+    width: 50%;
     padding: 4%;
 }
 
 .introHeading {
-    text-align: center;
-    font-size: x-large;
-}
 
-@keyframes gradient {
-    0% {
-        background-position: 0px;
-    }
-    /*25% {*/
-    /*    background: linear-gradient(90deg, red, orange);*/
-    /*}*/
-    /*50% {*/
-    /*    background: linear-gradient(180deg, red, orange);*/
-    /*}*/
-    100% {
-        background-position: 300px;
-    }
-}
-
-.tvlContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    width: 280px;
-    height: 60px;
-    border: double 4px transparent;
-    border-radius: 15px;
-    background-image: linear-gradient(#414141, #414141), radial-gradient(circle at top left, red,orange);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    animation: gradient 3s infinite;
-    background-size: 300px;
-}
-
-/*.tvlContainer {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*     !*width: 50vw;*!*/
-/*    width: 90%;*/
-/*    margin: auto;*/
-/*    max-width: 22em;*/
-
-/*    position: relative;*/
-/*    padding: 0% 1em;*/
-/*    box-sizing: border-box;*/
-
-/*    !*border: 5px;*!*/
-/*    color: #FFF;*/
-/*    background: #414141;*/
-/*    background-clip: padding-box; !* !importanté *!*/
-/*    border: solid 5px transparent !important; !* !importanté *!*/
-/*    border-radius: 1em;*/
-/*}*/
-
-/*.tvlContainer::before {*/
-/*    content: '';*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    right: 0;*/
-/*    bottom: 0;*/
-/*    left: 0;*/
-/*    z-index: -1;*/
-/*    margin: -5px; !* !importanté *!*/
-/*    border-radius: inherit; !* !importanté *!*/
-/*    background: linear-gradient(90deg, red, orange, red, orange, red);*/
-/*    background-size: 600%;*/
-/*    background-position: 0px;*/
-/*    animation: gradient 3s infinite;*/
-/*}*/
-
-.tvlHeading {
-    color: #1EB2E3;
-    font-weight: bolder;
-    font-size: x-large;
-}
-
-.tvlValue {
-    color: #1EB2E3;
-    font-weight: bolder;
-    font-size: x-large;
 }
 
 .introText {
-    text-align: center;
-    font-weight: bolder;
+
 }
 
 .mintCard {
@@ -254,17 +134,79 @@
     width: 40%;
     height: fit-content;
     padding: 3%;
-    background: #134357;
-    border-radius: 20px;
-    box-shadow: 0px 0px 10px 5px;
+    background: rgb(10,22,34,50%);
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px 5px #42d4db;
     font-weight: 600;
+}
+
+.bountyCardWrapper {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    padding: 1%;
+    /*background: #134357;*/
+    /*border-radius: 20px;*/
+    /*box-shadow: 0px 0px 10px 5px;*/
+    /*font-weight: 600;*/
+}
+
+.bountyCard {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    padding: 0% 2%;
+    background: rgb(10,22,34,50%);
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px 5px #42d4db;
+    font-weight: 600;
+}
+
+.bountyCardAnnouncement {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    font-weight: 700;
+    margin: 0px;
+    font-size: xx-large;
+    width: 33%;
+    white-space: nowrap;
+}
+
+.bountyCardText {
+    display: flex;
+    /*flex-direction: column;*/
+    justify-content: center;
+    align-content: center;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    white-space: nowrap;
+    font-size: medium;
+    width: 33%;
 }
 
 .mintCardAnnouncement {
     display: flex;
     justify-content: center;
     font-weight: 700;
+    font-size: 20px;
     margin: 0px;
+    text-align: center;
+}
+
+.mintNumberContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.mintNumberSeparator {
+    width: 50px;
+    height: 65px;
 }
 
 .mintCardTotalMinted {
@@ -272,6 +214,22 @@
     justify-content: center;
     font-weight: 700;
     /*margin: 0px;*/
+}
+
+.colorGolden {
+    color: goldenrod;
+}
+
+.mintCardTotalMintedHeader {
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    margin-top: auto;
+    margin-bottom: auto;
+    /*margin-left: 10px;*/
+    /*margin-right: 10px;*/
+    color: #FF5757;
+    font-size: 25px;
 }
 
 .mintCardAmounts {
@@ -311,8 +269,22 @@
 
 .mintCardMintButtons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 20px;
+}
+
+.ezClaimCardButtons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.ezBountyClaimCardButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
 }
 
 .mintCardButtonLoader {
@@ -343,18 +315,7 @@
 .preview {
     /*display: flex;*/
     /*justify-content: center;*/
-    padding: 0% 5%;
-    /*height: 1000px;*/
-    background-position: center;
-    background-size: cover;
-}
-
-.pool {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 3% 3%;
-    background: #139484;
+    padding: 3% 5%;
 }
 
 .previewHeaderWrapper {
@@ -364,7 +325,6 @@
 
 .previewHeader {
     text-align: center;
-    padding: 2%;
 }
 
 .carouselItems {
@@ -398,10 +358,7 @@
 .team {
     padding-top: 3%;
     width: 100%;
-    min-height: 600px;
-    /*background: #139484;*/
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+
 }
 
 .teamInfoContainer {
@@ -410,23 +367,12 @@
     padding: 0% 10%;
 }
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0.0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
 .teamMemberContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0% 5%;
     width: 50%;
-    animation-name: fadeIn;
-    animation-duration: 3s;
 }
 
 .teamMemberTextContainer {
@@ -514,7 +460,7 @@
     color: white;
     background: transparent;
     text-align: center;
-    min-width: 200px;
+    width: 200px;
     border-radius: 10px;
     border: 3px solid #7C00FF;
     font-weight: bolder;
@@ -531,32 +477,10 @@
     box-shadow: 0px 0px 10px 5px white;
 }
 
-.discordButton:hover {
-    box-shadow: 0px 0px 10px 5px white;
-}
-
-.amountAdjustmentButton {
-    /*display: flex;*/
+.connectWalletButtonNav {
+    display: none;
     color: white;
-    background: #0a667d;
-    text-align: center;
-    width: 50px;
-    height: 100%;
-    border-radius: 20px;
-    border: none;
-    font-size: x-large;
-    font-weight: bolder;
-    padding-bottom: 5px;
-}
-
-.amountAdjustmentButton:hover {
-    box-shadow: 0px 0px 10px 5px white;
-}
-
-
-.connectWalletButton {
-    color: white;
-    background: #6353BD;
+    background: #5479B3;
     text-align: center;
     width: 200px;
     border-radius: 20px;
@@ -566,8 +490,57 @@
     height: 50px;
     cursor: pointer;
     padding: 10px;
+}
+
+.docsButtonNav:hover {
+    box-shadow: 0px 0px 10px 5px white;
+}
+
+.discordButton:hover {
+    box-shadow: 0px 0px 10px 5px white;
+}
+
+.amountAdjustmentButton {
     display: flex;
     justify-content: center;
+    align-content: center;
+    align-items: center;
+    color: white;
+    background: transparent;
+    text-align: center;
+    width: 55px;
+    height: 100%;
+    border-radius: 10px;
+    border: 3px solid #7C00FF;
+    font-size: x-large;
+    font-weight: bolder;
+    /*padding-bottom: 5px;*/
+    transition-duration: 0.5s;
+}
+
+.amountAdjustmentButton:hover {
+    box-shadow: 0px 0px 10px 5px white;
+}
+
+.amountAdjustmentIcons {
+    align-self: center;
+    width: 25px;
+}
+
+
+.connectWalletButton {
+    color: white;
+    background: transparent;
+    text-align: center;
+    width: 200px;
+    border-radius: 10px;
+    border: 3px solid #7C00FF;
+    font-weight: bolder;
+    font-size: 20px;
+    height: 55px;
+    cursor: pointer;
+    padding: 10px;
+    transition-duration: 0.5s;
 }
 
 .connectWalletButton:hover {
@@ -732,76 +705,8 @@
     }
 }
 
-@media only screen and (max-width: 1300px) {
-
-    .logo {
-        max-width: 150px;
-    }
-
-    .introHeading {
-        text-align: center;
-        font-size: large;
-    }
-
-    .tvlHeading {
-        color: #1EB2E3;
-        font-weight: bolder;
-        font-size: large;
-        margin: 5px 0px;
-    }
-
-    .tvlValue {
-        color: #1EB2E3;
-        font-size: large;
-        margin: 5px 0px;
-    }
-
-    .tvlContainer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: auto;
-        width: 200px;
-        height: 40px;
-        border: double 3px transparent;
-        border-radius: 15px;
-        background-image: linear-gradient(#414141, #414141), radial-gradient(circle at top left, red,orange);
-        background-origin: border-box;
-        background-clip: padding-box, border-box;
-        animation: gradient 3s infinite;
-        background-size: 300px;
-    }
-
-    .nav {
-        display: flex;
-        /*justify-content: space-evenly;*/
-        padding: 45px;
-        z-index: 10;
-    }
-
-    .navList {
-        padding-left: 0%;
-        justify-content: space-evenly;
-        margin-right: 20px;
-    }
-
-    .introduction {
-        background-size: 1280px 768px;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
-
-    .preview {
-        /*display: flex;*/
-        /*justify-content: center;*/
-        padding: 0% 3% 10% 3%;
-        height: auto;
-        /*background: #024C8A;*/
-    }
-}
-
-/* for media width less than or equal to 980px */
-@media only screen and (max-width: 980px) {
+/* for media width less than or equal to 600px */
+@media only screen and (max-width: 950px) {
 
     .main {
         min-height: 100vh;
@@ -814,42 +719,62 @@
         background: var(--background);
     }
 
+    @keyframes float {
+
+        0% {
+            background-position-x: -10px;
+            background-position-y: -10px;
+        }
+
+        50% {
+            background-position-x: -0px;
+            background-position-y: -0px;
+        }
+
+        100% {
+            background-position-x: -10px;
+            background-position-y: -10px;
+        }
+
+    }
+
+
     .header {
-        padding-top: 10px;
-        height: 93vh;
-        background-size: 1400px 1200px;
-        border-top-right-radius: 15px;
+        padding-top: 20px;
+        background-repeat: repeat;
+        background-size: 400px 350px;
+        /*animation-timing-function: linear;*/
     }
 
     .logo {
-        /*width: 250px;*/
-        /*height: 50px;*/
+        width: 80px;
+        height: 60px;
+        align-self: baseline;
     }
 
     .logoWrapper {
         display: flex;
         align-content: center;
+        align-items: center;
+        padding-top: 3px;
     }
 
     .nav {
-        position: absolute;
         display: flex;
         justify-content: space-between;
-        padding: 35px 20px;
-        flex-direction: row-reverse;
+        padding: 20px 20px;
+        align-items: center;
     }
 
-    .navLocked {
-        justify-content: space-between;
-        flex-direction: row-reverse;
-        padding-right: 30px;
-        background: transparent;
+    .connectWalletButtonNav {
+        display: block;
     }
 
     .hamburger {
         border: 0px;
         background: transparent;
         display: block;
+        align-self: flex-start;
     }
 
     .navList {
@@ -889,21 +814,23 @@
     }
 
     .introduction {
-        background-size: 1200px 700px;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        padding: 4%;
+        justify-content: space-between;
     }
 
     .introWrapper {
         display: flex;
         flex-direction: column;
         width: 100%;
-        padding: 0%;
+        padding: 4%;
     }
 
     .mintCard {
         width: 100%;
-        padding: 10%;
+        padding: 9%;
+        margin-top: 10%;
     }
 
     .carouselItems {
@@ -946,7 +873,7 @@
         font-size: 1rem;
     }
 
-    .timeline__event__date__two {
+    .timeline__event__date__two{
         font-size: 1rem;
     }
 
@@ -963,10 +890,6 @@
         display: none;
     }
 
-    .team {
-        height: fit-content;
-    }
-
     .teamInfoContainer {
         display: flex;
         flex-direction: column;
@@ -979,14 +902,92 @@
         height: 150px;
         border-radius: 50%;
         box-shadow: 0px 0px 10px 5px;
-        transition: all .5s ease;
     }
 }
 
-@media only screen and (max-width: 800px) {
-    .introduction {
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
+@media only screen and (max-width: 1375px) {
+    .bountyCardAnnouncement {
+        font-size: xx-large;
+    }
+
+    .bountyCard {
+        padding: 4% 5%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bountyCardText{
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 1575px) {
+
+    .bountyCard {
+        padding: 4% 0%;
+        width: 92%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bountyCardText {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .bountyCardAnnouncement {
+        font-size: x-large;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+
+    .bountyCardWrapper {
+        padding: 0%;
+        /*width: 93%;*/
+    }
+
+    .bountyCard {
+        padding: 4% 0%;
+        width: 92%;
+        flex-direction: column;
+    }
+
+    .bountyCardAnnouncement {
+        font-size: x-large;
+        flex-direction: row;
+        width: auto;
+        justify-content: center;
+    }
+
+    .bountyCardText {
+        margin-bottom: 10px;
+    }
+
+    .ezBountyClaimCardButtons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .mintCardAmountAdjustmentButtonContainer {
+        width: 45%;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .mintCardAmountAdjustmentButtonContainer {
+        width: 25%;
     }
 }
 
@@ -1007,17 +1008,6 @@
 }
 
 @media only screen and (max-width: 500px) {
-
-    .header {
-        background-size: 1000px 900px;
-    }
-
-    .introduction {
-        background-size: 1112px 888px;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
-
     .navListMobile {
         width: 93%;
         left: 15px;
@@ -1042,32 +1032,14 @@
         flex-direction: column;
     }
 
-    .logoFooter {
-        width: 150px;
-    }
-
-    .tvlHeading {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .tvlValue {
-        margin-top: 10px;
-        margin-bottom: 10px;
+    .bountyCardText{
+        margin-top: 20px;
+        margin-bottom: 5px;
+        font-size: 15px;
     }
 }
 
 @media only screen and (max-width: 400px) {
-
-    .main {
-        padding: 15px 5px;
-    }
-
-    .introduction {
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
-
     .navListMobile {
         width: 92%;
         left: 15px;
@@ -1079,7 +1051,7 @@
         font-size: 0.7rem;
     }
 
-    .timeline__event__date__two {
+    .timeline__event__date__two{
         padding: 10px;
         font-size: 0.7rem;
     }
@@ -1098,17 +1070,28 @@
         flex-direction: column;
     }
 
-    .preview {
-        /*display: flex;*/
-        /*justify-content: center;*/
-        padding: 0% 3% 10% 3%;
-        height: auto;
-        /*background: #024C8A;*/
+    .bountyCard {
+        padding: 5% 1%;
+        flex-direction: column;
     }
 
-    .team {
-        height: fit-content;
+    .bountyCardAnnouncement {
+        font-size: x-large;
+        flex-direction: row;
+        width: auto;
+        justify-content: center;
+    }
+
+    .bountyCardText {
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+
+    .ezBountyClaimCardButtons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
     }
 }
-
-/* #02FEF1 */

@@ -3,7 +3,7 @@ import CONSTANTS from './constants';
 import {
     getCakeBnbPairNoWallet,
     getCakeNoWallet, getDistributorNoWallet,
-    getDrFrankensteinNoWallet, getEternalCakesDistributorNoWallet,
+    getDrFrankensteinNoWallet, getEternalCakesDistributorNoWallet, getMoneyMonkeysDistributorNoWallet,
     getPairNoWallet, getPancakeMasterchefNoWallet,
     getRouterNoWallet,
     getZmbeNoWallet
@@ -43,6 +43,13 @@ export const getCakeYield = async () => {
     const cycleCount = await distributor.methods.CYCLE_COUNT().call()
     const cycleDetails = await distributor.methods.distributionCycles(cycleCount).call()
     return Number(ethers.utils.formatUnits(cycleDetails.distributionAmount))
+}
+
+export const getMainstYield = async () => {
+    const distributor = getMoneyMonkeysDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
+    const cycleCount = await distributor.methods.CYCLE_COUNT().call()
+    const cycleDetails = await distributor.methods.distributionCycles(cycleCount).call()
+    return Number(ethers.utils.formatUnits(cycleDetails.distributionAmount, 9))
 }
 
 /**

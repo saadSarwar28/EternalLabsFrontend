@@ -81,6 +81,15 @@ export const getEternalCakesMinterAddress = (chainId: string) => {
     return ADDRESSES.ETERNAL_CAKES_MINTER[chainId]
 }
 
+export const getMoneyMonkeysMinterAddress = (chainId: string) => {
+    if (chainId === '0') {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.MONEY_MONKEYS_MINTER['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.MONEY_MONKEYS_MINTER[chainId]
+}
+
 export const getEternalCakesStakerAddress = (chainId: any) => {
     if (chainId === 0) {
         // return mainnet if chain id not initialized yet
@@ -106,6 +115,24 @@ export const getEternalCakesBountyAddress = (chainId: any) => {
     }
     // @ts-ignore
     return ADDRESSES.ETERNAL_CAKES_BOUNTY[chainId]
+}
+
+export const getMoneyMonkeysDistributorAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.MONEY_MONKEYS_DISTRIBUTOR['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.MONEY_MONKEYS_DISTRIBUTOR[chainId]
+}
+
+export const getMoneyMonkeysBountyAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.MONEY_MONKEYS_BOUNTY['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.MONEY_MONKEYS_BOUNTY[chainId]
 }
 
 export const getPancakeMasterchefAddress = (chainId: any) => {

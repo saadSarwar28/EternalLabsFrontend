@@ -14,7 +14,7 @@ import {Navbar} from './components/navbar';
 import Pools from './components/pools';
 import {
     updateCakePoolApr,
-    updateCakeYield,
+    updateCakeYield, updateMainstYield,
     updateRugzombiePancakeswapTombApr,
     updateZmbeYield
 } from '../reduxStore/accountSlice';
@@ -33,6 +33,7 @@ const Home: NextPage = () => {
     // )
     dispatch(updateZmbeYield())
     dispatch(updateCakeYield())
+    dispatch(updateMainstYield())
 
     return (
         <div className={styles.container}>

@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import {getCakePoolApr, getCakeYield, getZmbeTombApr, getZmbeYield} from '../../utils/apr';
+import {getCakePoolApr, getCakeYield, getMainstYield, getZmbeTombApr, getZmbeYield} from '../../utils/apr';
 
 const defaultState = {
     userData: {
@@ -8,11 +8,13 @@ const defaultState = {
         balance: 0,
         pendingZmbe: 0,
         pendingCake: 0,
+        pendingMainst: 0,
     },
     zmbeBnbPoolApr: 0,
     zmbeYield: 0,
     cakeBnbPoolApr: 0,
     cakeYield: 0,
+    mainstYield: 0,
     chainId: 0,
     web3Provider: null,
     web3WithWallet: null,
@@ -45,6 +47,16 @@ export const updateCakeYield = createAsyncThunk(
         return new Promise<void>((resolve, reject) => {
             // @ts-ignore
             resolve(getCakeYield());
+        });
+    }
+)
+
+export const updateMainstYield = createAsyncThunk(
+    "ACCOUNT/UPDATE_MAINST_YIELD",
+    ()=> {
+        return new Promise<void>((resolve, reject) => {
+            // @ts-ignore
+            resolve(getMainstYield());
         });
     }
 )
@@ -104,6 +116,15 @@ export const updatePendingCake = createAsyncThunk(
     }
 )
 
+export const updatePendingMainst = createAsyncThunk(
+    "ACCOUNT/UPDATE_PENDING_MAINST",
+    (mainst: any,) => {
+        return new Promise<void>((resolve, reject) => {
+            resolve(mainst)
+        })
+    }
+)
+
 export const disconnectWallet = createAsyncThunk(
     "ACCOUNT/DISCONNECT_WALLET",
     () => {
@@ -133,6 +154,10 @@ const createAccountSlice = createSlice({
         [updatePendingCake.fulfilled.toString()]: (state, {payload}) => {
             state.userData.pendingCake += payload
         },
+        [updatePendingMainst.fulfilled.toString()]: (state, {payload}) => {
+            state.userData.pendingMainst += payload
+        },
+
         [updateTvl.fulfilled.toString()]: (state, {payload}) => {
             if (state.tvl === 0) {
                 state.tvl = payload
@@ -153,6 +178,9 @@ const createAccountSlice = createSlice({
         },
         [updateCakeYield.fulfilled.toString()]: (state, {payload}) => {
             state.cakeYield = payload
+        },
+        [updateMainstYield.fulfilled.toString()]: (state, {payload}) => {
+            state.mainstYield = payload
         }
     }
 })

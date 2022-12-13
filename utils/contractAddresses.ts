@@ -41,6 +41,11 @@ const ADDRESSES = {
             '56': '0xE4cE0E5b3B70B5132807CE725eC93d6eE33B5Eca',
             '97': '0x1C7B298E554AfDAd2d432FEDb86Cd4048315556C',
         },
+    'MONEY_MONKEYS_MINTER':
+        {
+            '56': '0xa36c806c13851F8B27780753563fdDAA6566f996',
+            '97': '0x1C7B298E554AfDAd2d432FEDb86Cd4048315556C',
+        },
     'ETERNAL_CAKES_STAKER':
         {
             '56': '0xc626D5aEa14c84061dC2FE6719E20767De354304',
@@ -54,6 +59,16 @@ const ADDRESSES = {
     'ETERNAL_CAKES_DISTRIBUTOR':
         {
             '56': '0xb4688b86E1e5D7983310351a7097E7DA38506A91',
+            '97': '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
+        },
+    'MONEY_MONKEYS_BOUNTY':
+        {
+            '56': '0x8F4816A767048935C08a28eF1899e9E338f5309E',
+            '97': '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
+        },
+    'MONEY_MONKEYS_DISTRIBUTOR':
+        {
+            '56': '0x571Db7CB1376B28FACa0F19A05F7d7781E97771f',
             '97': '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
         },
     'CAKE_BNB_PAIR':
@@ -80,6 +95,11 @@ const ADDRESSES = {
         'ZMBE':
             {
                 '56': '0x50ba8bf9e34f0f83f96a340387d1d3888ba4b3b5',
+                '97': '0xcf468a63992059B77EFee1c7d4954b3A31649C38',
+            },
+        'BANANA':
+            {
+                '56': '0x603c7f932ED1fc6575303D8Fb018fDCBb0f39a95',
                 '97': '0xcf468a63992059B77EFee1c7d4954b3A31649C38',
             },
     }
