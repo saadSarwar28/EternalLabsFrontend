@@ -10,6 +10,14 @@ import {weiToNumber} from '../../../../../utils/units';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCreateAccountState} from '../../../../../reduxStore/accountSlice';
 import Loader from '../../../loader';
+import {Carousel} from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import styled from 'styled-components'; // requires a loader
+
+const Image = styled.img`
+  max-width: 400px;
+  border-radius: 10px;
+`
 
 export const EzMintCard = () => {
 
@@ -220,6 +228,68 @@ export const EzMintCard = () => {
             <ToastContainer/>
             <p className={styles.mintCardAnnouncement}>Eternal Zombies mint is Live!</p>
             <p className={styles.mintCardTotalMinted}>{totalMinted} / 1111</p>
+            <Carousel autoPlay={true} showArrows={false} showStatus={false} showIndicators={false} stopOnHover={true} infiniteLoop={true} showThumbs={false}>
+                <div>
+                    <Image src='/84.png' />
+                </div>
+                <div>
+                    <Image src='/85.png' />
+                </div>
+                <div>
+                    <Image src='/86.png' />
+                </div>
+                <div>
+                    <Image src='/87.png' />
+                </div>
+                <div>
+                    <Image src='/88.png' />
+                </div>
+                <div>
+                    <Image src='/89.png' />
+                </div>
+                <div>
+                    <Image src='/90.png' />
+                </div>
+                <div>
+                    <Image src='/91.png' />
+                </div>
+                <div>
+                    <Image src='/123.png' />
+                </div>
+                <div>
+                    <Image src='/124.png' />
+                </div>
+                <div>
+                    <Image src='/125.png' />
+                </div>
+                <div>
+                    <Image src='/91.png' />
+                </div>
+                <div>
+                    <Image src='/92.png' />
+                </div>
+                <div>
+                    <Image src='/93.png' />
+                </div>
+                <div>
+                    <Image src='/88.png' />
+                </div>
+                <div>
+                    <Image src='/126.png' />
+                </div>
+                <div>
+                    <Image src='/127.png' />
+                </div>
+                <div>
+                    <Image src='/128.png' />
+                </div>
+                <div>
+                    <Image src='/94.png' />
+                </div>
+                <div>
+                    <Image src='/95.png' />
+                </div>
+            </Carousel>
             <div className={styles.mintCardAmounts}>
                 <div className={styles.mintCardNormalPrice}>
                     <p className={styles.mintCardTotalMinted}>Price</p>

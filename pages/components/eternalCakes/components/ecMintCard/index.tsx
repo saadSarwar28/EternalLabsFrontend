@@ -13,6 +13,14 @@ import plusIcon from '../../../../../public/icons/plus.svg'
 import minusIcon from '../../../../../public/icons/minus.svg'
 import Loader from '../../../loader';
 import verticalLine from '../../../../../public/tiltedLine.png'
+import {Carousel} from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import styled from 'styled-components'; // requires a loader
+
+const Image = styled.img`
+  max-width: 400px;
+  border-radius: 10px;
+`
 
 export const EcMintCard = () => {
 
@@ -215,6 +223,62 @@ export const EcMintCard = () => {
                 <img className={styles.mintNumberSeparator} src={verticalLine.src} alt=""/>
                 <p className={styles.mintCardTotalMintedHeader}>2222</p>
             </div>
+            <Carousel autoPlay={true} showArrows={false} showStatus={false} showIndicators={false} stopOnHover={true} infiniteLoop={true} showThumbs={false}>
+                <div>
+                    <Image src='/228.png' />
+                </div>
+                <div>
+                    <Image src='/229.png' />
+                </div>
+                <div>
+                    <Image src='/245.png' />
+                </div>
+                <div>
+                    <Image src='/230.png' />
+                </div>
+                <div>
+                    <Image src='/231.png' />
+                </div>
+                <div>
+                    <Image src='/232.png' />
+                </div>
+                <div>
+                    <Image src='/233.png' />
+                </div>
+                <div>
+                    <Image src='/234.png' />
+                </div>
+                <div>
+                    <Image src='/235.png' />
+                </div>
+                <div>
+                    <Image src='/236.png' />
+                </div>
+                <div>
+                    <Image src='/237.png' />
+                </div>
+                <div>
+                    <Image src='/238.png' />
+                </div>
+                <div>
+                    <Image src='/239.png' />
+                </div>
+                <div>
+                    <Image src='/240.png' />
+                </div>
+                <div>
+                    <Image src='/241.png' />
+                </div>
+                <div>
+                    <Image src='/242.png' />
+                </div>
+                <div>
+                    <Image src='/243.png' />
+                </div>
+                <div>
+                    <Image src='/244.png' />
+                </div>
+            </Carousel>
             <div className={styles.mintCardAmounts}>
                 <div className={styles.mintCardNormalPrice}>
                     <p className={styles.mintCardTotalMinted}>Price</p>
