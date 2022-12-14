@@ -21,41 +21,12 @@ export const EzClaimCard = () => {
 
     const [ezBalance, setEzBalance] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
-    const [tokenIds, setTokenIds] = useState([])
-
-    const updatePendingZmbeTokens = () => {
-        if (tokenIds.length > 0) {
-            if (Number(ezBalance) === tokenIds.length) {
-                tokenIds.forEach(token => {
-                    getDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateEarnings(token).call({'from': userData.account})
-                        .then((res: any) => {
-                            dispatch(
-                                // @ts-ignore
-                                updatePendingZmbe(Number(weiToNumber(res, 2)))
-                            )
-                        })
-                })
-            }
-        }
-    }
-
-    useEffect(() => {
-        updatePendingZmbeTokens()
-    }, [tokenIds])
 
     const updateBalance = () => {
         if (userData.walletConnected) {
             getMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.balanceOf(userData.account).call()
                 .then((res: any) => {
                     setEzBalance(res)
-                    for (let i = 0; i < Number(res.toString()); i++) {
-                        // @ts-ignore
-                        getMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.tokenOfOwnerByIndex(userData.account, i).call()
-                            .then((res: any) => {
-                                // @ts-ignore
-                                setTokenIds(tokenIds => [...tokenIds, res.toString()])
-                            })
-                    }
                 })
         }
     }
@@ -82,6 +53,10 @@ export const EzClaimCard = () => {
                     // @ts-ignore
                     .then(res => {
                         notifySuccess('Claimed Successfully')
+                        dispatch(
+                        // @ts-ignore
+                            updatePendingZmbe(userData.account)
+                        )
                         setIsLoading(false)
                     })
             }

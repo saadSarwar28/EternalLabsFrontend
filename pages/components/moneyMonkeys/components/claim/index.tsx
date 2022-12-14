@@ -17,7 +17,6 @@ import {ethers} from 'ethers';
 export const MmClaimCard = () => {
 
     const dispatch = useDispatch()
-
     // @ts-ignore
     const {userData, web3Provider} = useSelector(
         selectCreateAccountState
@@ -25,42 +24,12 @@ export const MmClaimCard = () => {
 
     const [mmBalance, setMmBalance] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
-    const [tokenIds, setTokenIds] = useState([])
-
-    const updatePendingMainstTokens = () => {
-        if (tokenIds.length > 0) {
-            if (Number(mmBalance) === tokenIds.length) {
-                tokenIds.forEach(token => {
-                    getMoneyMonkeysDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateEarnings(token).call({'from': userData.account})
-                        .then((res: any) => {
-                            console.log(ethers.utils.formatUnits(res, 9), ' <<< ')
-                            dispatch(
-                                // @ts-ignore
-                                updatePendingMainst(Number(ethers.utils.formatUnits(res, 9)))
-                            )
-                        })
-                })
-            }
-        }
-    }
-
-    useEffect(() => {
-        updatePendingMainstTokens()
-    }, [tokenIds])
 
     const updateBalance = () => {
         if (userData.walletConnected) {
             getMoneyMonkeysMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.balanceOf(userData.account).call()
                 .then((res: any) => {
                     setMmBalance(res)
-                    for (let i = 0; i < Number(res.toString()); i++) {
-                        // @ts-ignore
-                        getMoneyMonkeysMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.tokenOfOwnerByIndex(userData.account, i).call()
-                            .then((res: any) => {
-                                // @ts-ignore
-                                setTokenIds(tokenIds => [...tokenIds, res.toString()])
-                            })
-                    }
                 })
         }
     }
@@ -87,7 +56,10 @@ export const MmClaimCard = () => {
                     // @ts-ignore
                     .then(res => {
                         notifySuccess('Claimed Successfully')
-                        updatePendingMainstTokens()
+                        dispatch(
+                            // @ts-ignore
+                            updatePendingMainst(userData.account)
+                        )
                         setIsLoading(false)
                     })
             }

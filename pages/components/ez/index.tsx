@@ -4,8 +4,25 @@ import {EzNavbar} from './components/ezNavbar';
 import {EzHeader} from './components/ezHeader';
 import {Footer} from '../footer';
 import EzBountyCard from './components/ezBounty';
+import {useDispatch, useSelector} from 'react-redux';
+import {selectCreateAccountState, updatePendingZmbe} from '../../../reduxStore/accountSlice';
 
 export const Ez = () => {
+
+    const dispatch = useDispatch()
+
+    // @ts-ignore
+    const {userData} = useSelector(
+        selectCreateAccountState
+    )
+
+    if (userData.walletConnected) {
+        dispatch(
+            // @ts-ignore
+            updatePendingZmbe(userData.account)
+        )
+    }
+
     return (
         <>
             <main className={styles.main}>

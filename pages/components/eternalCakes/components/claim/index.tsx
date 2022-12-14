@@ -24,41 +24,12 @@ export const EcClaimCard = () => {
 
     const [ecBalance, setEcBalance] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
-    const [tokenIds, setTokenIds] = useState([])
-
-    const updatePendingCakeTokens = () => {
-        if (tokenIds.length > 0) {
-            if (Number(ecBalance) === tokenIds.length) {
-                tokenIds.forEach(token => {
-                    getEternalCakesDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateEarnings(token).call({'from': userData.account})
-                        .then((res: any) => {
-                            dispatch(
-                                // @ts-ignore
-                                updatePendingCake(Number(weiToNumber(res, 5)))
-                            )
-                        })
-                })
-            }
-        }
-    }
-
-    useEffect(() => {
-        updatePendingCakeTokens()
-    }, [tokenIds])
 
     const updateBalance = () => {
         if (userData.walletConnected) {
             getEternalCakesMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.balanceOf(userData.account).call()
                 .then((res: any) => {
                     setEcBalance(res)
-                    for (let i = 0; i < Number(res.toString()); i++) {
-                        // @ts-ignore
-                        getEternalCakesMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.tokenOfOwnerByIndex(userData.account, i).call()
-                            .then((res: any) => {
-                                // @ts-ignore
-                                setTokenIds(tokenIds => [...tokenIds, res.toString()])
-                            })
-                    }
                 })
         }
     }
@@ -85,6 +56,10 @@ export const EcClaimCard = () => {
                     // @ts-ignore
                     .then(res => {
                         notifySuccess('Claimed Successfully')
+                        dispatch(
+                            // @ts-ignore
+                            updatePendingCake(userData.account)
+                        )
                         setIsLoading(false)
                     })
             }

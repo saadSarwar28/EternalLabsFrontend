@@ -2,9 +2,14 @@ import BigNumber from 'bignumber.js';
 import CONSTANTS from './constants';
 import {
     getCakeBnbPairNoWallet,
-    getCakeNoWallet, getDistributorNoWallet,
-    getDrFrankensteinNoWallet, getEternalCakesDistributorNoWallet, getMoneyMonkeysDistributorNoWallet,
-    getPairNoWallet, getPancakeMasterchefNoWallet,
+    getCakeNoWallet,
+    getDistributorNoWallet,
+    getDrFrankensteinNoWallet,
+    getEternalCakesDistributorNoWallet, getEternalCakesMinterNoWallet, getMinterNoWallet,
+    getMoneyMonkeysDistributorNoWallet,
+    getMoneyMonkeysMinterNoWallet,
+    getPairNoWallet,
+    getPancakeMasterchefNoWallet,
     getRouterNoWallet,
     getZmbeNoWallet
 } from './web3NoWallet';
@@ -50,6 +55,54 @@ export const getMainstYield = async () => {
     const cycleCount = await distributor.methods.CYCLE_COUNT().call()
     const cycleDetails = await distributor.methods.distributionCycles(cycleCount).call()
     return Number(ethers.utils.formatUnits(cycleDetails.distributionAmount, 9))
+}
+
+export const getPendingMainst = async (address: string) => {
+    const balance = await getMoneyMonkeysMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.balanceOf(address).call()
+    const tokenIds = []
+    for (let i = 0; i < Number(balance); i++) {
+        // @ts-ignore
+        const token = await getMoneyMonkeysMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.tokenOfOwnerByIndex(address, i).call()
+        tokenIds.push(token)
+    }
+    let pendingMainst = 0
+    for (const id of tokenIds) {
+        const tokens = await getMoneyMonkeysDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateEarnings(id).call()
+        pendingMainst += Number(ethers.utils.formatUnits(tokens, 9))
+    }
+    return pendingMainst
+}
+
+export const getPendingZmbe = async (address: string) => {
+    const balance = await getMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.balanceOf(address).call()
+    const tokenIds = []
+    for (let i = 0; i < Number(balance); i++) {
+        // @ts-ignore
+        const token = await getMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.tokenOfOwnerByIndex(address, i).call()
+        tokenIds.push(token)
+    }
+    let pendingZmbe = 0
+    for (const id of tokenIds) {
+        const tokens = await getDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateEarnings(id).call()
+        pendingZmbe += Number(ethers.utils.formatUnits(tokens))
+    }
+    return pendingZmbe
+}
+
+export const getPendingCake = async (address: string) => {
+    const balance = await getEternalCakesMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.balanceOf(address).call()
+    const tokenIds = []
+    for (let i = 0; i < Number(balance); i++) {
+        // @ts-ignore
+        const token = await getEternalCakesMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.tokenOfOwnerByIndex(address, i).call()
+        tokenIds.push(token)
+    }
+    let pendingCake = 0
+    for (const id of tokenIds) {
+        const tokens = await getEternalCakesDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateEarnings(id).call()
+        pendingCake += Number(ethers.utils.formatUnits(tokens))
+    }
+    return pendingCake
 }
 
 /**

@@ -1,5 +1,12 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import {getCakePoolApr, getCakeYield, getMainstYield, getZmbeTombApr, getZmbeYield} from '../../utils/apr';
+import {
+    getCakePoolApr,
+    getCakeYield,
+    getMainstYield, getPendingCake,
+    getPendingMainst, getPendingZmbe,
+    getZmbeTombApr,
+    getZmbeYield
+} from '../../utils/apr';
 
 const defaultState = {
     userData: {
@@ -23,7 +30,7 @@ const defaultState = {
 
 export const updateRugzombiePancakeswapTombApr = createAsyncThunk(
     "ACCOUNT/UPDATE_ZMBE_BNB_POOL_APR",
-    ()=> {
+    () => {
         return new Promise<void>((resolve, reject) => {
             // @ts-ignore
             resolve(getZmbeTombApr());
@@ -33,7 +40,7 @@ export const updateRugzombiePancakeswapTombApr = createAsyncThunk(
 
 export const updateZmbeYield = createAsyncThunk(
     "ACCOUNT/UPDATE_ZMBE_YIELD",
-    ()=> {
+    () => {
         return new Promise<void>((resolve, reject) => {
             // @ts-ignore
             resolve(getZmbeYield());
@@ -43,7 +50,7 @@ export const updateZmbeYield = createAsyncThunk(
 
 export const updateCakeYield = createAsyncThunk(
     "ACCOUNT/UPDATE_CAKE_YIELD",
-    ()=> {
+    () => {
         return new Promise<void>((resolve, reject) => {
             // @ts-ignore
             resolve(getCakeYield());
@@ -53,7 +60,7 @@ export const updateCakeYield = createAsyncThunk(
 
 export const updateMainstYield = createAsyncThunk(
     "ACCOUNT/UPDATE_MAINST_YIELD",
-    ()=> {
+    () => {
         return new Promise<void>((resolve, reject) => {
             // @ts-ignore
             resolve(getMainstYield());
@@ -63,7 +70,7 @@ export const updateMainstYield = createAsyncThunk(
 
 export const updateCakePoolApr = createAsyncThunk(
     "ACCOUNT/UPDATE_CAKE_BNB_POOL_APR",
-    ()=> {
+    () => {
         return new Promise<void>((resolve, reject) => {
             // @ts-ignore
             resolve(getCakePoolApr());
@@ -73,7 +80,7 @@ export const updateCakePoolApr = createAsyncThunk(
 
 export const updateAccount = createAsyncThunk(
     "ACCOUNT/UPDATE",
-    ( address,thunkAPI) => {
+    (address, thunkAPI) => {
         return new Promise<void>((resolve, reject) => {
             resolve(address);
         });
@@ -91,9 +98,14 @@ export const updateWeb3Provider = createAsyncThunk(
 
 export const updatePendingZmbe = createAsyncThunk(
     "ACCOUNT/UPDATE_PENDING_ZMBE",
-    (zmbe: any,) => {
+    (address: any,) => {
         return new Promise<void>((resolve, reject) => {
-            resolve(zmbe)
+            getPendingZmbe(address)
+                .then(res => {
+                        // @ts-ignore
+                        resolve(res)
+                    }
+                )
         })
     }
 )
@@ -109,18 +121,27 @@ export const updateTvl = createAsyncThunk(
 
 export const updatePendingCake = createAsyncThunk(
     "ACCOUNT/UPDATE_PENDING_CAKE",
-    (cake: any,) => {
+    (address: any,) => {
         return new Promise<void>((resolve, reject) => {
-            resolve(cake)
+            getPendingCake(address)
+                .then(res => {
+                        // @ts-ignore
+                        resolve(res)
+                    }
+                )
         })
     }
 )
 
 export const updatePendingMainst = createAsyncThunk(
     "ACCOUNT/UPDATE_PENDING_MAINST",
-    (mainst: any,) => {
+    (address: any,) => {
         return new Promise<void>((resolve, reject) => {
-            resolve(mainst)
+            getPendingMainst(address)
+                .then(res => {
+                    // @ts-ignore
+                    resolve(res);
+                })
         })
     }
 )
@@ -149,15 +170,14 @@ const createAccountSlice = createSlice({
             state.web3Provider = payload
         },
         [updatePendingZmbe.fulfilled.toString()]: (state, {payload}) => {
-            state.userData.pendingZmbe += payload
+            state.userData.pendingZmbe = payload
         },
         [updatePendingCake.fulfilled.toString()]: (state, {payload}) => {
-            state.userData.pendingCake += payload
+            state.userData.pendingCake = payload
         },
         [updatePendingMainst.fulfilled.toString()]: (state, {payload}) => {
-            state.userData.pendingMainst += payload
+            state.userData.pendingMainst = payload
         },
-
         [updateTvl.fulfilled.toString()]: (state, {payload}) => {
             if (state.tvl === 0) {
                 state.tvl = payload
