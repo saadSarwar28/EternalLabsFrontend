@@ -79,7 +79,7 @@ export const EzClaimCard = () => {
             <div className={styles.mintCardAmounts}>
                 <div className={styles.mintCardNormalPrice}>
                     <p className={styles.mintCardTotalMinted}>Total ZMBE earned</p>
-                    <p className={styles.mintCardTotalMinted}>{userData.pendingZmbe} ZMBE</p>
+                    <p className={styles.mintCardTotalMinted}>{userData.pendingZmbe.toFixed(2)} ZMBE</p>
                 </div>
             </div>
             {
