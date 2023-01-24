@@ -18,7 +18,7 @@ const ADDRESSES = {
         },
     'DISTRIBUTOR':
         {
-            '56': '0x16767767F157f1BdB2d3a354AfddeA5Fb0D052dE',
+            '56': '0x9F56910342901Df65deB482256e8ec2d099E6771',
             '97': '0xC2d2b5C41ce81d400BDDfDD323615680dB90EA0a',
         },
     'DR_FRANKENSTEIN':
