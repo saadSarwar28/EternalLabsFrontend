@@ -61,7 +61,7 @@ export const getPendingMainst = async (address: string) => {
     const amount = await getMoneyMonkeysDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateAllEarned().call({
         'from': address,
     })
-    return Number(ethers.utils.formatUnits(amount))
+    return Number(ethers.utils.formatUnits(amount, 9))
 }
 
 export const getPendingZmbe = async (address: string) => {

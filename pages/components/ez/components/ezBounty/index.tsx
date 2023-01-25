@@ -166,43 +166,44 @@ export const EzBountyCard: React.FC = () => {
     return (
         <div className={styles.bountyCardWrapper}>
             <div className={styles.bountyCard}>
-                <ToastContainer/>
-                <p className={styles.bountyCardAnnouncement}>$ZMBE Bounty!</p>
-                {
-                    // @ts-ignore
-                    bountyTime > 0 ? <BountyTimer endTs={bountyTime} callback={timerCallbackHandler}></BountyTimer> : null
-                }
-                {
-                    userData.walletConnected ?
-                        <>
-                            <div className={styles.ezBountyClaimCardButtons}>
-                                <p className={styles.bountyCardText}>Be the first one to claim!</p>
-                                <button onClick={claim} disabled={isLoading} className={styles.connectWalletButton}>
-                                    {
-                                        isLoading ? <Loader/> :
-                                            <span>Claim</span>
-                                    }
-                                </button>
-                            </div>
-                            {
-                                ezBalance < 1 && !ticketPurchased ?
-                                    <div className={styles.ezBountyClaimCardButtons}>
-                                        <p className={styles.bountyCardText}>Buy Ticket to be able to claim bounty!</p>
-                                        <button onClick={buyTicket} disabled={ticketPurchaseLoading}
-                                                className={styles.connectWalletButton}>
-                                            {
-                                                ticketPurchaseLoading ? <Loader/> :
-                                                    <span>Buy Ticket</span>
-                                            }
-                                        </button>
-                                    </div> : null
-                            }
-                        </>
-                        :
-                        <div className={styles.ezBountyClaimCardButtons}>
-                            <p className={styles.bountyCardText}>Please connect your wallet to claim!</p>
-                        </div>
-                }
+                <p className={styles.bountyCardAnnouncement} style={{margin: 'auto', marginTop: '10px', marginBottom: '10px'}}>Bounty under upgrade!</p>
+                {/*<ToastContainer/>*/}
+                {/*<p className={styles.bountyCardAnnouncement}>$ZMBE Bounty!</p>*/}
+                {/*{*/}
+                {/*    // @ts-ignore*/}
+                {/*    bountyTime > 0 ? <BountyTimer endTs={bountyTime} callback={timerCallbackHandler}></BountyTimer> : null*/}
+                {/*}*/}
+                {/*{*/}
+                {/*    userData.walletConnected ?*/}
+                {/*        <>*/}
+                {/*            <div className={styles.ezBountyClaimCardButtons}>*/}
+                {/*                <p className={styles.bountyCardText}>Be the first one to claim!</p>*/}
+                {/*                <button onClick={claim} disabled={isLoading} className={styles.connectWalletButton}>*/}
+                {/*                    {*/}
+                {/*                        isLoading ? <Loader/> :*/}
+                {/*                            <span>Claim</span>*/}
+                {/*                    }*/}
+                {/*                </button>*/}
+                {/*            </div>*/}
+                {/*            {*/}
+                {/*                ezBalance < 1 && !ticketPurchased ?*/}
+                {/*                    <div className={styles.ezBountyClaimCardButtons}>*/}
+                {/*                        <p className={styles.bountyCardText}>Buy Ticket to be able to claim bounty!</p>*/}
+                {/*                        <button onClick={buyTicket} disabled={ticketPurchaseLoading}*/}
+                {/*                                className={styles.connectWalletButton}>*/}
+                {/*                            {*/}
+                {/*                                ticketPurchaseLoading ? <Loader/> :*/}
+                {/*                                    <span>Buy Ticket</span>*/}
+                {/*                            }*/}
+                {/*                        </button>*/}
+                {/*                    </div> : null*/}
+                {/*            }*/}
+                {/*        </>*/}
+                {/*        :*/}
+                {/*        <div className={styles.ezBountyClaimCardButtons}>*/}
+                {/*            <p className={styles.bountyCardText}>Please connect your wallet to claim!</p>*/}
+                {/*        </div>*/}
+                {/*}*/}
             </div>
         </div>
     )
