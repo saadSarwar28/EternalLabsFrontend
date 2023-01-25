@@ -58,19 +58,10 @@ export const getMainstYield = async () => {
 }
 
 export const getPendingMainst = async (address: string) => {
-    const balance = await getMoneyMonkeysMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.balanceOf(address).call()
-    const tokenIds = []
-    for (let i = 0; i < Number(balance); i++) {
-        // @ts-ignore
-        const token = await getMoneyMonkeysMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.tokenOfOwnerByIndex(address, i).call()
-        tokenIds.push(token)
-    }
-    let pendingMainst = 0
-    for (const id of tokenIds) {
-        const tokens = await getMoneyMonkeysDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateEarnings(id).call()
-        pendingMainst += Number(ethers.utils.formatUnits(tokens, 9))
-    }
-    return pendingMainst
+    const amount = await getMoneyMonkeysDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateAllEarned().call({
+        'from': address,
+    })
+    return Number(ethers.utils.formatUnits(amount))
 }
 
 export const getPendingZmbe = async (address: string) => {
