@@ -81,19 +81,10 @@ export const getPendingZmbe = async (address: string) => {
 }
 
 export const getPendingCake = async (address: string) => {
-    const balance = await getEternalCakesMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.balanceOf(address).call()
-    const tokenIds = []
-    for (let i = 0; i < Number(balance); i++) {
-        // @ts-ignore
-        const token = await getEternalCakesMinterNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.tokenOfOwnerByIndex(address, i).call()
-        tokenIds.push(token)
-    }
-    let pendingCake = 0
-    for (const id of tokenIds) {
-        const tokens = await getEternalCakesDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateEarnings(id).call()
-        pendingCake += Number(ethers.utils.formatUnits(tokens))
-    }
-    return pendingCake
+    const amount = await getEternalCakesDistributorNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.calculateAllEarned().call({
+        'from': address,
+    })
+    return Number(ethers.utils.formatUnits(amount))
 }
 
 /**

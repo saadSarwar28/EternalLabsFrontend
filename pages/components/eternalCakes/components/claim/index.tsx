@@ -82,7 +82,7 @@ export const EcClaimCard = () => {
             <div className={styles.mintCardAmounts}>
                 <div className={styles.mintCardNormalPrice}>
                     <p className={styles.mintCardTotalMinted}>Total CAKE earned</p>
-                    <p className={styles.mintCardTotalMinted}>{userData.pendingCake} CAKE</p>
+                    <p className={styles.mintCardTotalMinted}>{userData.pendingCake.toFixed(2)} CAKE</p>
                 </div>
             </div>
             {
