@@ -126,6 +126,15 @@ export const getMoneyMonkeysDistributorAddress = (chainId: any) => {
     return ADDRESSES.MONEY_MONKEYS_DISTRIBUTOR[chainId]
 }
 
+export const getMoneyMonkeysStakerAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.MONEY_MONKEYS_STAKER['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.MONEY_MONKEYS_STAKER[chainId]
+}
+
 export const getMoneyMonkeysBountyAddress = (chainId: any) => {
     if (chainId === 0) {
         // return mainnet if chain id not initialized yet
@@ -142,6 +151,15 @@ export const getPancakeMasterchefAddress = (chainId: any) => {
     }
     // @ts-ignore
     return ADDRESSES.PANCAKE_MASTERCHEF[chainId]
+}
+
+export const getRewardApeAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.BEP20_REWARD_APE['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.BEP20_REWARD_APE[chainId]
 }
 
 export const getCakeAddress = (chainId: any) => {
@@ -161,3 +179,13 @@ export const getZmbeAddress = (chainId: any) => {
     // @ts-ignore
     return ADDRESSES.tokens.ZMBE[chainId]
 }
+
+export const getBountyTicketsAddress = (chainId: any) => {
+    if (chainId === 0) {
+        // return mainnet if chain id not initialized yet
+        return ADDRESSES.BOUNTY_TICKETS['56']
+    }
+    // @ts-ignore
+    return ADDRESSES.BOUNTY_TICKETS[chainId]
+}
+

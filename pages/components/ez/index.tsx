@@ -29,7 +29,7 @@ export const Ez = () => {
                 <div className={styles.containerCard}>
                     <div className={styles.header}>
                         <EzNavbar/>
-                        <EzBountyCard/>
+                        {/*<EzBountyCard/>*/}
                         <EzHeader/>
                     </div>
                 </div>

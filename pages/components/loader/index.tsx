@@ -6,7 +6,7 @@ export const Loader = () => {
     const loaderColor = '#2AB6A0'
 
     return (
-        <ScaleLoader color={loaderColor} width={10} height={25}/>
+        <ScaleLoader color={loaderColor} width={10} height={35}/>
     )
 }
 

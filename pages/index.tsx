@@ -20,6 +20,7 @@ import {
 } from '../reduxStore/accountSlice';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../reduxStore';
+import Bounty from './components/bounty';
 
 
 const Home: NextPage = () => {
@@ -53,6 +54,7 @@ const Home: NextPage = () => {
                 <div className={styles.containerCard}>
                     <Navbar/>
                     <Header/>
+                    <Bounty/>
                     <Collections/>
                     <Pools/>
                     {/*<Roadmap/>*/}

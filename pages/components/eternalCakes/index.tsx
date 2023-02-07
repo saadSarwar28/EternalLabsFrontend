@@ -29,7 +29,7 @@ export const EternalCakes = () => {
                 <div className={styles.containerCard}>
                     <div className={styles.header}>
                         <EcNavbar/>
-                        <EcBountyCard/>
+                        {/*<EcBountyCard/>*/}
                         <EcHeader/>
                     </div>
                 </div>

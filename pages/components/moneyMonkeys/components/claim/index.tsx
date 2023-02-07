@@ -82,7 +82,15 @@ export const MmClaimCard = () => {
             <div className={styles.mintCardAmounts}>
                 <div className={styles.mintCardNormalPrice}>
                     <p className={styles.mintCardTotalMinted}>Total earned</p>
-                    <p className={styles.mintCardTotalMinted}>{userData.pendingMainst.toFixed(2)} $MAINST</p>
+                    {
+                        mmBalance > 0 ?
+                            <>
+                                <p className={styles.mintCardTotalMinted}>{userData.pendingMainst.toFixed(2)} $MAINST</p>
+                            </> :
+                            <>
+                                <p className={styles.mintCardTotalMinted}>0.00 $MAINST</p>
+                            </>
+                    }
                 </div>
             </div>
             {

@@ -25,12 +25,12 @@
   },
   {
     "inputs": [],
-    "name": "BOUNTY_DISCHARGED",
+    "name": "BANANA",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "address",
         "name": "",
-        "type": "uint256"
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -51,7 +51,33 @@
   },
   {
     "inputs": [],
-    "name": "BOUNTY_PERCENTAGE",
+    "name": "BOUNTY_TICKETS",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "CAKE",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "CAKE_BOUNTY_PERCENTAGE",
     "outputs": [
       {
         "internalType": "uint256",
@@ -64,7 +90,72 @@
   },
   {
     "inputs": [],
-    "name": "DISTRIBUTOR",
+    "name": "ETERNAL_CAKES_DISTRIBUTOR",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ETERNAL_CAKES_MINTER",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ETERNAL_CAKES_STAKER",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ETERNAL_ZOMBIES_DISTRIBUTOR",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ETERNAL_ZOMBIES_MINTER",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ETERNAL_ZOMBIES_STAKER",
     "outputs": [
       {
         "internalType": "address",
@@ -90,7 +181,7 @@
   },
   {
     "inputs": [],
-    "name": "LAST_COMPOUNDED_BY",
+    "name": "LAST_CLAIMED_BY",
     "outputs": [
       {
         "internalType": "address",
@@ -103,7 +194,7 @@
   },
   {
     "inputs": [],
-    "name": "MINTER",
+    "name": "MONEY_MONKEYS_DISTRIBUTOR",
     "outputs": [
       {
         "internalType": "address",
@@ -116,7 +207,7 @@
   },
   {
     "inputs": [],
-    "name": "PRICE_CONSUMER",
+    "name": "MONEY_MONKEYS_MINTER",
     "outputs": [
       {
         "internalType": "address",
@@ -129,7 +220,7 @@
   },
   {
     "inputs": [],
-    "name": "STAKER",
+    "name": "MONEY_MONKEYS_STAKER",
     "outputs": [
       {
         "internalType": "address",
@@ -180,6 +271,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "ZMBE_BOUNTY_PERCENTAGE",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -200,7 +304,7 @@
         "type": "uint256"
       }
     ],
-    "name": "adjustBountyPercentage",
+    "name": "adjustCakeBountyPercentage",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -216,6 +320,38 @@
     "name": "adjustTicketPrice",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "percentage",
+        "type": "uint256"
+      }
+    ],
+    "name": "adjustZmbeBountyPercentage",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "claimant",
+        "type": "address"
+      }
+    ],
+    "name": "checkClaimable",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -253,66 +389,7 @@
   },
   {
     "inputs": [],
-    "name": "purchaseTicket",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "distributor",
-        "type": "address"
-      }
-    ],
-    "name": "setDistributor",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "minter",
-        "type": "address"
-      }
-    ],
-    "name": "setMinter",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "priceConsumer",
-        "type": "address"
-      }
-    ],
-    "name": "setPriceConsumer",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "staker",
-        "type": "address"
-      }
-    ],
-    "name": "setStaker",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -328,19 +405,6 @@
     "name": "setTreasury",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "ticketPrice",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -384,7 +448,7 @@
   },
   {
     "inputs": [],
-    "name": "withdrawRemainingZmbe",
+    "name": "withdrawRemainingCake",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

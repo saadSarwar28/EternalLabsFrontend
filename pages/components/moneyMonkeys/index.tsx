@@ -29,7 +29,7 @@ export const MoneyMonkeys = () => {
                 <div className={styles.containerCard}>
                     <div className={styles.header}>
                         <MmNavbar/>
-                        <MmBountyCard/>
+                        {/*<MmBountyCard/>*/}
                         <MmHeader/>
                     </div>
                 </div>
