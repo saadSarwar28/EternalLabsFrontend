@@ -3,7 +3,6 @@ import React from 'react';
 import {EcNavbar} from './components/ecNavbar';
 import {EcHeader} from './components/ecHeader';
 import {Footer} from '../footer';
-import EcBountyCard from './components/ecBounty';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCreateAccountState, updatePendingCake} from '../../../reduxStore/accountSlice';
 

@@ -3,7 +3,6 @@ import React from 'react';
 import {EzNavbar} from './components/ezNavbar';
 import {EzHeader} from './components/ezHeader';
 import {Footer} from '../footer';
-import EzBountyCard from './components/ezBounty';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCreateAccountState, updatePendingZmbe} from '../../../reduxStore/accountSlice';
 
@@ -29,7 +28,6 @@ export const Ez = () => {
                 <div className={styles.containerCard}>
                     <div className={styles.header}>
                         <EzNavbar/>
-                        {/*<EzBountyCard/>*/}
                         <EzHeader/>
                     </div>
                 </div>

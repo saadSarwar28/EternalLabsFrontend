@@ -3,7 +3,6 @@ import React from 'react';
 import {Footer} from '../footer';
 import MmNavbar from './components/mmNavbar';
 import MmHeader from './components/mmHeader';
-import MmBountyCard from './components/mmBounty';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectCreateAccountState, updatePendingMainst} from '../../../reduxStore/accountSlice';
 
@@ -29,7 +28,6 @@ export const MoneyMonkeys = () => {
                 <div className={styles.containerCard}>
                     <div className={styles.header}>
                         <MmNavbar/>
-                        {/*<MmBountyCard/>*/}
                         <MmHeader/>
                     </div>
                 </div>
