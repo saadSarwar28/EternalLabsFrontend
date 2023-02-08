@@ -187,7 +187,7 @@ export const Collections = () => {
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
                                     <span
-                                        className={collectionStyles.detailsRight} title="Per Distribution cycle">{zmbeYield.toFixed(2)} ZMBE / 4 Days</span>
+                                        className={collectionStyles.detailsRight} title="Per Distribution cycle">{zmbeYield.toFixed(2)} ZMBE / Day</span>
                                 </div>
                             </div>
                             {/*<div className={collectionStyles.detailsRow}>*/}
@@ -222,7 +222,7 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsLeft}>Compounds every</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight}>4 Days</span>
+                                    <span className={collectionStyles.detailsRight}>3 Days</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
@@ -313,7 +313,7 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsLeft}>Yield</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight} title="Per Distribution cycle">{cakeYield.toFixed(4)} CAKE / 4 Days</span>
+                                    <span className={collectionStyles.detailsRight} title="Per Distribution cycle">{cakeYield.toFixed(4)} CAKE / Day</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
@@ -331,7 +331,7 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsLeft}>Compounds every</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight}>4 Days</span>
+                                    <span className={collectionStyles.detailsRight}>3 Days</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
@@ -419,7 +419,7 @@ export const Collections = () => {
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
                                     <span
-                                        className={collectionStyles.detailsRight} title="Per Distribution cycle">{mainstYield.toFixed(2)} $MAINST / 3 Days</span>
+                                        className={collectionStyles.detailsRight} title="Per Distribution cycle">{mainstYield.toFixed(0)} $MAINST / Day</span>
                                 </div>
                             </div>
                             {/*<div className={collectionStyles.detailsRow}>*/}

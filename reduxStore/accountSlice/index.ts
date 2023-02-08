@@ -4,7 +4,6 @@ import {
     getCakeYield,
     getMainstYield, getPendingCake,
     getPendingMainst, getPendingZmbe,
-    getZmbeTombApr,
     getZmbeYield
 } from '../../utils/apr';
 

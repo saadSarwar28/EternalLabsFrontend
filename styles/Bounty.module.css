@@ -119,3 +119,139 @@
 }
 
 
+@media only screen and (max-width: 1375px) {
+    .bountyCardAnnouncement {
+        font-size: xx-large;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .bountyCardAnnouncement {
+        font-size: x-large;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+
+    .bountyCard {
+        padding: 4% 1%;
+        flex-direction: column;
+    }
+
+    .bountyCardAnnouncement {
+        font-size: x-large;
+        flex-direction: row;
+        width: auto;
+        justify-content: center;
+    }
+
+    .bountyCardText {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
+
+    .connectWalletButton {
+        margin-top: 20px;
+        align-self: center;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+    .bountyCard {
+        width: 90%;
+    }
+
+    .bountyCardAnnouncement {
+        font-size: large;
+        margin-bottom: 0px;
+    }
+
+    .bountyCardAmounts {
+        font-size: small;
+    }
+
+    .bountyCardWrapper {
+        padding: 10% 0%;
+    }
+
+    .connectWalletButton {
+        margin-top: 20px;
+        align-self: center;
+    }
+
+    .bountyCard {
+        padding: 5% 1%;
+        flex-direction: column;
+    }
+
+    .bountyCardNote {
+        font-size: small;
+        text-align: center;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 0px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+
+    .connectWalletButton {
+        margin-top: 10px;
+        align-self: center;
+    }
+
+    .bountyCardWrapper {
+        padding: 10% 0%;
+    }
+
+    .bountyCard {
+        padding: 5% 1%;
+        flex-direction: column;
+    }
+
+    .bountyCardAnnouncement {
+        font-size: large;
+        flex-direction: row;
+        width: auto;
+        justify-content: center;
+    }
+
+    .bountyCardText {
+        margin-top: 15px;
+        font-size: 14px;
+        margin-bottom: 0px;
+    }
+
+    .ezBountyClaimCardButtons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+    }
+
+    .bountyCardAmounts {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        font-weight: 500;
+        margin: 0px;
+        font-size: medium;
+        /*width: 33%;*/
+        white-space: nowrap;
+        align-self: center;
+        text-align: center;
+    }
+
+    .bountyCardNote {
+        text-align: center;
+    }
+
+}

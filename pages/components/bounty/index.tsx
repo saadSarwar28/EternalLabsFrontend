@@ -105,14 +105,18 @@ export const EzBountyCard: React.FC = () => {
     const updateCakeAmount = () => {
         getPancakeMasterchefNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.pendingCake(CONSTANTS.CAKE_POOL_ID, CONSTANTS.ETERNAL_CAKES_FARM_BOOSTER_PROXY).call()
             .then((res: any) => {
-                setCake((Number(ethers.utils.formatUnits(res)) * 50) / 100)
+                let amount = Number(ethers.utils.formatUnits(res))
+                amount = amount - ((amount * 12) / 100)
+                setCake((amount * 50) / 100)
             })
     }
 
     const updateZmbeAmount = () => {
         getDrFrankensteinNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.pendingZombie(CONSTANTS.EZ_POOL_ID, getStakerAddress(process.env.NEXT_PUBLIC_CHAIN_ID)).call()
             .then((res: any) => {
-                setZmbe((Number(ethers.utils.formatUnits(res)) * 50) / 100)
+                let amount = Number(ethers.utils.formatUnits(res))
+                amount = amount - ((amount * 13) / 100)
+                setZmbe((amount * 50) / 100)
             })
     }
 
@@ -473,7 +477,15 @@ export const EzBountyCard: React.FC = () => {
             <div className={styles.bountyCard}>
                 <ToastContainer/>
                 <p className={styles.bountyCardAnnouncement}>EternalLabs Triple Bounty!</p><br/>
-                <p className={styles.bountyCardAmounts}>~{zmbe.toFixed(2)} ZMBE &nbsp;&nbsp;&nbsp; ~{cake.toFixed(3)} CAKE &nbsp;&nbsp;&nbsp; ~{banana.toFixed(2)} BANANA</p>
+                {
+                    isMobile ?
+                        <>
+                            <p className={styles.bountyCardAmounts}>~{zmbe.toFixed(2)} ZMBE <br/> ~{cake.toFixed(3)} CAKE <br/> ~{banana.toFixed(2)} BANANA</p>
+                        </> :
+                        <>
+                            <p className={styles.bountyCardAmounts}>~{zmbe.toFixed(2)} ZMBE &nbsp;&nbsp;&nbsp; ~{cake.toFixed(3)} CAKE &nbsp;&nbsp;&nbsp; ~{banana.toFixed(2)} BANANA</p>
+                        </>
+                }
                 <p className={styles.bountyCardNote}>Note :- Exact token amounts depend on transaction confirmation time!</p><br/>
                 {
                     // @ts-ignore

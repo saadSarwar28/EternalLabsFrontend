@@ -24,6 +24,7 @@ const TimerBoxText = styled.p`
   justify-content: center;
   font-weight: 700;
   margin-bottom: 10px;
+  margin-top: 0px;
 `
 
 const TimerBox = styled.p`
