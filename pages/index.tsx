@@ -47,6 +47,7 @@ const Home: NextPage = () => {
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
                 <link rel="preconnect" href="https://fonts.gstatic.com"/>
                 <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"/>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8271132260511114" crossOrigin="anonymous"></script>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
             </Head>
