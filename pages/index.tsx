@@ -52,13 +52,13 @@ const Home: NextPage = () => {
                 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
                 <!-- Google tag (gtag.js) -->
                 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5PGE5NR15"></script>
-                <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
+                {/*<script>*/}
+                {/*    window.dataLayer = window.dataLayer || [];*/}
+                {/*    function gtag(){dataLayer.push(arguments);}*/}
+                {/*    gtag('js', new Date());*/}
 
-                    gtag('config', 'G-J5PGE5NR15');
-                </script>
+                {/*    gtag('config', 'G-J5PGE5NR15');*/}
+                {/*</script>*/}
             </Head>
             <main className={styles.main}>
                 <div className={styles.containerCard}>
