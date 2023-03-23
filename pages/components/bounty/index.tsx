@@ -14,9 +14,9 @@ import {
 } from '../../../reduxStore/accountSlice';
 import {
     getBountyNoWallet,
-    getBountyTicketsNoWallet, getDrFrankensteinNoWallet,
+    getBountyTicketsNoWallet, getCakeNoWallet, getDrFrankensteinNoWallet,
     getMinterNoWallet,
-    getPancakeMasterchefNoWallet, getRewardApeNoWallet
+    getPancakeMasterchefNoWallet, getRewardApeNoWallet, getZmbeNoWallet
 } from '../../../utils/web3NoWallet';
 import {
     getBountyAddress, getBountyTicketsAddress,
@@ -102,22 +102,24 @@ export const EzBountyCard: React.FC = () => {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [timeoutSet, setTimeoutSet] = useState(false)
 
-    const updateCakeAmount = () => {
-        getPancakeMasterchefNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.pendingCake(CONSTANTS.CAKE_POOL_ID, CONSTANTS.ETERNAL_CAKES_FARM_BOOSTER_PROXY).call()
-            .then((res: any) => {
-                let amount = Number(ethers.utils.formatUnits(res))
-                amount = amount - ((amount * 12) / 100)
-                setCake((amount * 50) / 100)
-            })
+    const updateCakeAmount = async () => {
+        const masterchef = getPancakeMasterchefNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
+        const cakePending = await masterchef.methods.pendingCake(CONSTANTS.CAKE_POOL_ID, CONSTANTS.ETERNAL_CAKES_FARM_BOOSTER_PROXY).call()
+        const cakeContract = getCakeNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
+        const cakeInStaker = await cakeContract.methods.balanceOf(getEternalCakesStakerAddress(process.env.NEXT_PUBLIC_CHAIN_ID)).call()
+        const totalCake = Number(ethers.utils.formatUnits(cakePending)) + Number(ethers.utils.formatUnits(cakeInStaker))
+        const amount = totalCake - ((totalCake * 12) / 100)
+        setCake((amount * 50) / 100)
     }
 
-    const updateZmbeAmount = () => {
-        getDrFrankensteinNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.pendingZombie(CONSTANTS.EZ_POOL_ID, getStakerAddress(process.env.NEXT_PUBLIC_CHAIN_ID)).call()
-            .then((res: any) => {
-                let amount = Number(ethers.utils.formatUnits(res))
-                amount = amount - ((amount * 13) / 100)
-                setZmbe((amount * 50) / 100)
-            })
+    const updateZmbeAmount = async () => {
+        const frankenstein = getDrFrankensteinNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
+        const zmbePending = await frankenstein.methods.pendingZombie(CONSTANTS.EZ_POOL_ID, getStakerAddress(process.env.NEXT_PUBLIC_CHAIN_ID)).call()
+        const zmbeContract = getZmbeNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
+        const zmbeInStaker = await zmbeContract.methods.balanceOf(getStakerAddress(process.env.NEXT_PUBLIC_CHAIN_ID)).call()
+        const totalZmbe = Number(ethers.utils.formatUnits(zmbePending)) + Number(ethers.utils.formatUnits(zmbeInStaker))
+        const amount = totalZmbe - ((totalZmbe * 13) / 100)
+        setZmbe((amount * 50) / 100)
     }
 
     const updateBananaAmount = () => {
@@ -489,7 +491,7 @@ export const EzBountyCard: React.FC = () => {
                 <p className={styles.bountyCardNote}>Note :- Exact token amounts depend on transaction confirmation time!</p><br/>
                 {
                     // @ts-ignore
-                    bountyTime > 0 ? <BountyTimer endTs={bountyTime} callback={timerCallbackHandler}></BountyTimer> : null
+                    bountyTime > 0 ? <BountyTimer endTs={bountyTime} callback={timerCallbackHandler}/> : null
                 }
                 {
                     userData.walletConnected ?
