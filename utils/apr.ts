@@ -17,7 +17,12 @@ import {
 import {ethers} from 'ethers';
 import {getCakeBnbLpTokenValue, getZmbeBnbLpTokenValue} from './lpPrice';
 import ADDRESSES from './contractAddresses';
-import {getMoneyMonkeysStakerAddress, getPancakeMasterchefAddress, getStakerAddress} from './getContractAddress';
+import {
+    getEternalCakesStakerAddress,
+    getMoneyMonkeysStakerAddress,
+    getPancakeMasterchefAddress,
+    getStakerAddress
+} from './getContractAddress';
 import {getTokenPriceFromCoinGecko} from './fetch';
 
 // export const getZmbeTombApr = async () => {
@@ -41,22 +46,26 @@ export const getZmbeYield = async () => {
     const bounty = getBountyNoWallet()
     const drFrankenstein = getDrFrankensteinNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
     const zmbe = await drFrankenstein.methods.pendingZombie(CONSTANTS.EZ_POOL_ID, getStakerAddress(process.env.NEXT_PUBLIC_CHAIN_ID)).call()
+    const zmbe_contract = getZmbeNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
+    const zmbe_in_staker = await zmbe_contract.methods.balanceOf(getStakerAddress(process.env.NEXT_PUBLIC_CHAIN_ID)).call()
     const last_claimed = await bounty.methods.LAST_CLAIMED().call()
     // @ts-ignore
     const now = parseInt(new Date / 1000)
     const timeDiff = now - last_claimed
-    return ((Number(ethers.utils.formatUnits(zmbe)) / timeDiff) * 86400)
+    return (((Number(ethers.utils.formatUnits(zmbe)) + Number(ethers.utils.formatUnits(zmbe_in_staker))) / timeDiff) * 86400)
 }
 
 export const getCakeYield = async () => {
     const bounty = getBountyNoWallet()
     const masterchef = getPancakeMasterchefNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
     const cake = await masterchef.methods.pendingCake(CONSTANTS.CAKE_POOL_ID, CONSTANTS.ETERNAL_CAKES_FARM_BOOSTER_PROXY).call()
+    const cake_contract = getCakeNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID)
+    const cake_in_staker = await cake_contract.methods.balanceOf(getEternalCakesStakerAddress(process.env.NEXT_PUBLIC_CHAIN_ID)).call()
     const last_claimed = await bounty.methods.LAST_CLAIMED().call()
     // @ts-ignore
     const now = parseInt(new Date / 1000)
     const timeDiff = now - last_claimed
-    return ((Number(ethers.utils.formatUnits(cake)) / timeDiff) * 86400)
+    return (((Number(ethers.utils.formatUnits(cake)) + Number(ethers.utils.formatUnits(cake_in_staker))) / timeDiff) * 86400)
 }
 
 export const getMainstYield = async () => {

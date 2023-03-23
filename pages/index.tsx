@@ -1,5 +1,5 @@
 import type {NextPage} from 'next'
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head'
@@ -21,17 +21,12 @@ import {
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../reduxStore';
 import Bounty from './components/bounty';
+import {getZmbeYield} from '../utils/apr';
 
 
 const Home: NextPage = () => {
 
     const dispatch = useDispatch<AppDispatch>();
-    // dispatch(
-    //     updateRugzombiePancakeswapTombApr()
-    // )
-    // dispatch(
-    //     updateCakePoolApr()
-    // )
     dispatch(updateZmbeYield())
     dispatch(updateCakeYield())
     dispatch(updateMainstYield())
@@ -50,15 +45,7 @@ const Home: NextPage = () => {
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8271132260511114" crossOrigin="anonymous"></script>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-                <!-- Google tag (gtag.js) -->
                 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5PGE5NR15"></script>
-                {/*<script>*/}
-                {/*    window.dataLayer = window.dataLayer || [];*/}
-                {/*    function gtag(){dataLayer.push(arguments);}*/}
-                {/*    gtag('js', new Date());*/}
-
-                {/*    gtag('config', 'G-J5PGE5NR15');*/}
-                {/*</script>*/}
             </Head>
             <main className={styles.main}>
                 <div className={styles.containerCard}>
