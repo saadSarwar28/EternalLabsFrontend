@@ -9,7 +9,7 @@ import contractIcon from '../../../public/file-contract-solid.svg'
 import background from "../../../public/gradient-blue-background.png"
 import {useRouter} from 'next/router'
 import {getEternalCakesMinterAddress, getStakerAddress, getMinterAddress} from '../../../utils/getContractAddress';
-import {getDrFrankensteinNoWallet, getPancakeMasterchefNoWallet} from '../../../utils/web3NoWallet';
+import {getBountyNoWallet, getDrFrankensteinNoWallet, getPancakeMasterchefNoWallet} from '../../../utils/web3NoWallet';
 import constants from '../../../utils/constants';
 import {weiToNumber} from '../../../utils/units';
 import Link from 'next/link';
@@ -35,8 +35,17 @@ export const Collections = () => {
     const [totalEcTokens, setTotalEcTokens] = useState(0)
     const [eZTokenWorth, setEzTokenWorth] = useState(0)
     const [eCTokenWorth, setEcTokenWorth] = useState(0)
-
+    const [compoundingDuration, setCompoundingDuration] = useState('')
     const {zmbeBnbPoolApr, cakeBnbPoolApr, zmbeYield, cakeYield, mainstYield} = useSelector(selectCreateAccountState)
+
+    useEffect(() => {
+        if (compoundingDuration == '') {
+            getBountyNoWallet().methods.BOUNTY_DURATION().call()
+                .then((res: any) => {
+                    setCompoundingDuration(String((Number(res) / 60) / 60) + ' Hours')
+                })
+        }
+    }, [])
 
     // @ts-ignore
     const [web3NoWallet, setWeb3NoWallet] = useState(new Web3(process.env.NEXT_PUBLIC_BINANCE_RPC)) // for fetching info
@@ -187,7 +196,8 @@ export const Collections = () => {
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
                                     <span
-                                        className={collectionStyles.detailsRight} title="Per Distribution cycle">{zmbeYield.toFixed(2)} ZMBE / Day</span>
+                                        className={collectionStyles.detailsRight}
+                                        title="Per Distribution cycle">{zmbeYield.toFixed(2)} ZMBE / Day</span>
                                 </div>
                             </div>
                             {/*<div className={collectionStyles.detailsRow}>*/}
@@ -222,7 +232,7 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsLeft}>Compounds every</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight}>2 Days</span>
+                                    <span className={collectionStyles.detailsRight}>{compoundingDuration}</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
@@ -313,7 +323,8 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsLeft}>Pool Yield</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight} title="Per Distribution cycle">{cakeYield.toFixed(4)} CAKE / Day</span>
+                                    <span className={collectionStyles.detailsRight}
+                                          title="Per Distribution cycle">{cakeYield.toFixed(4)} CAKE / Day</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
@@ -331,7 +342,7 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsLeft}>Compounds every</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight}>2 Days</span>
+                                    <span className={collectionStyles.detailsRight}>{compoundingDuration}</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
@@ -419,7 +430,8 @@ export const Collections = () => {
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
                                     <span
-                                        className={collectionStyles.detailsRight} title="Per Distribution cycle">{mainstYield.toFixed(0)} $MAINST / Day</span>
+                                        className={collectionStyles.detailsRight}
+                                        title="Per Distribution cycle">{mainstYield.toFixed(0)} $MAINST / Day</span>
                                 </div>
                             </div>
                             {/*<div className={collectionStyles.detailsRow}>*/}
@@ -454,7 +466,7 @@ export const Collections = () => {
                                     <span className={collectionStyles.detailsLeft}>Compounds every</span>
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
-                                    <span className={collectionStyles.detailsRight}>2 Days</span>
+                                    <span className={collectionStyles.detailsRight}>{compoundingDuration}</span>
                                 </div>
                             </div>
                             {/*<div className={collectionStyles.detailsRow}>*/}

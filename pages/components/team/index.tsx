@@ -6,10 +6,15 @@ export const Team = () => {
 
     const [showCards, setShowCards] = useState(false)
     const [offset, setOffset] = useState(0);
+    const [_isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        setIsMobile(isMobile)
+    }, [])
 
     useEffect(() => {
         if (!showCards) {
-            if (window.pageYOffset > (isMobile ? 4250 : 2300)) {
+            if (window.pageYOffset > (_isMobile ? 4250 : 2300)) {
                 setShowCards(true)
             }
             const onScroll = () => setOffset(window.pageYOffset);
@@ -21,7 +26,7 @@ export const Team = () => {
     }, []);
 
     useEffect(() => {
-        if (offset > (isMobile ? 4250 : 2300)) {
+        if (offset > (_isMobile ? 4250 : 2300)) {
             setShowCards(true)
         }
     }, [offset])

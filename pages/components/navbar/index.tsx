@@ -5,6 +5,12 @@ import Link from 'next/link';
 
 export const Navbar = () => {
 
+    const [_isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        setIsMobile(isMobile)
+    }, [])
+
     const [isNavExpanded, setIsNavExpanded] = useState(false)
 
     const toggleNavBar = () => {
@@ -40,7 +46,7 @@ export const Navbar = () => {
 
     return (
         <nav className={
-            isMobile ? styles.nav : displayBackground ? styles.navLocked : styles.nav
+            _isMobile ? styles.nav : displayBackground ? styles.navLocked : styles.nav
         }>
             {/*<div className={styles.logoWrapper}>*/}
             {/*<img*/}

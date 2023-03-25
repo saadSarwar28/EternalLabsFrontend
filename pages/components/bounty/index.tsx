@@ -460,6 +460,12 @@ export const EzBountyCard: React.FC = () => {
         setCanClaim(true)
     }
 
+    const [_isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        setIsMobile(isMobile)
+    }, [])
+
     return (
         <div className={styles.bountyCardWrapper}>
             <Modal
@@ -480,7 +486,7 @@ export const EzBountyCard: React.FC = () => {
                 <ToastContainer/>
                 <p className={styles.bountyCardAnnouncement}>EternalLabs Triple Bounty!</p><br/>
                 {
-                    isMobile ?
+                    _isMobile ?
                         <>
                             <p className={styles.bountyCardAmounts}>~{zmbe.toFixed(2)} ZMBE <br/> ~{cake.toFixed(3)} CAKE <br/> ~{banana.toFixed(2)} BANANA</p>
                         </> :
