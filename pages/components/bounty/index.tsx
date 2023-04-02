@@ -485,7 +485,7 @@ export const EzBountyCard: React.FC = () => {
             <div className={styles.bountyCard}>
                 <ToastContainer/>
                 <p className={styles.bountyCardAnnouncement}>EternalLabs Triple Bounty!</p><br/>
-                <p className={styles.bountyCardAnnouncement}>Bounty is being upgraded and will be available shortly!</p><br/>
+                <p className={styles.bountyCardAnnouncement}>Bounty is being upgraded<br/> and will be available shortly!</p><br/>
                 {/*{*/}
                 {/*    _isMobile ?*/}
                 {/*        <>*/}
