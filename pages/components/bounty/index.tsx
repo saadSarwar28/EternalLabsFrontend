@@ -15,7 +15,7 @@ import {
 import {
     getBountyNoWallet,
     getBountyTicketsNoWallet, getCakeNoWallet, getDrFrankensteinNoWallet,
-    getMinterNoWallet,
+    getMinterNoWallet, getMoneyMonkeysStakerNoWallet,
     getPancakeMasterchefNoWallet, getRewardApeNoWallet, getZmbeNoWallet
 } from '../../../utils/web3NoWallet';
 import {
@@ -122,17 +122,19 @@ export const EzBountyCard: React.FC = () => {
         setZmbe((amount * 50) / 100)
     }
 
-    const updateBananaAmount = () => {
-        getRewardApeNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.pendingReward(getMoneyMonkeysStakerAddress(process.env.NEXT_PUBLIC_CHAIN_ID)).call()
-            .then((res: any) => {
-                setBanana((Number(ethers.utils.formatUnits(res)) * 40) / 100)
-            })
+    const updateBananaAmount = async () => {
+        const totalBananaStaked = await getMoneyMonkeysStakerNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.TOTAL_BANANA_STAKED().call()
+        const _totalStaked = Number(ethers.utils.formatUnits(totalBananaStaked))
+        const total = await getMoneyMonkeysStakerNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.bananaStaked().call()
+        const _total = Number(ethers.utils.formatUnits(total))
+        const earned = _total - _totalStaked
+        setBanana((earned * 45) / 100)
     }
 
     useEffect(() => {
         if (!timeoutSet) {
             setInterval(() => {
-                updateCakeAmount()
+                // updateCakeAmount()
                 updateZmbeAmount()
                 updateBananaAmount()
             }, 3000)
@@ -484,55 +486,55 @@ export const EzBountyCard: React.FC = () => {
             </Modal>
             <div className={styles.bountyCard}>
                 <ToastContainer/>
-                <p className={styles.bountyCardAnnouncement}>EternalLabs Triple Bounty!</p><br/>
-                <p className={styles.bountyCardAnnouncement}>Bounty is being upgraded<br/> and will be available shortly!</p><br/>
-                {/*{*/}
-                {/*    _isMobile ?*/}
-                {/*        <>*/}
-                {/*            <p className={styles.bountyCardAmounts}>~{zmbe.toFixed(2)} ZMBE <br/> ~{cake.toFixed(3)} CAKE <br/> ~{banana.toFixed(2)} BANANA</p>*/}
-                {/*        </> :*/}
-                {/*        <>*/}
-                {/*            <p className={styles.bountyCardAmounts}>~{zmbe.toFixed(2)} ZMBE &nbsp;&nbsp;&nbsp; ~{cake.toFixed(3)} CAKE &nbsp;&nbsp;&nbsp; ~{banana.toFixed(2)} BANANA</p>*/}
-                {/*        </>*/}
-                {/*}*/}
-                {/*<p className={styles.bountyCardNote}>Note :- Exact token amounts depend on transaction confirmation time!</p><br/>*/}
-                {/*{*/}
-                {/*    // @ts-ignore*/}
-                {/*    bountyTime > 0 ? <BountyTimer endTs={bountyTime} callback={timerCallbackHandler}/> : null*/}
-                {/*}*/}
-                {/*{*/}
-                {/*    userData.walletConnected ?*/}
-                {/*        <>*/}
-                {/*            {*/}
-                {/*                !ticketPurchased ?*/}
-                {/*                    <div className={styles.ezBountyClaimCardButtons}>*/}
-                {/*                        <p className={styles.bountyCardText}>*/}
-                {/*                            Buy an EternalLabs NFT Token or purchase a bounty Ticket to be able to claim bounty!*/}
-                {/*                        </p>*/}
-                {/*                        <button onClick={buyTicket} disabled={ticketPurchaseLoading}*/}
-                {/*                                className={styles.claimButton}>*/}
-                {/*                            {*/}
-                {/*                                ticketPurchaseLoading ? <Loader/> :*/}
-                {/*                                    <span>Buy Ticket</span>*/}
-                {/*                            }*/}
-                {/*                        </button>*/}
-                {/*                    </div> :*/}
-                {/*                    <div className={styles.ezBountyClaimCardButtons}>*/}
-                {/*                        <p className={styles.bountyCardText}>Be the first one to claim!</p>*/}
-                {/*                        <button onClick={claim} disabled={isLoading} className={styles.claimButton}>*/}
-                {/*                            {*/}
-                {/*                                isLoading ? <Loader/> :*/}
-                {/*                                    <span>Claim</span>*/}
-                {/*                            }*/}
-                {/*                        </button>*/}
-                {/*                    </div>*/}
-                {/*            }*/}
-                {/*        </>*/}
-                {/*        :*/}
-                {/*        <div className={styles.ezBountyClaimCardButtons}>*/}
-                {/*            <button onClick={openModal} className={styles.connectWalletButton}>Connect Wallet</button>*/}
-                {/*        </div>*/}
-                {/*}*/}
+                <p className={styles.bountyCardAnnouncement}>EternalLabs Double Bounty!</p>
+                {/*<p className={styles.bountyCardAnnouncement}>Bounty is being upgraded<br/> and will be available shortly!</p><br/>*/}
+                {
+                    _isMobile ?
+                        <>
+                            <p className={styles.bountyCardAmounts}>~{zmbe.toFixed(2)} ZMBE <br/> ~{banana.toFixed(2)} BANANA</p>
+                        </> :
+                        <>
+                            <p className={styles.bountyCardAmounts}>~{zmbe.toFixed(2)} ZMBE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ~{banana.toFixed(2)} BANANA</p>
+                        </>
+                }
+                <p className={styles.bountyCardNote}>Note :- Exact token amounts depend on transaction confirmation time!</p><br/>
+                {
+                    // @ts-ignore
+                    bountyTime > 0 ? <BountyTimer endTs={bountyTime} callback={timerCallbackHandler}/> : null
+                }
+                {
+                    userData.walletConnected ?
+                        <>
+                            {
+                                !ticketPurchased ?
+                                    <div className={styles.ezBountyClaimCardButtons}>
+                                        <p className={styles.bountyCardText}>
+                                            Buy an EternalLabs NFT Token or purchase a bounty Ticket to be able to claim bounty!
+                                        </p>
+                                        <button onClick={buyTicket} disabled={ticketPurchaseLoading}
+                                                className={styles.claimButton}>
+                                            {
+                                                ticketPurchaseLoading ? <Loader/> :
+                                                    <span>Buy Ticket</span>
+                                            }
+                                        </button>
+                                    </div> :
+                                    <div className={styles.ezBountyClaimCardButtons}>
+                                        <p className={styles.bountyCardText}>Be the first one to claim!</p>
+                                        <button onClick={claim} disabled={isLoading} className={styles.claimButton}>
+                                            {
+                                                isLoading ? <Loader/> :
+                                                    <span>Claim</span>
+                                            }
+                                        </button>
+                                    </div>
+                            }
+                        </>
+                        :
+                        <div className={styles.ezBountyClaimCardButtons}>
+                            <button onClick={openModal} className={styles.connectWalletButton}>Connect Wallet</button>
+                        </div>
+                }
             </div>
         </div>
     )

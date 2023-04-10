@@ -120,12 +120,12 @@
   },
   {
     "inputs": [],
-    "name": "DISTRIBUTION_PERCENTAGE",
+    "name": "BURN_MAINST",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "bool",
         "name": "",
-        "type": "uint256"
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -133,7 +133,7 @@
   },
   {
     "inputs": [],
-    "name": "DISTRIBUTOR",
+    "name": "EL_DISTRIBUTOR",
     "outputs": [
       {
         "internalType": "address",
@@ -198,20 +198,7 @@
   },
   {
     "inputs": [],
-    "name": "GNANA_POOL",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "GNANA_REINVEST_PERCENTAGE",
+    "name": "MAINST_BURN_PERCENTAGE",
     "outputs": [
       {
         "internalType": "uint256",
@@ -224,20 +211,7 @@
   },
   {
     "inputs": [],
-    "name": "GNANA_TOKEN",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "MAINST_BURN_PERCENTAGE",
+    "name": "MAINST_BURN_TALLY",
     "outputs": [
       {
         "internalType": "uint256",
@@ -263,7 +237,59 @@
   },
   {
     "inputs": [],
+    "name": "MAINST_TO_BURN",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MASTERCHEF",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "MINTER",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MM_DISTRIBUTOR",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "STRATEGY",
     "outputs": [
       {
         "internalType": "address",
@@ -315,33 +341,20 @@
   },
   {
     "inputs": [],
+    "name": "TOTAL_BANANA_STAKED_EL",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "TOTAL_BNB_RECEIVED",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "TOTAL_GNANA_BOUGHT",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "TOTAL_GNANA_STAKED",
     "outputs": [
       {
         "internalType": "uint256",
@@ -379,22 +392,23 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "bananaStaked",
+    "outputs": [
       {
         "internalType": "uint256",
-        "name": "bananaAmount",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "calculateBananaDistribution",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "_amounts",
-        "type": "uint256[]"
-      }
-    ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "burnMainst",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -414,17 +428,10 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "newGananaPoolAddress",
+        "name": "claimant",
         "type": "address"
       }
     ],
-    "name": "changeGananaPoolAddress",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "compound",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -439,15 +446,21 @@
   },
   {
     "inputs": [],
-    "name": "getBananaApproved",
+    "name": "getTokensApproved",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "getGnanaApproved",
-    "outputs": [],
+    "name": "harvestBanana",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -501,11 +514,11 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "percentage",
+        "name": "percent",
         "type": "uint256"
       }
     ],
-    "name": "setDistributionPercentage",
+    "name": "setBountyPercentage",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -518,7 +531,7 @@
         "type": "address"
       }
     ],
-    "name": "setDistributorAddress",
+    "name": "setEternalBananasDistributorAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -583,19 +596,6 @@
         "type": "uint256"
       }
     ],
-    "name": "setGnanaReinvestPercentage",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_percent",
-        "type": "uint256"
-      }
-    ],
     "name": "setMainstBurnPercentage",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -615,6 +615,39 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "distributor",
+        "type": "address"
+      }
+    ],
+    "name": "setMoneyMonkeysDistributorAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "stake",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "bananaToStake",
+        "type": "uint256"
+      }
+    ],
+    "name": "stakeBanana",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "stakeRemainingBanana",
     "outputs": [],
@@ -623,7 +656,7 @@
   },
   {
     "inputs": [],
-    "name": "stakeRemainingGnana",
+    "name": "toggleMainstBurn",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -655,19 +688,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "withdrawGnana",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "withdrawLeftOverBanana",
     "outputs": [],
@@ -676,7 +696,7 @@
   },
   {
     "inputs": [],
-    "name": "withdrawLeftOverGnana",
+    "name": "withdrawRemainingBnb",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

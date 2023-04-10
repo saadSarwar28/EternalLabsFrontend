@@ -13,7 +13,7 @@ const ADDRESSES = {
         },
     'BOUNTY':
         {
-            '56': '0x55D5a6DdCa3CCD128490D050853A153b0D5a020b',
+            '56': '0x353F9be7e38f7A3bbe5515722a58DA234211d207',
             '97': '0x5855CB9437E57480c5Fb2203D76e86C6522B8063',
         },
     'BOUNTY_TICKETS':
@@ -73,7 +73,7 @@ const ADDRESSES = {
         },
     'MONEY_MONKEYS_STAKER':
         {
-            '56': '0x08570762688c81b10B177a4184d0E2438b915167',
+            '56': '0x55911a2FF2b6c6CdB870BFF49c9364ea1347DF92',
             '97': '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
         },
     'MONEY_MONKEYS_DISTRIBUTOR':
