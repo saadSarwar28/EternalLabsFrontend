@@ -324,7 +324,7 @@ export const Collections = () => {
                                 </div>
                                 <div className={collectionStyles.detailsColumn}>
                                     <span className={collectionStyles.detailsRight}
-                                          title="Per Distribution cycle">{cakeYield.toFixed(4)} CAKE / Day</span>
+                                          title="Per Distribution cycle">0.00 CAKE / Day</span>
                                 </div>
                             </div>
                             <div className={collectionStyles.detailsRow}>
