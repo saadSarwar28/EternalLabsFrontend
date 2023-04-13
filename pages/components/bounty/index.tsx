@@ -128,7 +128,7 @@ export const EzBountyCard: React.FC = () => {
         const total = await getMoneyMonkeysStakerNoWallet(process.env.NEXT_PUBLIC_CHAIN_ID).methods.bananaStaked().call()
         const _total = Number(ethers.utils.formatUnits(total))
         const earned = _total - _totalStaked
-        setBanana((earned * 45) / 100)
+        setBanana((earned * 40) / 100)
     }
 
     useEffect(() => {
