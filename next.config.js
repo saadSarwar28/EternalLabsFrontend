@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  agentRules: false,
+  output: 'export',
   trailingSlash: true,
   distDir: 'build',
   images: {
-    loader: 'akamai',
-    path: '',
+    unoptimized: true,
   }
 }
 

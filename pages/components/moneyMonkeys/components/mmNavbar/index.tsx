@@ -308,7 +308,7 @@ export const EcNavbar: React.FC = () => {
                 <img src="/icons8-menu-squared-96.svg" style={{height: '50px'}}/>
             </button>
             <ul className={isNavExpanded ? styles.navListMobile : styles.navList}>
-                <li className={styles.navLinks} onClick={closeNavBar}><Link href="/#home"><a>Back to Home</a></Link>
+                <li className={styles.navLinks} onClick={closeNavBar}><Link legacyBehavior href="/#home"><a>Back to Home</a></Link>
                 </li>
                 {
                     isMobile ?

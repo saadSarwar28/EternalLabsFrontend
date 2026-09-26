@@ -252,6 +252,7 @@ export const Collections = () => {
                                             <span className={collectionStyles.detailsRight}>
                                                 <Link
                                                     href="https://bscscan.com/address/0x5a87d0173a2a22579b878a27048c8a9b09bff496"
+                                                    legacyBehavior
                                                     passHref={true}
                                                     className={collectionStyles.detailsContractLink}>
                                                     <a target="_blank">
@@ -259,6 +260,7 @@ export const Collections = () => {
                                                             0x5a87d...ff496&nbsp;
                                                             <Image
                                                                 src={contractIcon}
+                                                                alt=""
                                                                 width={20}
                                                                 height={20}
                                                             />
@@ -362,6 +364,7 @@ export const Collections = () => {
                                             <span className={collectionStyles.detailsRight}>
                                                 <Link
                                                     href="https://bscscan.com/address/0xE4cE0E5b3B70B5132807CE725eC93d6eE33B5Eca"
+                                                    legacyBehavior
                                                     passHref={true}
                                                     className={collectionStyles.detailsContractLink}>
                                                     <a target="_blank">
@@ -369,6 +372,7 @@ export const Collections = () => {
                                                             0xE4cE0...3B5Eca&nbsp;
                                                             <Image
                                                                 src={contractIcon}
+                                                                alt=""
                                                                 width={20}
                                                                 height={20}
                                                             />
@@ -486,6 +490,7 @@ export const Collections = () => {
                                             <span className={collectionStyles.detailsRight}>
                                                 <Link
                                                     href="https://bscscan.com/address/0xa36c806c13851F8B27780753563fdDAA6566f996"
+                                                    legacyBehavior
                                                     passHref={true}
                                                     className={collectionStyles.detailsContractLink}>
                                                     <a target="_blank">
@@ -493,6 +498,7 @@ export const Collections = () => {
                                                             0x5a87d...ff496&nbsp;
                                                             <Image
                                                                 src={contractIcon}
+                                                                alt=""
                                                                 width={20}
                                                                 height={20}
                                                             />

@@ -60,18 +60,18 @@ export const Navbar = () => {
             </button>
             <div className={styles.navButtonContainer}></div>
             <ul className={isNavExpanded ? styles.navListMobile : styles.navList}>
-                <li className={styles.navLinks} onClick={closeNavBar}><Link href="#home"><a>Home</a></Link></li>
+                <li className={styles.navLinks} onClick={closeNavBar}><Link legacyBehavior href="#home"><a>Home</a></Link></li>
                 {/*{isMobile ? <hr/> : null}*/}
-                <li className={styles.navLinks} onClick={closeNavBar}><Link href="#collections"><a>Collections</a></Link></li>
+                <li className={styles.navLinks} onClick={closeNavBar}><Link legacyBehavior href="#collections"><a>Collections</a></Link></li>
                 {/*{isMobile ? <hr/> : null}*/}
-                <li className={styles.navLinks} onClick={closeNavBar}><Link href="#pools"><a>Pools</a></Link></li>
+                <li className={styles.navLinks} onClick={closeNavBar}><Link legacyBehavior href="#pools"><a>Pools</a></Link></li>
                 {/*{isMobile ? <hr/> : null}*/}
                 {/*<li className={styles.navLinks} onClick={closeNavBar}><Link href="#roadmap"><a>Roadmap</a></Link></li>*/}
                 {/*{isMobile ? <hr/> : null}*/}
-                <li className={styles.navLinks} onClick={closeNavBar}><Link href="#team"><a>Team</a></Link></li>
+                <li className={styles.navLinks} onClick={closeNavBar}><Link legacyBehavior href="#team"><a>Team</a></Link></li>
             </ul>
             <div className={styles.navButtonContainer}>
-                <Link href="https://docs.eternallabs.finance/welcome-to-eternallabs">
+                <Link legacyBehavior href="https://docs.eternallabs.finance/welcome-to-eternallabs">
                     <a target="_blank" className={styles.docsButtonNav} rel="noreferrer">Read The Docs</a>
                 </Link>
             </div>
