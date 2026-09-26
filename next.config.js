@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   agentRules: false,
-  output: 'standalone',
+  output: 'export',
   trailingSlash: true,
   distDir: 'build',
   images: {
